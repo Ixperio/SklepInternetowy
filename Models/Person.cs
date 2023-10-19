@@ -9,12 +9,12 @@ using System.Web.Razor.Parser;
 namespace SklepInternetowy.Models
 {
     /**
-     * @author Artur Leszczak 
-     * @desc PersonRegister odpowiada modelowi rejestracji nowego użytkownika
-     */
-    public class PersonRegister
+         * @author Artur Leszczak 
+         * @desc PersonRegister odpowiada definicji użytkownika serwisu
+         */
+    public class Person
     {
-        
+        public int Id { get; set; }
         [Required]
         [DisplayName("Imie")]
         public string Name { get; set; }
@@ -24,6 +24,15 @@ namespace SklepInternetowy.Models
         [Required]
         [DisplayName("Email")]
         public string Email { get; set; }
+    }
+
+        /**
+         * @author Artur Leszczak 
+         * @desc PersonRegister odpowiada modelowi rejestracji nowego użytkownika , dziedziczy od klasy Person
+         */
+        public class PersonRegister : Person
+    {
+       
         [Required]
         [DisplayName("Potwierdź email")]
         public string ConfirmEmail { get; set; }
@@ -41,10 +50,12 @@ namespace SklepInternetowy.Models
      */
     public class PersonLogin
     {
-        //[Required]
-        public string Email { get; }
-       // [Required]
-        public string Password { get; }
+        [Required]
+        [DisplayName("Wprowadź adres email")]
+        public string Email { get; set; }
+        [Required]
+        [DisplayName("Wprowadź hasło")]
+        public string Password { get; set; }
 
     }
 }

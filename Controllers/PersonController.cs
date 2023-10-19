@@ -10,15 +10,17 @@ namespace SklepInternetowy.Controllers
 {
     public class PersonController : Controller
     {
+        /**
+        * @autor Artur Leszczak
+        * @description Funckja Register pozwala na rejestrację nowego użytkownika
+        */
+
         // GET: Person
         public ActionResult Index()
         {
             return View();
         }
-        /**
-         * @autor Artur Leszczak
-         * @description Funckja Register pozwala na rejestrację nowego użytkownika
-         */
+       
         /**
        * Prezentacja widoku
        */
@@ -31,9 +33,16 @@ namespace SklepInternetowy.Controllers
          * Pobieranie danych z formularza
          */
         [HttpPost]
-        public ActionResult Register(PersonRegister person)
+        public ActionResult Register(PersonRegister personRegistered)
         {
-
+            if (ModelState.IsValid)
+            {
+                ViewBag.Message = "Utworzono nowe konto!";
+            }
+            else
+            {
+                ViewBag.Message = "Wprowadzono nieprawidłowe dane!";
+            }
             return View();
         }
 
@@ -54,9 +63,9 @@ namespace SklepInternetowy.Controllers
          * Pobieranie danych z formularza
          */
         [HttpPost]
-        public ActionResult Login(PersonLogin person)
+        public ActionResult Login(PersonLogin personLogged)
         {
-            ViewBag.Message = person.Email + " " + person.Password;
+            ViewBag.Message = personLogged.Email + " " + personLogged.Password;
 
             return View();
         }

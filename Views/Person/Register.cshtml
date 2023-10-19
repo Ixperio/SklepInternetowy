@@ -1,8 +1,42 @@
 ﻿@model SklepInternetowy.Models.PersonRegister
 
 @{
+    /**
+    * @author Artur Leszczak
+    * @desc Formularz rejestracji
+    */
     ViewBag.Title = "Rejestracja";
+
 }
 
 <h2>Rejestracja nowego użytkownika</h2>
 
+@using (Html.BeginForm())
+{
+    <label for="Name">Wprowadź imię</label>
+    <br />
+    <input type="text" name="Name" placeholder="Imię" />
+    <br />
+    <label for="Surname">Wprowadź nazwisko</label>
+    <br />
+    <input type="text" name="Surname" placeholder="Nazwisko" />
+    <br />
+    <label for="Email">Wprowadź email</label>
+    <br />
+    <input type="email" name="Email" placeholder="Email" />
+    <br />
+    <label for="ConfirmEmail">Powtórz email</label>
+    <br />
+    <input type="email" name="ConfirmEmail" placeholder="Potwierdź email" />
+    <br />
+    <label for="Password">Wprowadź hasło</label>
+    <br />
+    <input type="password" name="Password" />
+    <br />
+    <label for="ConfirmPassword">Potwierdź hasło</label>
+    <br />
+    <input type="password" name="ConfirmPassword" />
+    <br />
+    <input type="submit" value="Zarejestruj się" />
+}
+@ViewBag.Message
