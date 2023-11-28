@@ -1,0 +1,17 @@
+﻿@model Sklep.Models.ModelViews.PersonLogin
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm())
+{
+    <input type="text" name="Login" />
+    <br />
+    <input type="password" name="Password" />
+    <br />
+    <input type="submit" value="Zaloguj się" />
+    <br />
+    @ViewBag.Message
+}
