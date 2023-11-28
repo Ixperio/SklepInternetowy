@@ -40,8 +40,8 @@ namespace Sklep.Controllers
         /**
          * Pobieranie danych z formularza
          */
-        //[HttpPost]
-       /* public ActionResult Register(PersonRegistration personRegistered)
+        [HttpPost]
+        public ActionResult Register(PersonRegistration personRegistered)
         {
             if (ModelState.IsValid)
             {
@@ -60,7 +60,7 @@ namespace Sklep.Controllers
 
                 _db.Logowanie.Add(person.Logowanie);
                 _db.Person.Add(person);
-                _db.SaveChanges();
+                _db.SaveChanges();*/
             }
             else
             {
