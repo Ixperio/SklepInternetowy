@@ -45,6 +45,21 @@ namespace Sklep.Controllers
             if (ModelState.IsValid)
             {
                 ViewBag.Message = "Utworzono nowe konto!";
+                /*Person person = new Person();
+                person.Email = personRegistered.Email;
+                person.Phone = personRegistered.PhoneNumber;
+                person.Name = personRegistered.FirstName;
+                person.Surname = personRegistered.LastName;
+                person.Birthday = personRegistered.BirthDate;
+                person.Logowanie = new Logowanie()
+                {
+                    Login = personRegistered.Login,
+                    Password = personRegistered.Password
+                };
+
+                _db.Logowanie.Add(person.Logowanie);
+                _db.Person.Add(person);
+                _db.SaveChanges();*/
             }
             else
             {

@@ -1,0 +1,83 @@
+﻿@model Sklep.Models.ModelViews.OrderSubmit
+@{
+    ViewBag.Title = "SubmitOrder";
+}
+
+<style>
+    .form-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .error-message {
+        color: red;
+        margin-top: 5px;
+    }
+
+    .submit-button {
+        grid-column: span 2;
+    }
+</style>
+
+<h2>Order</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-container">
+        <div class="form-group">
+            <label for="Street">Street</label>
+            <input type="text" id="Street" name="Street" required />
+        </div>
+        <div class="form-group">
+            <label for="Number">Number</label>
+            <input type="text" id="Number" name="Number" required />
+        </div>
+        <div class="form-group">
+            <label for="FlatNumber">FlatNumber</label>
+            <input type="text" id="FlatNumber" name="FlatNumber" />
+        </div>
+        <div class="form-group">
+            <label for="City">City</label>
+            <input type="text" id="City" name="City" required />
+        </div>
+        <div class="form-group">
+            <label for="State">State</label>
+            <input type="text" id="State" name="State" />
+        </div>
+        <div class="form-group">
+            <label for="Country">Country</label>
+            <input type="text" id="Country" name="Country" required />
+        </div>
+        <div class="form-group">
+            <label for="Phone">Phone</label>
+            <input type="tel" id="Phone" name="Phone" required pattern="\(?\d{3}\)?-? *\d{3}-? *-?\d{3}" />
+
+        </div>
+        <div class="form-group">
+            <label for="PostalCode">Postal Code</label>
+            <input type="text" id="PostalCode" name="PostalCode" required />
+        </div>
+
+        <div class="form-group">
+            <label for="paymentMethod">Payment Method</label>
+            <select id="paymentMethod" name="paymentMethod" required>
+                <option value="Blik">Blik</option>
+                <option value="Credit_Card">Credit Card</option>
+                <option value="Cash">Cash</option>
+            </select>
+        </div>
+
+        <div class="form-group submit-button">
+            <input type="submit" value="Submit Order" />
+        </div>
+    </div>
+
+    @ViewBag.Message
+}
