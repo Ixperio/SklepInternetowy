@@ -67,7 +67,7 @@ namespace Sklep.Controllers
                 ViewBag.Message = "Wprowadzono nieprawidłowe dane!";
             }
             return View();
-        } */
+        } 
 
         /*
         * @autor Artur Leszczak
