@@ -39,8 +39,8 @@ namespace Sklep.Controllers
         /**
          * Pobieranie danych z formularza
          */
-     /*   [HttpPost]
-        public ActionResult Register(PersonRegister personRegistered)
+        [HttpPost]
+        public ActionResult Register(PersonRegistration personRegistered)
         {
             if (ModelState.IsValid)
             {
