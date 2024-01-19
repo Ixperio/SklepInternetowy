@@ -1,13 +1,22 @@
-﻿using System;
+﻿using Sklep.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 
 namespace Sklep.Controllers
 {
     public class ProductController : Controller
     {
+        private MyDbContext _db;
+
+        public ProductController()
+        {
+            this._db = new MyDbContext();
+        }
+
         // GET: Product
         public ActionResult Index()
         {
@@ -33,11 +42,23 @@ namespace Sklep.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                string name = collection["name"];
+                string description = collection["description"];
+                //string price = collection["price"];
 
-                return RedirectToAction("Add");
+                ProductBuilder builder = new ProductBuilder();
+                builder.Reset();
+                builder.BuildName(name);
+                builder.BuildDescription(new Opis());
+                //builder.BuildPrice(price.AsDecimal());
+
+                Produkt produkt = builder.GetProduct();
+                _db.Products.Add(produkt);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index");
             }
-            catch
+            catch (Exception e)
             {
                 return View();
             }

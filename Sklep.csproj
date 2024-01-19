@@ -139,6 +139,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ErrorViewModel.cs" />
+    <Compile Include="Models\IProductBuilder.cs" />
     <Compile Include="Models\Kategoria.cs" />
     <Compile Include="Models\Logowanie.cs" />
     <Compile Include="Models\ModelViews\PersonLogin.cs" />
@@ -242,7 +243,7 @@
     <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.1.min.map" />
     <Content Include="Views\Product\Index.cshtml" />
-    <Content Include="Views\Product\Add.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Person\Login.cshtml" />
   </ItemGroup>
   <ItemGroup />

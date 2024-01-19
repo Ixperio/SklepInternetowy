@@ -6,7 +6,7 @@ namespace Sklep.Models
 {
     public class MyDbContext : DbContext
     {
-        public MyDbContext() : base("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\alok1\\Desktop\\STUDIA\\SEM5\\MVC\\PROJEKT\\Sklep\\App_Data\\Database.mdf;Integrated Security=True")
+        public MyDbContext() : base("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Sklep;Integrated Security=True;Connect Timeout=30;Encrypt=False;")
         {
 
         }
