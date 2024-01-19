@@ -40,7 +40,7 @@ namespace Sklep.Controllers
          * Pobieranie danych z formularza
          */
         [HttpPost]
-        public ActionResult Register(PersonRegistration personRegistered)
+       /* public ActionResult Register(PersonRegistration personRegistered)
         {
             if (ModelState.IsValid)
             {
@@ -59,14 +59,14 @@ namespace Sklep.Controllers
 
                 _db.Logowanie.Add(person.Logowanie);
                 _db.Person.Add(person);
-                _db.SaveChanges();*/
+                _db.SaveChanges();
             }
             else
             {
                 ViewBag.Message = "Wprowadzono nieprawidłowe dane!";
             }
             return View();
-        }
+        } */
 
         /*
         * @autor Artur Leszczak
