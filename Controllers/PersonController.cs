@@ -1,26 +1,33 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SklepInternetowy.Models;
 
-namespace SklepInternetowy.Controllers
+using Sklep.Models.ModelViews;
+using Sklep.Models;
+
+namespace Sklep.Controllers
 {
     public class PersonController : Controller
     {
+        private readonly MyDbContext _db;
+
         /**
         * @autor Artur Leszczak
         * @description Funckja Register pozwala na rejestrację nowego użytkownika
         */
+         
+        public PersonController() {
+             this._db = new MyDbContext();
+        }
 
         // GET: Person
         public ActionResult Index()
         {
             return View();
         }
-       
+
         /**
        * Prezentacja widoku
        */
@@ -33,11 +40,26 @@ namespace SklepInternetowy.Controllers
          * Pobieranie danych z formularza
          */
         [HttpPost]
-        public ActionResult Register(PersonRegister personRegistered)
+        public ActionResult Register(PersonRegistration personRegistered)
         {
             if (ModelState.IsValid)
             {
                 ViewBag.Message = "Utworzono nowe konto!";
+                /*Person person = new Person();
+                person.Email = personRegistered.Email;
+                person.Phone = personRegistered.PhoneNumber;
+                person.Name = personRegistered.FirstName;
+                person.Surname = personRegistered.LastName;
+                person.Birthday = personRegistered.BirthDate;
+                person.Logowanie = new Logowanie()
+                {
+                    Login = personRegistered.Login,
+                    Password = personRegistered.Password
+                };
+
+                _db.Logowanie.Add(person.Logowanie);
+                _db.Person.Add(person);
+                _db.SaveChanges();*/
             }
             else
             {
@@ -65,7 +87,22 @@ namespace SklepInternetowy.Controllers
         [HttpPost]
         public ActionResult Login(PersonLogin personLogged)
         {
-            ViewBag.Message = personLogged.Email + " " + personLogged.Password;
+            if (ModelState.IsValid)
+            {
+
+                var query = from c in _db.Logowanie where c.Login == personLogged.Login && c.Password == personLogged.Password select c;
+ 
+                if (query.ToList().Count != 0 ) {
+
+                    ViewBag.Message = "Zalogowano";
+                }
+                else
+                {
+                    ViewBag.Message = "Niepoprawne dane!";
+                }
+               
+            }
+            
 
             return View();
         }

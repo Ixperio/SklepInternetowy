@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Informacje ogólne o zestawie zależą od poniższego
 // zestawu atrybutów. Zmień wartości tych atrybutów, aby zmodyfikować informacje
 // związane z zestawem.
-[assembly: AssemblyTitle("SklepInternetowy")]
+[assembly: AssemblyTitle("Sklep")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SklepInternetowy")]
+[assembly: AssemblyProduct("Sklep")]
 [assembly: AssemblyCopyright("Copyright ©  2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Poniższy identyfikator GUID odpowiada atrybutowi ID biblioteki typelib, jeśli ten projekt jest uwidaczniany w modelu COM
-[assembly: Guid("d3492ac2-aa97-4ef4-9fff-584d2abe123b")]
+[assembly: Guid("00ffd6f7-df4b-4bab-a525-b75e4528e61f")]
 
 // Informacje o wersji zestawu obejmują następujące cztery wartości:
 //

@@ -1,42 +1,63 @@
-﻿@model SklepInternetowy.Models.PersonRegister
-
+﻿@model Sklep.Models.ModelViews.PersonRegistration
 @{
-    /**
-    * @author Artur Leszczak
-    * @desc Formularz rejestracji
-    */
-    ViewBag.Title = "Rejestracja";
-
+    ViewBag.Title = "Register";
 }
 
-<h2>Rejestracja nowego użytkownika</h2>
+<style>
+    .form-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+
+    .submit-button {
+        grid-column: span 2;
+    }
+</style>
+
+<h2>Register</h2>
 
 @using (Html.BeginForm())
 {
-    <label for="Name">Wprowadź imię</label>
-    <br />
-    <input type="text" name="Name" placeholder="Imię" />
-    <br />
-    <label for="Surname">Wprowadź nazwisko</label>
-    <br />
-    <input type="text" name="Surname" placeholder="Nazwisko" />
-    <br />
-    <label for="Email">Wprowadź email</label>
-    <br />
-    <input type="email" name="Email" placeholder="Email" />
-    <br />
-    <label for="ConfirmEmail">Powtórz email</label>
-    <br />
-    <input type="email" name="ConfirmEmail" placeholder="Potwierdź email" />
-    <br />
-    <label for="Password">Wprowadź hasło</label>
-    <br />
-    <input type="password" name="Password" />
-    <br />
-    <label for="ConfirmPassword">Potwierdź hasło</label>
-    <br />
-    <input type="password" name="ConfirmPassword" />
-    <br />
-    <input type="submit" value="Zarejestruj się" />
+    <div class="form-container">
+        <div class="form-group">
+            <label for="FirstName">First Name</label>
+            <input type="text" id="FirstName" name="FirstName" required />
+        </div>
+        <div class="form-group">
+            <label for="LastName">Last Name</label>
+            <input type="text" id="LastName" name="LastName" required />
+        </div>
+        <div class="form-group">
+            <label for="PhoneNumber">Phone Number</label>
+            <input type="tel" id="PhoneNumber" name="PhoneNumber" required pattern="\(?\d{3}\)?-? *\d{3}-? *-?\d{3}" />
+        </div>
+        <div class="form-group">
+            <label for="BirthDate">Birth Date</label>
+            <input type="date" id="BirthDate" name="BirthDate" required />
+        </div>
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="email" id="Email" name="Email" required />
+        </div>
+        <div class="form-group">
+            <label for="Login">Username</label>
+            <input type="text" id="Username" name="Username" required />
+        </div>
+        <div class="form-group">
+            <label for="Password">Password</label>
+            <input type="password" id="Password" name="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
+        </div>
+        <div class="form-group submit-button">
+            <input type="submit" value="Register" />
+        </div>
+    </div>
+
+    @ViewBag.Message
 }
-@ViewBag.Message
