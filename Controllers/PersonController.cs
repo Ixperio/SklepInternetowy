@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 using Sklep.Models.ModelViews;
 using Sklep.Models;
+using Sklep.Db_Context;
 
 namespace Sklep.Controllers
 {
@@ -19,7 +20,7 @@ namespace Sklep.Controllers
         */
          
         public PersonController() {
-             this._db = new MyDbContext();
+            this._db = DbContextConnectionSingleton.GetInstance().MyDbContext;
         }
 
         // GET: Person

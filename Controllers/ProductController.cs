@@ -1,4 +1,5 @@
-﻿using Sklep.Models;
+﻿using Sklep.Db_Context;
+using Sklep.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,6 @@ namespace Sklep.Controllers
 {
     public class ProductController : Controller
     {
-        private MyDbContext _db;
-
-        public ProductController()
-        {
-            this._db = new MyDbContext();
-        }
-
         // GET: Product
         public ActionResult Index()
         {
@@ -53,6 +47,7 @@ namespace Sklep.Controllers
                 //builder.BuildPrice(price.AsDecimal());
 
                 Produkt produkt = builder.GetProduct();
+                MyDbContext _db = DbContextConnectionSingleton.GetInstance().MyDbContext;
                 _db.Products.Add(produkt);
                 _db.SaveChanges();
 

@@ -122,6 +122,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Db_Context\DbContextConnectionSingleton.cs" />
     <Compile Include="Migrations\202311272351426_Init2.cs" />
     <Compile Include="Migrations\202311272351426_Init2.designer.cs">
       <DependentUpon>202311272351426_Init2.cs</DependentUpon>
@@ -134,7 +135,7 @@
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\Adress.cs" />
     <Compile Include="Models\Country.cs" />
-    <Compile Include="Models\DbContext.cs" />
+    <Compile Include="Db_Context\MyDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
