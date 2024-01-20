@@ -8,6 +8,7 @@ using System.Web.Routing;
 using System.Data.Entity;
 
 using Sklep.Models;
+using Sklep.Db_Context;
 
 namespace Sklep
 {

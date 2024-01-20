@@ -1,8 +1,10 @@
-﻿using System.Data.Entity;
+﻿using Sklep.Models;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using System.Linq;
 using System.Reflection.Emit;
 
-namespace Sklep.Models
+namespace Sklep.Db_Context
 {
     public class MyDbContext : DbContext
     {
