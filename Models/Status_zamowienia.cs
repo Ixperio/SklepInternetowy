@@ -10,6 +10,5 @@ namespace Sklep.Models
         public int Id {  get; set; }
         public string Status { get; set; }
 
-        public virtual ICollection<Zamowienia> Zamowienia { get; set; }
     }
 }

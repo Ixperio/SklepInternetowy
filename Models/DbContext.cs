@@ -6,7 +6,7 @@ namespace Sklep.Models
 {
     public class MyDbContext : DbContext
     {
-        public MyDbContext() : base("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Sklep;Integrated Security=True;Connect Timeout=30;Encrypt=False;")
+        public MyDbContext() : base("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\alok1\\Desktop\\Studia\\SklepInternetowy\\App_Data\\DB.mdf;Integrated Security=True")
         {
 
         }
@@ -53,5 +53,7 @@ namespace Sklep.Models
         public DbSet<Waluta> Waluta { get; set; }
         
         public DbSet<Zamowienia> Zamowienia { get; set; }
+       
+
     }
 }

@@ -13,16 +13,12 @@ namespace Sklep.Models
         public string HomeNumber { get; set; }
 
         public int TownID { get; set; }
-        public virtual Town Town { get; set; }
 
         public DateTime addDate { get; set; }
         public DateTime? removeDate { get; set; }
         public bool isDeleted { get; set; }
 
         public int PersonId { get; set; }
-        public virtual Person Person { get; set; }
-
-        public virtual ICollection<Zamowienia> Zamowienia { get; set; }
 
     }
 }

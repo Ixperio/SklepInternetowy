@@ -15,7 +15,6 @@ namespace Sklep.Models
         public string Description { get; set; }
         public bool isDeleted { get; set; } = false;
 
-        public virtual ICollection<Person> Person { get; set; }
 
     }
 }

@@ -12,8 +12,6 @@ namespace Sklep.Models
         public int LogowanieId { get; set; }
         public string Login {  get; set; }
         public string Password { get; set; }
-        
-        public virtual ICollection<Person> Persons { get; set; }
 
     }
 }

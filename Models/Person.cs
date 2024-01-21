@@ -23,26 +23,7 @@ namespace Sklep.Models
         public string Email { get; set; }
         public DateTime Birthday { get; set; }
         public int LogowanieId { get; set; }
-        public virtual Logowanie Logowanie { get; set; }
-
         public int AccountTypeId { get; set; }
-        public virtual AccountType AccountType { get; set; }
-
-        public virtual ICollection<Adress> Adresses { get; set; }
-
-        public virtual ICollection<Section> Scetions { get; set; }
-
-        public virtual ICollection<Kategoria> Kategoria { get; set; }
-
-        public virtual ICollection<Opis> Opis { get; set; }
-
-        public virtual ICollection<Parametr> Parametr { get; set; }
-
-        public virtual ICollection<Produkt> Produkt { get; set; }
-
-        public virtual ICollection<Photo> Photo { get; set; }
-
-        public virtual ICollection<Zamowienia> Zamowienia { get; set; }
 
     }
 }

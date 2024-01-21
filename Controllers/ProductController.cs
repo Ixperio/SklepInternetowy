@@ -1,10 +1,18 @@
 ﻿using Sklep.Models;
+using Sklep.Models.Strategia.Interface;
+using Sklep.Models.Strategia;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
+using System.IO;
+using System.Xml.Linq;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using Microsoft.Ajax.Utilities;
 
 namespace Sklep.Controllers
 {
@@ -107,5 +115,75 @@ namespace Sklep.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public ActionResult GetProductPdf(int id)
+        {
+            IPdfGenerator generujPojedynczyProdukt = new ProduktSolo();
+
+            PdfGeneartorContext context = new PdfGeneartorContext(generujPojedynczyProdukt);
+
+            //pobierz produkt po id;
+
+            var produkt = this.getProductById(id);
+
+            if(produkt!=null)
+            {
+                List<Produkt> listaProduktow = new List<Produkt>();
+                listaProduktow.Add(produkt);
+
+                using (var memoryStream = new MemoryStream())
+                {
+                    var writer = new PdfWriter(memoryStream);
+                    var pdf = new PdfDocument(writer);
+                    var document = new Document(pdf);
+
+                    document = context.generate(listaProduktow, document);
+
+                    document.Close();
+                    Response.Headers.Add("Content-Disposition", "inline; filename=example.pdf");
+                    return File(memoryStream.ToArray(), "application/pdf");
+                }
+
+            }
+
+            return HttpNotFound();
+
+        }
+
+        private Produkt? getProductById(int id) {
+            var produkt = new Produkt()
+            {
+                ProduktId = id,
+                Nazwa = _db.Products.SingleOrDefault(x => x.ProduktId == id).Nazwa,
+                Ilosc_w_magazynie = _db.Products.SingleOrDefault(x => x.ProduktId == id).Ilosc_w_magazynie,
+                rodzaj_miaryId = _db.Products.SingleOrDefault(x => x.ProduktId == id).rodzaj_miaryId,
+                cenaNetto = _db.Products.SingleOrDefault(x => x.ProduktId == id).cenaNetto,
+                vatId = _db.Products.SingleOrDefault(x => x.ProduktId == id).vatId,
+                glownaWalutaId = _db.Products.SingleOrDefault(x => x.ProduktId == id).glownaWalutaId,
+                rodzajId = _db.Products.SingleOrDefault(x => x.ProduktId == id).rodzajId,
+                Kupiono_lacznie = _db.Products.SingleOrDefault(x => x.ProduktId == id).Kupiono_lacznie,
+                adderId = _db.Products.SingleOrDefault(x => x.ProduktId == id).adderId,
+                isDeleted = _db.Products.SingleOrDefault(x => x.ProduktId == id).isDeleted,
+                isVisible = _db.Products.SingleOrDefault(x => x.ProduktId == id).isVisible,
+                addDate = _db.Products.SingleOrDefault(x => x.ProduktId == id).addDate,
+                removeDate = _db.Products.SingleOrDefault(x => x.ProduktId == id).removeDate
+            };
+
+            if (produkt.isDeleted)
+            {
+                return null;
+            }
+            if(produkt.isVisible)
+            {
+                return produkt;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
     }
 }

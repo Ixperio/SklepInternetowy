@@ -30,11 +30,7 @@ namespace Sklep.Models
         }
         public void BuildDescription(Opis description)
         {
-            if(produkt.opis==null)
-            {
-                produkt.opis = new List<Opis>();
-            }
-            produkt.opis.Add(description);
+            
         }
 
         public void BuildName(string name)
@@ -44,7 +40,12 @@ namespace Sklep.Models
 
         public void BuildPrice(decimal price)
         {
-            produkt.cena = price;
+            produkt.cenaNetto = price;
+        }
+
+        public void BuildVat(int vatId)
+        {
+            produkt.vatId = vatId;
         }
 
         public Produkt GetProduct()
