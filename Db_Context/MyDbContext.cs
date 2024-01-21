@@ -6,11 +6,21 @@ using System.Reflection.Emit;
 
 namespace Sklep.Db_Context
 {
-    public class MyDbContext : DbContext
+    public sealed class MyDbContext : DbContext
     {
-        public MyDbContext() : base("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Sklep;Integrated Security=True;Connect Timeout=30;Encrypt=False;")
+        private static MyDbContext _instance;
+        private MyDbContext() : base("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Sklep;Integrated Security=True;Connect Timeout=30;Encrypt=False;")
         {
 
+        }
+
+        public static MyDbContext GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new MyDbContext();
+            }
+            return _instance;
         }
 
         public DbSet<Logowanie> Logowanie { get; set; }
