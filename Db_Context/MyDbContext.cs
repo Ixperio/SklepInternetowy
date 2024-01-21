@@ -65,5 +65,7 @@ namespace Sklep.Db_Context
         public DbSet<Waluta> Waluta { get; set; }
         
         public DbSet<Zamowienia> Zamowienia { get; set; }
+       
+
     }
 }

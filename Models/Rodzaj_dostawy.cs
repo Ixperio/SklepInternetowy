@@ -11,7 +11,5 @@ namespace Sklep.Models
         public string Name { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsVisible { get; set; }
-
-        public virtual ICollection<Zamowienia> Zamowienia { get; set; }
     }
 }
