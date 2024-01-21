@@ -47,7 +47,7 @@ namespace Sklep.Controllers
                 //builder.BuildPrice(price.AsDecimal());
 
                 Produkt produkt = builder.GetProduct();
-                MyDbContext _db = DbContextConnectionSingleton.GetInstance().MyDbContext;
+                MyDbContext _db = MyDbContext.GetInstance();
                 _db.Products.Add(produkt);
                 _db.SaveChanges();
 

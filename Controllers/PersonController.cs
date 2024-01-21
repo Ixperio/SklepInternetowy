@@ -20,7 +20,7 @@ namespace Sklep.Controllers
         */
          
         public PersonController() {
-            this._db = DbContextConnectionSingleton.GetInstance().MyDbContext;
+            this._db = MyDbContext.GetInstance();
         }
 
         // GET: Person
