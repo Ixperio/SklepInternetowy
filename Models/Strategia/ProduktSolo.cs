@@ -21,7 +21,7 @@ namespace Sklep.Models.Strategia
             Produkt produkt = products[0];
             Document dokumentPdf = dokument;
 
-            Paragraph nazwa = new Paragraph(produkt.Nazwa);
+            Paragraph nazwa = new Paragraph(produkt.Nazwa+" - Cena netto :"+produkt.cenaNetto);
 
             dokumentPdf.Add(nazwa);
 

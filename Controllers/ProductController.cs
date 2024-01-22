@@ -13,6 +13,7 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using Microsoft.Ajax.Utilities;
+using System.Runtime.Remoting.Messaging;
 
 namespace Sklep.Controllers
 {
@@ -140,9 +141,15 @@ namespace Sklep.Controllers
 
                     document = context.generate(listaProduktow, document);
 
+                    string fileName = "Produkt nr "+id+".pdf";
+
+                    pdf.GetDocumentInfo().SetTitle(fileName);
+
                     document.Close();
-                    Response.Headers.Add("Content-Disposition", "inline; filename=example.pdf");
-                    return File(memoryStream.ToArray(), "application/pdf");
+                    Response.Clear();
+                    Response.ContentType = "application/pdf";
+                    Response.AddHeader("Content-Disposition", "inline; filename=" + fileName);
+                    return File(memoryStream.ToArray(), "application/pdf", fileName);
                 }
 
             }
