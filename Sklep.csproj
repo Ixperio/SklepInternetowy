@@ -222,13 +222,16 @@
     </Compile>
     <Compile Include="Models\Dekorator\DiscountDecorator.cs" />
     <Compile Include="Models\Dekorator\HolidayDiscountDecorator.cs" />
+    <Compile Include="Models\Dekorator\Interface\IProductDiscount.cs" />
     <Compile Include="Models\Dekorator\SpecialDiscountDecorator.cs" />
     <Compile Include="Models\Dekorator\StandardDiscountDecorator.cs" />
     <Compile Include="Models\ErrorViewModel.cs" />
+    <Compile Include="Models\Interfaces\IProducts.cs" />
     <Compile Include="Models\IProductBuilder.cs" />
     <Compile Include="Models\Kategoria.cs" />
     <Compile Include="Models\Logowanie.cs" />
     <Compile Include="Models\ModelViews\PersonLogin.cs" />
+    <Compile Include="Models\ModelViews\Product.cs" />
     <Compile Include="Models\Opis.cs" />
     <Compile Include="Models\Parametr.cs" />
     <Compile Include="Models\Parametr_Produkt.cs" />
