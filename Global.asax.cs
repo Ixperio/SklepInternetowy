@@ -29,7 +29,7 @@ namespace Sklep
 
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MyDbContext>());
             MyDbContext context = MyDbContext.GetInstance();
-            context.Database.Initialize(true);
+            //context.Database.Initialize(true);
 
         }
     }

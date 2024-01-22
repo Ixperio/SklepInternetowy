@@ -1,4 +1,5 @@
 ﻿using Sklep.Models;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
@@ -9,16 +10,22 @@ namespace Sklep.Db_Context
     public sealed class MyDbContext : DbContext
     {
         private static MyDbContext _instance;
-        private MyDbContext() : base("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Sklep;Integrated Security=True;Connect Timeout=30;Encrypt=False;")
-        {
 
+        [Obsolete("Konstruktor do ef")]
+        public MyDbContext()
+        {
+                
+        }
+        private MyDbContext(bool x) : base("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Sklep;Integrated Security=True;Connect Timeout=30;Encrypt=False;")
+        {
+            
         }
 
         public static MyDbContext GetInstance()
         {
             if (_instance == null)
             {
-                _instance = new MyDbContext();
+                _instance = new MyDbContext(true);
             }
             return _instance;
         }
@@ -35,6 +42,7 @@ namespace Sklep.Db_Context
 
         public DbSet<Kategoria> Kategoria { get; set; }
 
+        public DbSet<Komentarz> Komentarze { get; set; }
         public DbSet<Opis> Description { get; set; }
 
         public DbSet<Parametr> Parametr { get; set; }

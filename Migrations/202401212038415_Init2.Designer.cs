@@ -7,13 +7,13 @@ namespace Sklep.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class Init2 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Init2));
         
         string IMigrationMetadata.Id
         {
-            get { return "202401202258105_Initial"; }
+            get { return "202401212038415_Init2"; }
         }
         
         string IMigrationMetadata.Source

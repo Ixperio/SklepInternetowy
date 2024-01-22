@@ -10,6 +10,12 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using Microsoft.Ajax.Utilities;
+using Sklep.Db_Context;
+using Sklep.Models;
+using Sklep.Models.Strategia.Interface;
+using Sklep.Models.Strategia;
+using Sklep.Models.ModelViews;
+using Sklep.Prototype;
 
 namespace Sklep.Controllers
 {
@@ -19,13 +25,12 @@ namespace Sklep.Controllers
 
         public ProductController()
         {
-            this._db = new MyDbContext();
+            this._db = MyDbContext.GetInstance();
         }
 
         // GET: Product
         public ActionResult Index()
         {
-
             return View();
         }
 
@@ -54,7 +59,7 @@ namespace Sklep.Controllers
                 ProductBuilder builder = new ProductBuilder();
                 builder.Reset();
                 builder.BuildName(name);
-                builder.BuildDescription(new Opis());
+                //builder.BuildDescription(new Opis());
                 //builder.BuildPrice(price.AsDecimal());
 
                 Produkt produkt = builder.GetProduct();
@@ -181,6 +186,62 @@ namespace Sklep.Controllers
                 return null;
             }
 
+        }
+
+        public ActionResult Comments(int id)
+        {
+            var produkt = getProductById(id);
+
+            if (produkt != null)
+            {
+                return View(produkt.Komentarze.ToList());
+            }
+
+            return HttpNotFound();
+        }
+
+        //https://localhost:44386/Product/AddComment?productId=1
+        [HttpGet]
+        public ActionResult AddComment(int productId)
+        {
+            var produkt = _db.Products.Find(productId);
+            if (produkt == null)
+            {
+                return HttpNotFound();
+            }
+
+            var productComment = new ProductComment { ProduktId = productId };
+            return View(productComment);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddComment(ProductComment productComment)
+        {
+            if (ModelState.IsValid)
+            {
+                Comment prototypeComment = new Comment { UserName = productComment.UserName, Content = productComment.Content };
+                Comment newComment = prototypeComment.DeepCopy();
+
+                var produkt = _db.Products.Find(productComment.ProduktId);
+                if (produkt != null)
+                {
+                    var komentarz = new Komentarz
+                    {
+                        UserName = newComment.UserName,
+                        Content = newComment.Content,
+                        CreatedAt = DateTime.Now
+                    };
+                    _db.Komentarze.Add(komentarz);
+                    produkt.Komentarze.Add(komentarz);
+                    _db.SaveChanges();
+
+                    ViewBag.Message = "Comment added successfully!";
+                    return RedirectToAction("Comments", new { id = productComment.ProduktId });
+                }
+            }
+
+            return View(productComment);
         }
 
     }

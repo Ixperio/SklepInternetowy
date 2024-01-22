@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -53,7 +53,7 @@
                         addDate = c.DateTime(nullable: false),
                         adderId = c.Int(nullable: false),
                         removeDate = c.DateTime(),
-                        removerId = c.Int(nullable: false),
+                        removerId = c.Int(),
                         isDeleted = c.Boolean(nullable: false),
                         isVisible = c.Boolean(nullable: false),
                     })
@@ -236,7 +236,7 @@
                         Description = c.String(),
                         adderId = c.Int(nullable: false),
                         addDate = c.DateTime(nullable: false),
-                        removerId = c.Int(nullable: false),
+                        removerId = c.Int(),
                         removerDate = c.DateTime(),
                         isDeleted = c.Boolean(nullable: false),
                         isVisible = c.Boolean(nullable: false),

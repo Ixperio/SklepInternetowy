@@ -46,13 +46,18 @@ namespace Sklep.Controllers
             if (ModelState.IsValid)
             {
                 ViewBag.Message = "Utworzono nowe konto!";
-                /*Person person = new Person();
-                person.Email = personRegistered.Email;
-                person.Phone = personRegistered.PhoneNumber;
-                person.Name = personRegistered.FirstName;
-                person.Surname = personRegistered.LastName;
-                person.Birthday = personRegistered.BirthDate;
-                person.Logowanie = new Logowanie()
+                Person person = new Person
+                {
+                    Email = personRegistered.Email,
+                    Phone = personRegistered.PhoneNumber,
+                    Name = personRegistered.FirstName,
+                    Surname = personRegistered.LastName,
+                    Birthday = personRegistered.BirthDate,
+                    LogowanieId = 0, 
+                    AccountTypeId = 0 
+                };
+
+                person.Logowanie = new Logowanie
                 {
                     Login = personRegistered.Login,
                     Password = personRegistered.Password
@@ -60,7 +65,7 @@ namespace Sklep.Controllers
 
                 _db.Logowanie.Add(person.Logowanie);
                 _db.Person.Add(person);
-                _db.SaveChanges();*/
+                _db.SaveChanges();
             }
             else
             {

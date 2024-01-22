@@ -198,13 +198,21 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Migrations\202401202258105_Initial.cs" />
-    <Compile Include="Migrations\202401202258105_Initial.designer.cs">
-      <DependentUpon>202401202258105_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202401212033200_Init.cs" />
+    <Compile Include="Migrations\202401212033200_Init.designer.cs">
+      <DependentUpon>202401212033200_Init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202401210212533_Init3.cs" />
-    <Compile Include="Migrations\202401210212533_Init3.designer.cs">
-      <DependentUpon>202401210212533_Init3.cs</DependentUpon>
+    <Compile Include="Migrations\202401212038415_Init2.cs" />
+    <Compile Include="Migrations\202401212038415_Init2.designer.cs">
+      <DependentUpon>202401212038415_Init2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401212228016_Init3.cs" />
+    <Compile Include="Migrations\202401212228016_Init3.designer.cs">
+      <DependentUpon>202401212228016_Init3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401212342247_Init4.cs" />
+    <Compile Include="Migrations\202401212342247_Init4.designer.cs">
+      <DependentUpon>202401212342247_Init4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
@@ -217,10 +225,12 @@
     <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Models\IProductBuilder.cs" />
     <Compile Include="Models\Kategoria.cs" />
+    <Compile Include="Models\Komentarz.cs" />
     <Compile Include="Models\Logowanie.cs" />
     <Compile Include="Models\ModelViews\OrderSubmit.cs" />
     <Compile Include="Models\ModelViews\PersonLogin.cs" />
     <Compile Include="Models\ModelViews\PersonRegistration.cs" />
+    <Compile Include="Models\ModelViews\ProductComments.cs" />
     <Compile Include="Models\Opis.cs" />
     <Compile Include="Models\Parametr.cs" />
     <Compile Include="Models\Parametr_Produkt.cs" />
@@ -244,6 +254,7 @@
     <Compile Include="Models\Waluta.cs" />
     <Compile Include="Models\Zamowienia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Prototype\Comment.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DB.mdf" />
@@ -331,16 +342,23 @@
     <Content Include="Views\Person\Login.cshtml" />
     <Content Include="Views\Person\Register.cshtml" />
     <Content Include="Views\Order\SubmitOrder.cshtml" />
+    <Content Include="Views\Product\AddComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202401202258105_Initial.resx">
-      <DependentUpon>202401202258105_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202401212033200_Init.resx">
+      <DependentUpon>202401212033200_Init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202401210212533_Init3.resx">
-      <DependentUpon>202401210212533_Init3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202401212038415_Init2.resx">
+      <DependentUpon>202401212038415_Init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401212228016_Init3.resx">
+      <DependentUpon>202401212228016_Init3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401212342247_Init4.resx">
+      <DependentUpon>202401212342247_Init4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
