@@ -230,6 +230,8 @@
     <Compile Include="Models\IProductBuilder.cs" />
     <Compile Include="Models\Kategoria.cs" />
     <Compile Include="Models\Logowanie.cs" />
+    <Compile Include="Models\Memento\Memento.cs" />
+    <Compile Include="Models\Memento\TextEditor.cs" />
     <Compile Include="Models\Metoda_wytworcza\DostawaKurier.cs" />
     <Compile Include="Models\Metoda_wytworcza\DostawaPobranieKurier.cs" />
     <Compile Include="Models\Metoda_wytworcza\Interface\IDostawa.cs" />
@@ -357,9 +359,7 @@
       <DependentUpon>202401210212533_Init3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Memento\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
