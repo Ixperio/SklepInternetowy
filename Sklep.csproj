@@ -230,6 +230,12 @@
     <Compile Include="Models\IProductBuilder.cs" />
     <Compile Include="Models\Kategoria.cs" />
     <Compile Include="Models\Logowanie.cs" />
+    <Compile Include="Models\Metoda_wytworcza\DostawaKurier.cs" />
+    <Compile Include="Models\Metoda_wytworcza\DostawaPobranieKurier.cs" />
+    <Compile Include="Models\Metoda_wytworcza\Interface\IDostawa.cs" />
+    <Compile Include="Models\Metoda_wytworcza\Interface\IFactoryDostawa.cs" />
+    <Compile Include="Models\Metoda_wytworcza\Kurier.cs" />
+    <Compile Include="Models\Metoda_wytworcza\KurierPobranie.cs" />
     <Compile Include="Models\ModelViews\PersonLogin.cs" />
     <Compile Include="Models\ModelViews\Product.cs" />
     <Compile Include="Models\Opis.cs" />
@@ -353,7 +359,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\Memento\" />
-    <Folder Include="Models\Metoda_wytworcza\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

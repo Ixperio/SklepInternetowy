@@ -9,6 +9,10 @@ using Sklep.Models.Dekorator.Interface;
 using Sklep.Models.Dekorator;
 using System.Data.Entity.Core.Metadata.Edm;
 using Sklep.Models.ModelViews;
+using Sklep.Models.Metoda_wytworcza.Interface;
+using Sklep.Models.Metoda_wytworcza;
+using iText.Kernel.Font;
+using iText.IO.Font.Constants;
 
 namespace Sklep.Models.Strategia
 {
@@ -22,8 +26,12 @@ namespace Sklep.Models.Strategia
         //Tworzy plik pdf.
         public Document generatePdf(List<Produkt> products, Document dokument)
         {
+
             Produkt produkt = products[0];
             Document dokumentPdf = dokument;
+            
+            var font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+            dokumentPdf.SetFont(font);
 
             Product prod = new Product(produkt.cenaNetto);
 
@@ -43,6 +51,17 @@ namespace Sklep.Models.Strategia
 
             dokumentPdf.Add(nazwa3);
 
+            //DOSTAWY
+
+            IFactoryDostawa dostawyFabrykaKurier = new DostawaKurier();
+            IFactoryDostawa dostawyFabrykaKurierPobranie = new DostawaPobranieKurier();
+            IDostawa dostawa = dostawyFabrykaKurier.createFactory();
+            IDostawa dostawaPobranie = dostawyFabrykaKurierPobranie.createFactory();
+
+            dokumentPdf.Add(new Paragraph("Możliwe dostawy : "));
+
+            dokumentPdf.Add(new Paragraph(dostawa.getName() + " | " + dostawa.getPrice() + "PLN"));
+            dokumentPdf.Add(new Paragraph(dostawaPobranie.getName() + " | " + dostawaPobranie.getPrice() + "PLN"));
 
             return dokumentPdf;
 

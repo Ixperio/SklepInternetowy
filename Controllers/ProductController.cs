@@ -14,6 +14,11 @@ using iText.Layout;
 using iText.Layout.Element;
 using Microsoft.Ajax.Utilities;
 using System.Runtime.Remoting.Messaging;
+using iText.IO.Font.Constants;
+using iText.Kernel.Font;
+using iText.IO.Font;
+using System.Text;
+using System.Web.Configuration;
 
 namespace Sklep.Controllers
 {
@@ -139,6 +144,10 @@ namespace Sklep.Controllers
                     var pdf = new PdfDocument(writer);
                     var document = new Document(pdf);
 
+                    string fontPath = Server.MapPath("~/App_Data/Sevillana-Regular.ttf"); // Zmień YourNamespace na rzeczywistą przestrzeń nazw
+                    PdfFont font = PdfFontFactory.CreateFont(fontPath, PdfEncodings.UTF8);
+                    document.SetFont(font);
+
                     document = context.generate(listaProduktow, document);
 
                     string fileName = "Produkt nr "+id+".pdf";
@@ -149,6 +158,7 @@ namespace Sklep.Controllers
                     Response.Clear();
                     Response.ContentType = "application/pdf";
                     Response.AddHeader("Content-Disposition", "inline; filename=" + fileName);
+
                     return File(memoryStream.ToArray(), "application/pdf", fileName);
                 }
 
