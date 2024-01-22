@@ -220,6 +220,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dekorator\DiscountDecorator.cs" />
+    <Compile Include="Models\Dekorator\HolidayDiscountDecorator.cs" />
+    <Compile Include="Models\Dekorator\SpecialDiscountDecorator.cs" />
+    <Compile Include="Models\Dekorator\StandardDiscountDecorator.cs" />
     <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Models\IProductBuilder.cs" />
     <Compile Include="Models\Kategoria.cs" />
@@ -343,6 +347,10 @@
     <EmbeddedResource Include="Migrations\202401210212533_Init3.resx">
       <DependentUpon>202401210212533_Init3.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Memento\" />
+    <Folder Include="Models\Metoda_wytworcza\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
