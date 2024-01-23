@@ -6,13 +6,14 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Data.Entity;
-
 using Sklep.Models;
+
 
 namespace Sklep
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -28,8 +29,11 @@ namespace Sklep
 
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MyDbContext>());
             MyDbContext context = new MyDbContext();
+
             context.Database.Initialize(true);
 
+            HttpContext.Current.Application["liczba_wyswietlen"] = context.Globals.FirstOrDefault(c => c.Id == 1).Value;
         }
+
     }
 }

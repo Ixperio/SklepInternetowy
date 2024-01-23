@@ -212,6 +212,10 @@
     <Compile Include="Migrations\202401210212533_Init3.designer.cs">
       <DependentUpon>202401210212533_Init3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202401231757490_Init4.cs" />
+    <Compile Include="Migrations\202401231757490_Init4.designer.cs">
+      <DependentUpon>202401231757490_Init4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\Adress.cs" />
@@ -226,6 +230,7 @@
     <Compile Include="Models\Dekorator\SpecialDiscountDecorator.cs" />
     <Compile Include="Models\Dekorator\StandardDiscountDecorator.cs" />
     <Compile Include="Models\ErrorViewModel.cs" />
+    <Compile Include="Models\Globals.cs" />
     <Compile Include="Models\Interfaces\IProducts.cs" />
     <Compile Include="Models\IProductBuilder.cs" />
     <Compile Include="Models\Kategoria.cs" />
@@ -357,6 +362,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202401210212533_Init3.resx">
       <DependentUpon>202401210212533_Init3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401231757490_Init4.resx">
+      <DependentUpon>202401231757490_Init4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

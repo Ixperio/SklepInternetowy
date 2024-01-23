@@ -298,3 +298,4 @@ C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\bin\BouncyCastle.Cryptograp
 C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\bin\itext.bouncy-castle-adapter.dll
 C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\bin\BouncyCastle.Cryptography.xml
 C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\bin\itext.bouncy-castle-adapter.xml
+C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.Migrations.Init4.resources

@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Data.Entity.ModelConfiguration;
 using System.Reflection.Emit;
 
@@ -53,7 +55,8 @@ namespace Sklep.Models
         public DbSet<Waluta> Waluta { get; set; }
         
         public DbSet<Zamowienia> Zamowienia { get; set; }
-       
+
+        public  DbSet<Globals> Globals { get; set; }
 
     }
 }

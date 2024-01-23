@@ -6,6 +6,10 @@ using System.Web.Mvc;
 
 using Sklep.Models.ModelViews;
 using Sklep.Models;
+using System.Data.Entity.Infrastructure;
+using System.Data.SqlClient;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity;
 
 namespace Sklep.Controllers
 {
@@ -103,7 +107,6 @@ namespace Sklep.Controllers
                
             }
             
-
             return View();
         }
     }

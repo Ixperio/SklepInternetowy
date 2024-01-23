@@ -6,10 +6,17 @@ using System.Web.Mvc;
 
 namespace Sklep.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : Controller 
     {
+
         public ActionResult Index()
         {
+
+            int aktualnaLiczbaWyswietlen = (int)HttpContext.Application["liczba_wyswietlen"];
+            HttpContext.Application["liczba_wyswietlen"] = aktualnaLiczbaWyswietlen + 1;
+
+            ViewBag.LiczbaWyswietlenStrony = HttpContext.Application["liczba_wyswietlen"];
+
             return View();
         }
 
