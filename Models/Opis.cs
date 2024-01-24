@@ -25,5 +25,6 @@ namespace Sklep.Models
         public bool isDeleted { get; set; }
         public bool isVisible { get; set; }
         
+        public string Description { get; set; }
     }
 }

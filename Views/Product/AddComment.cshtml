@@ -21,6 +21,8 @@
         @Html.TextAreaFor(model => model.Content, new { @class = "form-control" })
     </div>
 
+    @Html.HiddenFor(model => model.ProduktId)
+
     <div class="form-group">
         <input type="submit" value="Add Comment" class="btn btn-primary" />
     </div>

@@ -45,8 +45,6 @@ namespace Sklep.Db_Context
 
         public DbSet<Adress> Adress { get; set; }
 
-        public DbSet<Country> Country { get; set; }
-
         public DbSet<Kategoria> Kategoria { get; set; }
 
         public DbSet<Komentarz> Komentarze { get; set; }
@@ -70,10 +68,6 @@ namespace Sklep.Db_Context
         public DbSet<Rodzaj_platnosci> Rodzaj_platnosci { get; set; }
 
         public DbSet<Section> Sekcja { get; set; }
-
-        public DbSet<Status_zamowienia> Status_zamowienia { get; set; }
-
-        public DbSet<Town> Miasto { get; set; }
 
         public DbSet<Typ_jednostki> Typ_jednostki { get; set; }
 
