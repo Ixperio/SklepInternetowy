@@ -12,15 +12,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Caramel&family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
 </head>
-<style>
-    body{
+<body>
+    <style>
+    body {
         width: 100vw;
         height: 100vh;
         display: grid;
-        grid-template-rows: min-content max-content;
+        grid-template-rows: 8% 92%;
         padding: 0;
         place-content: flex-start;
+        place-items: center;
     }
+
     .nav {
         width: 100vw;
         max-height: 100px;
@@ -44,10 +47,12 @@
         color: #000;
         transform: scale(0.5);
     }
-    .content{
+
+    .content {
         padding: 20px;
         height: max-content;
     }
+
     .search {
         background-color: #FEA3AF;
         border-radius: 50px;
@@ -62,23 +67,26 @@
         margin-left: 50px;
         margin-right: 55px;
     }
+
     ::placeholder {
         color: #fff;
         font-style: italic;
         font-family: Inter;
         font-weight: 300;
     }
-    .search > .search_input{
+
+    .search > .search_input {
         border: none;
         color: #fff;
         font-family: Inter;
         background-color: transparent;
         outline: none;
-
     }
-    .search > svg:hover{
+
+    .search > svg:hover {
         cursor: pointer;
     }
+
     .navOptions {
         display: grid;
         grid-template-columns: max-content max-content max-content max-content;
@@ -88,6 +96,7 @@
         grid-column-gap: 30px;
         font-size: 1.2em;
     }
+
         .navOptions > .navButton {
             border-radius: 50px;
             background-color: transparent;
@@ -102,14 +111,16 @@
             font-size: 1em;
             text-decoration: none;
         }
-        .navButtonText {
-            color: #000;
-            font-style: italic;
-            font-family: Inter;
-            cursor: pointer;
-            font-size: 1em;
-            text-decoration: none;
-        }
+
+    .navButtonText {
+        color: #000;
+        font-style: italic;
+        font-family: Inter;
+        cursor: pointer;
+        font-size: 1em;
+        text-decoration: none;
+    }
+
     .navOptions > .navButton[selected] > .navButtonText {
         color: #fff;
         font-style: italic;
@@ -118,6 +129,7 @@
         font-size: 1em;
         text-decoration: none;
     }
+
     .navOptions > .navButton:hover > .navButtonText {
         color: #fff;
         font-style: italic;
@@ -135,36 +147,45 @@
         background-color: #FC6D84;
         font-size: 1em;
     }
-            .navOptions > .navButton[selected] {
-                transition: 0.2s;
-                font-style: italic;
-                color: #fff;
-                font-family: Inter;
-                background-color: #FC6D84;
-                font-size: 1em;
-            }
-            .iconsGroup {
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
-                grid-column-gap: 20px;
-                width: max-content;
-            }
-            .icons{
-                display: grid;
-                grid-template-columns: max-content;
-                place-items: center;
-                justify-items: center;
-                font-family: Inter;
-                font-size: 1rem;
-                color: #000;
-            }
-                .icons > h3 {
-                    font-size: 1rem;
-                    font-family: Inter;
-                }
 
+    .navOptions > .navButton[selected] {
+        transition: 0.2s;
+        font-style: italic;
+        color: #fff;
+        font-family: Inter;
+        background-color: #FC6D84;
+        font-size: 1em;
+    }
+
+    .iconsGroup {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: 20px;
+        width: max-content;
+    }
+
+    .icons {
+        display: grid;
+        grid-template-columns: max-content;
+        place-items: center;
+        justify-items: center;
+        font-family: Inter;
+        font-size: 1rem;
+        color: #000;
+    }
+
+        .icons > h3 {
+            font-size: 1rem;
+            font-family: Inter;
+        }
+
+    .content {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+    }
 </style>
-<body>
         <div class="nav">
             <div class="logo"><img src="@Url.Content("~/Images/Logotyp.PNG")" alt="Słodycze"/></div>
             <div class="search">
@@ -180,35 +201,34 @@
                     switch (ViewBag.navId)
                     {
                         case 1:
-                            <div class="navButton" selected>@Html.ActionLink("Asortyment", "Index", "Home", new { @class = "navButtonText" })</div>
+                            <div class="navButton" selected>@Html.ActionLink("Asortyment", "Index", "HomeController", new { @class = "navButtonText" })</div>
                             <div class="navButton">Kategorie</div>
-                            <div class="navButton">@Html.ActionLink("O nas", "About", "Home", new { @class = "navButtonText" })</div>
-                            <div class="navButton">@Html.ActionLink("Kontakt", "Contact", "Home", new { @class = "navButtonText" })</div>
-
+                            <div class="navButton">@Html.ActionLink("O nas", "About", "HomeController", new { @class = "navButtonText" })</div>
+                            <div class="navButton">@Html.ActionLink("Kontakt", "Contact", "HomeController", new { @class = "navButtonText" })</div>
                             break;
                         case 2:
-                            <div class="navButton">@Html.ActionLink("Asortyment", "Index", "Home", new { @class = "navButtonText" })</div>
+                            <div class="navButton">@Html.ActionLink("Asortyment", "Index", "HomeController", new { @class = "navButtonText" })</div>
                             <div class="navButton" selected>Kategorie</div>
-                            <div class="navButton">@Html.ActionLink("O nas", "About", "Home", new { @class = "navButtonText" })</div>
-                            <div class="navButton">@Html.ActionLink("Kontakt", "Contact", "Home", new { @class = "navButtonText" })</div>
+                            <div class="navButton">@Html.ActionLink("O nas", "About", "HomeController", new { @class = "navButtonText" })</div>
+                            <div class="navButton">@Html.ActionLink("Kontakt", "Contact", "HomeController", new { @class = "navButtonText" })</div>
                             break;
                         case 3:
-                            <div class="navButton">@Html.ActionLink("Asortyment", "Index", "Home", new { @class = "navButtonText" })</div>
+                            <div class="navButton">@Html.ActionLink("Asortyment", "Index", "HomeController", new { @class = "navButtonText" })</div>
                             <div class="navButton">Kategorie</div>
-                            <div class="navButton" selected>@Html.ActionLink("O nas", "About", "Home", new { @class = "navButtonText" })</div>
-                            <div class="navButton">@Html.ActionLink("Kontakt", "Contact", "Home", new { @class = "navButtonText" })</div>
+                            <div class="navButton" selected>@Html.ActionLink("O nas", "About", "HomeController", new { @class = "navButtonText" })</div>
+                            <div class="navButton">@Html.ActionLink("Kontakt", "Contact", "HomeController", new { @class = "navButtonText" })</div>
                             break;
                         case 4:
-                            <div class="navButton">@Html.ActionLink("Asortyment", "Index", "Home", new { @class = "navButtonText" })</div>
+                            <div class="navButton">@Html.ActionLink("Asortyment", "Index", "HomeController", new { @class = "navButtonText" })</div>
                             <div class="navButton">Kategorie</div>
-                            <div class="navButton">@Html.ActionLink("O nas", "About", "Home", new { @class = "navButtonText" })</div>
-                            <div class="navButton" selected>@Html.ActionLink("Kontakt", "Contact", "Home", new { @class = "navButtonText" })</div>
+                            <div class="navButton">@Html.ActionLink("O nas", "About", "HomeController", new { @class = "navButtonText" })</div>
+                            <div class="navButton" selected>@Html.ActionLink("Kontakt", "Contact", "HomeController", new { @class = "navButtonText" })</div>
                             break;
                         default:
-                            <div class="navButton" selected>@Html.ActionLink("Asortyment", "Index", "Home", new { @class = "navButtonText" })</div>
+                            <div class="navButton">@Html.ActionLink("Asortyment", "Index", "HomeController", new { @class = "navButtonText" })</div>
                             <div class="navButton">Kategorie</div>
-                            <div class="navButton">@Html.ActionLink("O nas", "About", "Home", new { @class = "navButtonText" })</div>
-                            <div class="navButton">@Html.ActionLink("Kontakt", "Contact", "Home", new { @class = "navButtonText" })</div>
+                            <div class="navButton">@Html.ActionLink("O nas", "About", "HomeController", new { @class = "navButtonText" })</div>
+                            <div class="navButton">@Html.ActionLink("Kontakt", "Contact", "HomeController", new { @class = "navButtonText" })</div>
                             break;
                     }
                 }
@@ -221,24 +241,26 @@
                     </svg>
                     <h3>Lista zakupowa</h3>
                 </div>
-                <div class="icons">
-                    <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M23 19.1667C25.0333 19.1667 26.9834 18.3589 28.4211 16.9212C29.8589 15.4834 30.6666 13.5333 30.6666 11.5C30.6666 9.46668 29.8589 7.51664 28.4211 6.07886C26.9834 4.64108 25.0333 3.83334 23 3.83334C20.9667 3.83334 19.0166 4.64108 17.5788 6.07886C16.141 7.51664 15.3333 9.46668 15.3333 11.5C15.3333 13.5333 16.141 15.4834 17.5788 16.9212C19.0166 18.3589 20.9667 19.1667 23 19.1667Z" stroke="black" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M40.25 42.1667C40.25 39.9014 39.8038 37.6582 38.9369 35.5654C38.07 33.4725 36.7994 31.5709 35.1976 29.9691C33.5958 28.3673 31.6942 27.0966 29.6013 26.2297C27.5084 25.3628 25.2653 24.9167 23 24.9167C20.7347 24.9167 18.4916 25.3628 16.3987 26.2297C14.3058 27.0966 12.4042 28.3673 10.8024 29.9691C9.2006 31.5709 7.92997 33.4725 7.06308 35.5654C6.19618 37.6582 5.75 39.9014 5.75 42.1667" stroke="black" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    <h3>Zaloguj się</h3>
-                </div>
-                <div class="icons">
-                    <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.79163 16.2917H41.2083L37.1833 41.2083H8.81663L4.79163 16.2917Z" stroke="black" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M33.5417 16.2917C33.5417 9.93982 28.821 4.79166 23 4.79166C17.1772 4.79166 12.4584 9.93982 12.4584 16.2917" stroke="black" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M16.2917 26.8333C16.8 26.8333 17.2875 26.6314 17.647 26.272C18.0064 25.9125 18.2083 25.425 18.2083 24.9167C18.2083 24.4083 18.0064 23.9208 17.647 23.5614C17.2875 23.2019 16.8 23 16.2917 23C15.7833 23 15.2958 23.2019 14.9364 23.5614C14.5769 23.9208 14.375 24.4083 14.375 24.9167C14.375 25.425 14.5769 25.9125 14.9364 26.272C15.2958 26.6314 15.7833 26.8333 16.2917 26.8333Z" fill="black" />
-                        <path d="M17.25 31.625C17.25 31.625 19.1667 34.5 23 34.5C26.8333 34.5 28.75 31.625 28.75 31.625" stroke="black" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M29.7083 26.8333C30.2166 26.8333 30.7041 26.6314 31.0636 26.272C31.423 25.9125 31.625 25.425 31.625 24.9167C31.625 24.4083 31.423 23.9208 31.0636 23.5614C30.7041 23.2019 30.2166 23 29.7083 23C29.2 23 28.7124 23.2019 28.353 23.5614C27.9936 23.9208 27.7916 24.4083 27.7916 24.9167C27.7916 25.425 27.9936 25.9125 28.353 26.272C28.7124 26.6314 29.2 26.8333 29.7083 26.8333Z" fill="black" />
-                    </svg>
-                    <h3>0,00zł</h3>
-                </div>
-            </div>
+                <a href="@Url.Action("Login", "Person")">
+                    <div class="icons">
+                        <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M23 19.1667C25.0333 19.1667 26.9834 18.3589 28.4211 16.9212C29.8589 15.4834 30.6666 13.5333 30.6666 11.5C30.6666 9.46668 29.8589 7.51664 28.4211 6.07886C26.9834 4.64108 25.0333 3.83334 23 3.83334C20.9667 3.83334 19.0166 4.64108 17.5788 6.07886C16.141 7.51664 15.3333 9.46668 15.3333 11.5C15.3333 13.5333 16.141 15.4834 17.5788 16.9212C19.0166 18.3589 20.9667 19.1667 23 19.1667Z" stroke="black" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M40.25 42.1667C40.25 39.9014 39.8038 37.6582 38.9369 35.5654C38.07 33.4725 36.7994 31.5709 35.1976 29.9691C33.5958 28.3673 31.6942 27.0966 29.6013 26.2297C27.5084 25.3628 25.2653 24.9167 23 24.9167C20.7347 24.9167 18.4916 25.3628 16.3987 26.2297C14.3058 27.0966 12.4042 28.3673 10.8024 29.9691C9.2006 31.5709 7.92997 33.4725 7.06308 35.5654C6.19618 37.6582 5.75 39.9014 5.75 42.1667" stroke="black" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <h3>Zaloguj się</h3>
+                    </div>
+                    </a>
+                    <div class="icons">
+                        <svg width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.79163 16.2917H41.2083L37.1833 41.2083H8.81663L4.79163 16.2917Z" stroke="black" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M33.5417 16.2917C33.5417 9.93982 28.821 4.79166 23 4.79166C17.1772 4.79166 12.4584 9.93982 12.4584 16.2917" stroke="black" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M16.2917 26.8333C16.8 26.8333 17.2875 26.6314 17.647 26.272C18.0064 25.9125 18.2083 25.425 18.2083 24.9167C18.2083 24.4083 18.0064 23.9208 17.647 23.5614C17.2875 23.2019 16.8 23 16.2917 23C15.7833 23 15.2958 23.2019 14.9364 23.5614C14.5769 23.9208 14.375 24.4083 14.375 24.9167C14.375 25.425 14.5769 25.9125 14.9364 26.272C15.2958 26.6314 15.7833 26.8333 16.2917 26.8333Z" fill="black" />
+                            <path d="M17.25 31.625C17.25 31.625 19.1667 34.5 23 34.5C26.8333 34.5 28.75 31.625 28.75 31.625" stroke="black" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M29.7083 26.8333C30.2166 26.8333 30.7041 26.6314 31.0636 26.272C31.423 25.9125 31.625 25.425 31.625 24.9167C31.625 24.4083 31.423 23.9208 31.0636 23.5614C30.7041 23.2019 30.2166 23 29.7083 23C29.2 23 28.7124 23.2019 28.353 23.5614C27.9936 23.9208 27.7916 24.4083 27.7916 24.9167C27.7916 25.425 27.9936 25.9125 28.353 26.272C28.7124 26.6314 29.2 26.8333 29.7083 26.8333Z" fill="black" />
+                        </svg>
+                        <h3>0,00zł</h3>
+                    </div>
+</div>
             
         </div>
         <div class="content">

@@ -9,6 +9,5 @@ namespace Sklep.Models.ModelViews
     {
         public string Login {  get; set; }
         public string Password { get; set; }
-
     }
 }

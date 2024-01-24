@@ -4,9 +4,6 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 
 ﻿using Sklep.Models;
-using System;
-using System.Data.Entity;
-
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Reflection.Emit;

@@ -53,7 +53,7 @@ namespace Sklep.Controllers
             if (ModelState.IsValid)
             {
                 ViewBag.Message = "Utworzono nowe konto!";
-                Person person = new Person
+                Person person = new Person()
                 {
                     Email = personRegistered.Email,
                     Phone = personRegistered.PhoneNumber,
