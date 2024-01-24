@@ -16,8 +16,7 @@ namespace Sklep.Models
         public string PostCode { get; set; }
         public string Country { get; set; }
         public string State { get; set; }
-        public DateTime addDate { get; set; }
-        public DateTime? removeDate { get; set; }
+        public string Email { get; set; }
         public bool isDeleted { get; set; }
 
         public int PersonId { get; set; }

@@ -37,14 +37,16 @@ namespace Sklep.Controllers
                     City = orderSubmit.City,
                     PostCode = orderSubmit.PostalCode,
                     State = orderSubmit.State,
-                    Country = orderSubmit.Country
+                    Country = orderSubmit.Country,
+                    Email = orderSubmit.Email
                 };
 
-                _db.Adress.Add(adress);
+                var x = _db.Adress.Add(adress);
                 _db.SaveChanges();
 
                 EmailNotification notification = new EmailNotification();
                 Zamowienia zamowienia = new Zamowienia();
+                zamowienia.adresId = x.AdressId;
                 zamowienia.Attach(notification);
 
                 zamowienia.SetStatus("Przyjeto do realizacji"); //korzystac z setstatus kiedy chce wyslac powiadomienie

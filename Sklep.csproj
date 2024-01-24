@@ -227,6 +227,14 @@
     <Compile Include="Migrations\202401240011105_init7.designer.cs">
       <DependentUpon>202401240011105_init7.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202401241609316_Init8.cs" />
+    <Compile Include="Migrations\202401241609316_Init8.designer.cs">
+      <DependentUpon>202401241609316_Init8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401241702483_Init9.cs" />
+    <Compile Include="Migrations\202401241702483_Init9.designer.cs">
+      <DependentUpon>202401241702483_Init9.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\Adress.cs" />
@@ -381,6 +389,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202401240011105_init7.resx">
       <DependentUpon>202401240011105_init7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401241609316_Init8.resx">
+      <DependentUpon>202401241609316_Init8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401241702483_Init9.resx">
+      <DependentUpon>202401241702483_Init9.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
