@@ -4,119 +4,76 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Produkt</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nazwa)
-        </dt>
+<style>
+    #contentDetails {
+        display: grid;
+        justify-items: center;
+        width: 100%;
+        height: 100%;
+        align-items: flex-start;
+        padding-top: 50px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Nazwa)
-        </dd>
+    .backBtn {
+        display: grid;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        background-color: #FC6D84;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.1s;
+        width: max-content;
+    }
+    .cont {
+        width: 70%;
+        display: grid;
+        justify-items: left;
+    }
+    .contentProduct {
+        background-color: #fff;
+        box-shadow: rgba(0,0,0,0.25) 0px 0px 3px 1px;
+        border-radius: 5px;
+        width: 100%;
+        display: grid;
+        padding: 30px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Ilosc_w_magazynie)
-        </dt>
+    .backBtn > a {
+        color: #fff;
+        text-decoration: none;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Ilosc_w_magazynie)
-        </dd>
+    .backBtn:hover {
+        padding: 7px 20px 13px 20px;
+        transition: 0.1s;
+    }
+</style>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.rodzaj_miaryId)
-        </dt>
+<content id="contentDetails">
+    <div class="cont">
+        <div class="backBtn">
+            @Html.ActionLink("Wróć do wyszukiwania", "Index")
+        </div>
+        <div class="contentProduct">
+            <div class="sectionMain">
+                <div class="picture">
 
-        <dd>
-            @Html.DisplayFor(model => model.rodzaj_miaryId)
-        </dd>
+                    <div class="changeButtons"></div>
+                </div>
+                <div class="information">
+                    <h3 class="ProductName">@ViewBag.product.Nazwa</h3>
+                </div>
+                <div class="buySection"></div>
+            </div>
+        </div>
+    </div>
+    
+</content>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.cenaNetto)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.cenaNetto)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.vatId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.vatId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.glownaWalutaId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.glownaWalutaId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.rodzajId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.rodzajId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Kupiono_lacznie)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kupiono_lacznie)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.adderId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.adderId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.isDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.isDeleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.isVisible)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.isVisible)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.addDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.addDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.removeDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.removeDate)
-        </dd>
-
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ProduktId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
