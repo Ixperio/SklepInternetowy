@@ -1,17 +1,81 @@
 ﻿@model Sklep.Models.ModelViews.PersonLogin
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Logowanie";
 }
 
-<h2>Login</h2>
+<style>
+    content#forMain{
+        display: grid;
+        width: 100%;
+        height: 100%;
+        grid-template-columns: 1fr;
+        place-items: center;
+        justify-content: center;
 
-@using (Html.BeginForm())
-{
-    <input type="text" name="Login" />
-    <br />
-    <input type="password" name="Password" />
-    <br />
-    <input type="submit" value="Zaloguj się" />
-    <br />
-    @ViewBag.Message
-}
+    }
+        content#forMain > form {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-row-gap: 10px;
+            place-content: center;
+            justify-content: center;
+            place-items: center;
+        }
+        content#forMain > form > h2 {
+            padding-bottom: 20px;
+
+        }
+        content#forMain > form > a{
+            text-align: center;
+        }
+            content#forMain > form > input[type=submit] {
+                outline: none;
+                background-color: #FC6D84;
+                border: none;
+                border-radius: 5px;
+                padding: 10px 20px 10px 20px;
+                box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.15);
+                transition: 0.08s;
+                font-size: 16px;
+                color: #fff;
+                font-weight: 400;
+                font-family: Inter;
+                text-align: center;
+                width: min-content;
+                height: min-content;
+            }
+            content#forMain > form > input[type=submit]:hover{
+                padding-left: 25px;
+                padding-right: 25px;
+                padding-top: 8px;
+                padding-bottom: 12px;
+                transition: 0.15s;
+                cursor: pointer;
+            } 
+</style>
+
+<content id="forMain">
+
+
+    @using (Html.BeginForm())
+    {
+        <h2>Login</h2>
+        <div>
+            <label for="Login">Login</label><br />
+            <input type="text" name="Login" />
+        </div>
+        <div>
+            <label for="Password">Hasło</label><br />
+            <input type="password" name="Password" />
+        </div>
+        
+        <br />
+        <input type="submit" value="Zaloguj się" />
+        <br />
+        <a href="@Url.Action("Register", "Person")">Przejdź do rejestracji</a>
+
+        <br />
+        @ViewBag.Message
+    }
+
+</content>

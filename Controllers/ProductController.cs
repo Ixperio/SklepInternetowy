@@ -69,7 +69,7 @@ namespace Sklep.Controllers
                         }
 
                         }
-                        catch( Exception ex )
+                        catch(Exception)
                         {
                             return HttpNotFound();
                         }
@@ -107,7 +107,7 @@ namespace Sklep.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return View();
             }
@@ -203,7 +203,7 @@ namespace Sklep.Controllers
 
         }
 
-        private Produkt? getProductById(int id) {
+        private Produkt getProductById(int id) {
             var produkt = new Produkt()
             {
                 ProduktId = id,

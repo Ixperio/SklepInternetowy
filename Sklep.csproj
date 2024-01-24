@@ -220,10 +220,6 @@
     <Compile Include="Migrations\202401212342247_Init4.designer.cs">
       <DependentUpon>202401212342247_Init4.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202401231757490_Init4.cs" />
-    <Compile Include="Migrations\202401231757490_Init4.designer.cs">
-      <DependentUpon>202401231757490_Init4.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\Adress.cs" />
@@ -255,7 +251,6 @@
     <Compile Include="Models\ModelViews\PersonLogin.cs" />
     <Compile Include="Models\ModelViews\Product.cs" />
     <Compile Include="Models\ModelViews\OrderSubmit.cs" />
-    <Compile Include="Models\ModelViews\PersonLogin.cs" />
     <Compile Include="Models\ModelViews\PersonRegistration.cs" />
     <Compile Include="Models\ModelViews\ProductComments.cs" />
     <Compile Include="Models\Opis.cs" />
@@ -369,9 +364,9 @@
     <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Person\Login.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
-    <Content Include="Views\Person\Register.cshtml" />
     <Content Include="Views\Order\SubmitOrder.cshtml" />
     <Content Include="Views\Product\AddComment.cshtml" />
+    <Content Include="Views\Person\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -388,9 +383,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202401212342247_Init4.resx">
       <DependentUpon>202401212342247_Init4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202401231757490_Init4.resx">
-      <DependentUpon>202401231757490_Init4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

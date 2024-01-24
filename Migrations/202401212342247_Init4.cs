@@ -20,7 +20,15 @@
                 .PrimaryKey(t => t.CommentId)
                 .ForeignKey("dbo.Produkts", t => t.ProduktId, cascadeDelete: true)
                 .Index(t => t.ProduktId);
-            
+            CreateTable(
+               "dbo.Globals",
+               c => new
+               {
+                   Id = c.Int(nullable: false, identity: true),
+                   Name = c.String(),
+                   Value = c.Int(nullable: false),
+               })
+               .PrimaryKey(t => t.Id);
         }
         
         public override void Down()
@@ -28,6 +36,7 @@
             DropForeignKey("dbo.Komentarzs", "ProduktId", "dbo.Produkts");
             DropIndex("dbo.Komentarzs", new[] { "ProduktId" });
             DropTable("dbo.Komentarzs");
+            DropTable("dbo.Globals");
         }
     }
 }
