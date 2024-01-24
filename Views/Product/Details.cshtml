@@ -1,0 +1,122 @@
+﻿@model Sklep.Models.Produkt
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Produkt</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ilosc_w_magazynie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ilosc_w_magazynie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rodzaj_miaryId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rodzaj_miaryId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cenaNetto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cenaNetto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vatId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vatId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.glownaWalutaId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.glownaWalutaId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rodzajId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rodzajId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kupiono_lacznie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kupiono_lacznie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.adderId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adderId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isDeleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isVisible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isVisible)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.addDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.addDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.removeDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.removeDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProduktId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

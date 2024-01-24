@@ -19,6 +19,7 @@ using iText.Kernel.Font;
 using iText.IO.Font;
 using System.Text;
 using System.Web.Configuration;
+using System.Data.Entity.Infrastructure.Interception;
 
 namespace Sklep.Controllers
 {
@@ -41,7 +42,35 @@ namespace Sklep.Controllers
         // GET: Product/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            using(var db = _db)
+            {
+                    using (var transaction = db.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
+                    {
+                        try
+                        {
+                        var product = db.Products.FirstOrDefault(p => p.ProduktId == id);
+
+                        if (product != null)
+                        {
+                            ViewBag.produkt = product;
+                            transaction.Commit();
+
+                            return View();
+                        }
+                        else
+                        {
+                            transaction.Rollback();
+                            return HttpNotFound();
+                        }
+
+                        }
+                        catch( Exception ex )
+                        {
+                            return HttpNotFound();
+                        }
+                    }
+              }
+
         }
 
         // GET: Product/Create
