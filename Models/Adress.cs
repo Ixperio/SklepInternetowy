@@ -11,9 +11,11 @@ namespace Sklep.Models
         public string Name { get; set; }
         public string Street { get; set; }
         public string HomeNumber { get; set; }
-
-        public int TownID { get; set; }
-
+        public string FlatNumber { get; set; }
+        public string City { get; set; }
+        public string PostCode { get; set; }
+        public string Country { get; set; }
+        public string State { get; set; }
         public DateTime addDate { get; set; }
         public DateTime? removeDate { get; set; }
         public bool isDeleted { get; set; }

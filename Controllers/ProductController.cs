@@ -215,7 +215,6 @@ namespace Sklep.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult AddComment(ProductComment productComment)
         {
             if (ModelState.IsValid)
@@ -237,7 +236,6 @@ namespace Sklep.Controllers
                     _db.SaveChanges();
 
                     ViewBag.Message = "Comment added successfully!";
-                    return RedirectToAction("Comments", new { id = productComment.ProduktId });
                 }
             }
 

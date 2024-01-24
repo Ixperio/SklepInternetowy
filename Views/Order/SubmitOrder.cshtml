@@ -28,7 +28,7 @@
 
 <h2>Order</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("SubmitOrder", "Order", FormMethod.Post))
 {
     <div class="form-container">
         <div class="form-group">
@@ -40,8 +40,8 @@
             <input type="text" id="Number" name="Number" required />
         </div>
         <div class="form-group">
-            <label for="FlatNumber">FlatNumber</label>
-            <input type="text" id="FlatNumber" name="FlatNumber" />
+            <label for="Flat_Number">FlatNumber</label>
+            <input type="text" id="Flat_Number" name="Flat_Number" />
         </div>
         <div class="form-group">
             <label for="City">City</label>

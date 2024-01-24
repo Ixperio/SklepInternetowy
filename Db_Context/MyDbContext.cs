@@ -16,7 +16,7 @@ namespace Sklep.Db_Context
         {
                 
         }
-        private MyDbContext(bool x) : base("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Sklep;Integrated Security=True;Connect Timeout=30;Encrypt=False;")
+        private MyDbContext(bool x) : base("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Sklep.Db_Context.MyDbContext;Integrated Security=True;Connect Timeout=30;Encrypt=False;")
         {
             
         }
@@ -37,8 +37,6 @@ namespace Sklep.Db_Context
         public DbSet<AccountType> Account_type { get; set; }
 
         public DbSet<Adress> Adress { get; set; }
-
-        public DbSet<Country> Country { get; set; }
 
         public DbSet<Kategoria> Kategoria { get; set; }
 
@@ -63,10 +61,6 @@ namespace Sklep.Db_Context
         public DbSet<Rodzaj_platnosci> Rodzaj_platnosci { get; set; }
 
         public DbSet<Section> Sekcja { get; set; }
-
-        public DbSet<Status_zamowienia> Status_zamowienia { get; set; }
-
-        public DbSet<Town> Miasto { get; set; }
 
         public DbSet<Typ_jednostki> Typ_jednostki { get; set; }
 
