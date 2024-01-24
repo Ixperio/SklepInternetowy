@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,6 +16,7 @@ namespace Sklep.Models
         public int rodzaj_miaryId { get; set; }
         public decimal cenaNetto { get; set; }
 
+        public Opis opis { get; set; }
         public int vatId { get; set; }
 
         public int glownaWalutaId { get; set; }
@@ -32,5 +32,6 @@ namespace Sklep.Models
         public DateTime addDate { get; set; } = DateTime.Now;
         public DateTime? removeDate { get; set; }
 
+        public virtual ICollection<Komentarz> Komentarze { get; set; }
     }
 }

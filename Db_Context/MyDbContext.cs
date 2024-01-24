@@ -1,16 +1,40 @@
+
 ﻿using System;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
+
+﻿using Sklep.Models;
+using System;
+using System.Data.Entity;
+
 using System.Data.Entity.ModelConfiguration;
+using System.Linq;
 using System.Reflection.Emit;
 
-namespace Sklep.Models
+namespace Sklep.Db_Context
 {
-    public class MyDbContext : DbContext
+    public sealed class MyDbContext : DbContext
     {
-        public MyDbContext() : base("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\alok1\\Desktop\\STUDIA\\SEM5\\MVC\\PROJEKT\\Sklep\\App_Data\\DB.mdf;Integrated Security=True")
-        {
+        private static MyDbContext _instance;
 
+
+        [Obsolete("Konstruktor do ef")]
+        public MyDbContext()
+        {
+                
+        }
+        private MyDbContext(bool x) : base("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\alok1\\Desktop\\STUDIA\\SEM5\\MVC\\PROJEKT\\Sklep\\App_Data\\DB.mdf;Integrated Security=True")
+        {
+            
+        }
+
+        public static MyDbContext GetInstance()
+        {
+            if (_instance == null)
+            {
+                _instance = new MyDbContext(true);
+            }
+            return _instance;
         }
 
         public DbSet<Logowanie> Logowanie { get; set; }
@@ -25,6 +49,7 @@ namespace Sklep.Models
 
         public DbSet<Kategoria> Kategoria { get; set; }
 
+        public DbSet<Komentarz> Komentarze { get; set; }
         public DbSet<Opis> Description { get; set; }
 
         public DbSet<Parametr> Parametr { get; set; }

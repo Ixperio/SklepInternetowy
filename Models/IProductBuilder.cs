@@ -28,9 +28,14 @@ namespace Sklep.Models
         {
             produkt = new Produkt();
         }
+
         public void BuildDescription(Opis description)
         {
-            
+            if(produkt.opis == null)
+            {
+                produkt.opis = new Opis();
+        }
+            produkt.opis = description;
         }
 
         public void BuildName(string name)

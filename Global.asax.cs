@@ -7,6 +7,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Data.Entity;
 using Sklep.Models;
+using Sklep.Db_Context;
 
 
 namespace Sklep
@@ -28,9 +29,8 @@ namespace Sklep
              */
 
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MyDbContext>());
-            MyDbContext context = new MyDbContext();
 
-            context.Database.Initialize(true);
+            MyDbContext context = MyDbContext.GetInstance();
 
             HttpContext.Current.Application["liczba_wyswietlen"] = context.Globals.FirstOrDefault(c => c.Id == 1).Value;
         }

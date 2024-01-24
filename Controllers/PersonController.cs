@@ -6,10 +6,14 @@ using System.Web.Mvc;
 
 using Sklep.Models.ModelViews;
 using Sklep.Models;
+
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity;
+
+using Sklep.Db_Context;
+
 
 namespace Sklep.Controllers
 {
@@ -23,7 +27,7 @@ namespace Sklep.Controllers
         */
          
         public PersonController() {
-             this._db = new MyDbContext();
+            this._db = MyDbContext.GetInstance();
         }
 
         // GET: Person
@@ -43,19 +47,24 @@ namespace Sklep.Controllers
         /**
          * Pobieranie danych z formularza
          */
-        //[HttpPost]
-       /* public ActionResult Register(PersonRegistration personRegistered)
+        [HttpPost]
+        public ActionResult Register(PersonRegistration personRegistered)
         {
             if (ModelState.IsValid)
             {
                 ViewBag.Message = "Utworzono nowe konto!";
-                /*Person person = new Person();
-                person.Email = personRegistered.Email;
-                person.Phone = personRegistered.PhoneNumber;
-                person.Name = personRegistered.FirstName;
-                person.Surname = personRegistered.LastName;
-                person.Birthday = personRegistered.BirthDate;
-                person.Logowanie = new Logowanie()
+                Person person = new Person
+                {
+                    Email = personRegistered.Email,
+                    Phone = personRegistered.PhoneNumber,
+                    Name = personRegistered.FirstName,
+                    Surname = personRegistered.LastName,
+                    Birthday = personRegistered.BirthDate,
+                    LogowanieId = 0, 
+                    AccountTypeId = 0 
+                };
+
+                person.Logowanie = new Logowanie
                 {
                     Login = personRegistered.Login,
                     Password = personRegistered.Password
@@ -70,7 +79,7 @@ namespace Sklep.Controllers
                 ViewBag.Message = "Wprowadzono nieprawidłowe dane!";
             }
             return View();
-        } */
+        } 
 
         /*
         * @autor Artur Leszczak
