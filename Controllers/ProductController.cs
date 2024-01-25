@@ -48,14 +48,25 @@ namespace Sklep.Controllers
                     {
                         try
                         {
-                        var product = db.Products.FirstOrDefault(p => p.ProduktId == id);
+                        var product = db.Products.FirstOrDefault(p => p.ProduktId == id && p.isDeleted == false && p.isVisible == true);
 
                         if (product != null)
                         {
-                            ViewBag.produkt = product;
-                            transaction.Commit();
+                            var rodzaj = db.Rodzaj.FirstOrDefault(r => r.Id == product.rodzajId);
 
-                            return View();
+                            if (rodzaj != null)
+                            {
+                                var kategoria = db.Kategoria.FirstOrDefault(k => k.KategoriaId == rodzaj.KategoriaId && k.isDeleted == false && k.isVisible == true);
+
+                                if (kategoria != null)
+                                {
+                                    ViewBag.produkt = product;
+                                    ViewBag.kategoria = kategoria;
+                                    transaction.Commit();
+
+                                    return View("Details");
+                                }
+                            }
                         }
                         else
                         {
@@ -64,7 +75,7 @@ namespace Sklep.Controllers
                         }
 
                         }
-                        catch( Exception ex )
+                        catch(Exception)
                         {
                             return HttpNotFound();
                         }
@@ -101,7 +112,7 @@ namespace Sklep.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return View();
             }

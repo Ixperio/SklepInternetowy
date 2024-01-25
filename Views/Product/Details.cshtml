@@ -1,5 +1,4 @@
-﻿@model Sklep.Models.Produkt
-
+﻿
 @{
     ViewBag.Title = "Details";
 }
@@ -52,6 +51,51 @@
         padding: 7px 20px 13px 20px;
         transition: 0.1s;
     }
+    .CategoryName{
+        color: #787878;
+    }
+    .sectionMain{
+        display: grid;
+        width: 100%;
+        grid-template-columns: 10fr min-content 20fr 15fr;
+        place-items: flex-start;
+        grid-column-gap: 10px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .picture {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr;
+        grid-row-gap: 20px;
+        place-items: flex-start;
+        justify-items: center;
+    }
+    .informaction {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr;
+        grid-row-gap: 20px;
+        place-items: flex-start;
+        justify-items: center;
+    }
+    .buySection {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr;
+        grid-row-gap: 20px;
+        place-items: flex-start;
+        justify-items: center;
+    }
+    .verticalLine{
+        background-color: #eeeeed;
+        height: 80%;
+        margin-top: 10%;
+        width: 1px;
+        margin-left: 30px;
+        margin-right: 30px;
+        content: '';
+    }
 </style>
 
 <content id="contentDetails">
@@ -62,13 +106,18 @@
         <div class="contentProduct">
             <div class="sectionMain">
                 <div class="picture">
-
+                    <img style="width: 30vh; height:30vh;" src="https://selgros24.pl/images/prodImages/Mars_Baton_czekoladowy_Mars_51g_67613455_0_1000_1000.jpg"/>
                     <div class="changeButtons"></div>
                 </div>
+                <div class="verticalLine"></div>
                 <div class="information">
-                    <h3 class="ProductName">@ViewBag.product.Nazwa</h3>
+                    <h3 class="ProductName">Baton Mars</h3>
+                    <h5 class="CategoryName">Batony</h5>
                 </div>
-                <div class="buySection"></div>
+                <div class="buySection">
+                    <h3>Cena brutto: 5,29</h3>
+                    <h5>Cena netto: 4,30</h5>
+                </div>
             </div>
         </div>
     </div>
