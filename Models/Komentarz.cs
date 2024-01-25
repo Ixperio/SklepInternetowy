@@ -17,9 +17,8 @@ namespace Sklep.Models
 
         public DateTime CreatedAt { get; set; }
 
-        [ForeignKey("Produkt")]
+
         public int ProduktId { get; set; }
-        [ForeignKey("ProduktId")]
-        public virtual Produkt Produkt { get; set; }
+
     }
 }

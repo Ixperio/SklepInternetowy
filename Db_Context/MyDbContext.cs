@@ -18,9 +18,8 @@ namespace Sklep.Db_Context
         [Obsolete("Konstruktor do ef")]
         public MyDbContext()
         {
-                
         }
-        private MyDbContext(bool x) : base("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\alok1\\Desktop\\STUDIA\\SEM5\\MVC\\PROJEKT\\Sklep\\App_Data\\DB.mdf;Integrated Security=True")
+        private MyDbContext(bool x) : base("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Sklep.Db_Context.MyDbContext;Integrated Security=True;Connect Timeout=30;Encrypt=False;")
         {
             
         }

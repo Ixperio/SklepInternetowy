@@ -290,5 +290,8 @@ namespace Sklep.Controllers
             return View(productComment);
         }
 
+      
+        
+
     }
 }

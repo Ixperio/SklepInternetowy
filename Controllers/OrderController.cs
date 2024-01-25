@@ -59,18 +59,5 @@ namespace Sklep.Controllers
 
             return View();
         }
-
-        [HttpGet]
-        public ActionResult Cart()
-        {
-            return View("~/Views/Order/Cart.cshtml");
-        }
-
-        [HttpPost]
-        public ActionResult Cart(OrderCart orderCart)
-        {
-            return View();
-        }
-
     }
 }

@@ -22,11 +22,8 @@ namespace Sklep.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public DateTime Birthday { get; set; }
-
-        [ForeignKey("Logowanie")]
         public int LogowanieId { get; set; }
-        public Logowanie Logowanie { get; set; }
         public int AccountTypeId { get; set; }
-
+        public Logowanie Logowanie { get; internal set; }
     }
 }

@@ -205,21 +205,13 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Migrations\202401212033200_Init.cs" />
-    <Compile Include="Migrations\202401212033200_Init.designer.cs">
-      <DependentUpon>202401212033200_Init.cs</DependentUpon>
+    <Compile Include="Migrations\202401242133341_Init.cs" />
+    <Compile Include="Migrations\202401242133341_Init.designer.cs">
+      <DependentUpon>202401242133341_Init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202401212038415_Init2.cs" />
-    <Compile Include="Migrations\202401212038415_Init2.designer.cs">
-      <DependentUpon>202401212038415_Init2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202401212228016_Init3.cs" />
-    <Compile Include="Migrations\202401212228016_Init3.designer.cs">
-      <DependentUpon>202401212228016_Init3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202401212342247_Init4.cs" />
-    <Compile Include="Migrations\202401212342247_Init4.designer.cs">
-      <DependentUpon>202401212342247_Init4.cs</DependentUpon>
+    <Compile Include="Migrations\202401242241532_Init2.cs" />
+    <Compile Include="Migrations\202401242241532_Init2.designer.cs">
+      <DependentUpon>202401242241532_Init2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
@@ -371,20 +363,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202401212033200_Init.resx">
-      <DependentUpon>202401212033200_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202401242133341_Init.resx">
+      <DependentUpon>202401242133341_Init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202401212038415_Init2.resx">
-      <DependentUpon>202401212038415_Init2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202401212228016_Init3.resx">
-      <DependentUpon>202401212228016_Init3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202401212342247_Init4.resx">
-      <DependentUpon>202401212342247_Init4.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202401242241532_Init2.resx">
+      <DependentUpon>202401242241532_Init2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
