@@ -16,12 +16,15 @@
                         Value = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
+
+            AddColumn("dbo.Photos", "ProductId", c => c.Int(nullable: false));
             
         }
         
         public override void Down()
         {
             DropTable("dbo.Globals");
+            DropColumn("dbo.Photos", "ProductId");
         }
     }
 }

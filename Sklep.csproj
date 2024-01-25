@@ -201,6 +201,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BusketController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -243,8 +244,12 @@
     <Compile Include="Models\Metoda_wytworcza\Interface\IFactoryDostawa.cs" />
     <Compile Include="Models\Metoda_wytworcza\Kurier.cs" />
     <Compile Include="Models\Metoda_wytworcza\KurierPobranie.cs" />
+    <Compile Include="Models\ModelViews\Pages.cs" />
     <Compile Include="Models\ModelViews\PersonLogin.cs" />
     <Compile Include="Models\ModelViews\Product.cs" />
+    <Compile Include="Models\ModelViews\ProductAddBusket.cs" />
+    <Compile Include="Models\ModelViews\ProductListAll.cs" />
+    <Compile Include="Models\ModelViews\ProduktWKoszyku.cs" />
     <Compile Include="Models\Opis.cs" />
     <Compile Include="Models\Parametr.cs" />
     <Compile Include="Models\Parametr_Produkt.cs" />
@@ -354,6 +359,8 @@
     <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Person\Login.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Product\Products.cshtml" />
+    <Content Include="Views\Busket\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

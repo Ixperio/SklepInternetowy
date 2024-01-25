@@ -20,6 +20,7 @@ namespace Sklep.Models
        public int adderId { get; set; }
        public int SectionId { get; set; }
 
+       public int ProductId { get; set; }
 
     } 
 }

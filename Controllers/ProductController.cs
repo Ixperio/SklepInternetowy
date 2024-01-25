@@ -20,6 +20,9 @@ using iText.IO.Font;
 using System.Text;
 using System.Web.Configuration;
 using System.Data.Entity.Infrastructure.Interception;
+using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
+using Sklep.Models.ModelViews;
+using System.Data.Entity;
 
 namespace Sklep.Controllers
 {
@@ -35,13 +38,96 @@ namespace Sklep.Controllers
         // GET: Product
         public ActionResult Index()
         {
+            if (Request.Cookies["KoszykWartosc"] != null)
+            {
+                HttpCookie existingCookie = Request.Cookies["KoszykWartosc"];
+                string cookieValue = existingCookie.Value;
+                ViewBag.WartoscKoszyka = cookieValue;
+            }
             return View();
+        }
+
+        public ActionResult Products(Pages page)
+        {
+            if (Request.Cookies["KoszykWartosc"] != null)
+            {
+                HttpCookie existingCookie = Request.Cookies["KoszykWartosc"];
+                string cookieValue = existingCookie.Value;
+                ViewBag.WartoscKoszyka = cookieValue;
+            }
+            using (var db = _db)
+            {
+                try
+                {
+                    List<Produkt> products = db.Products.Where(p => p.isDeleted == false && p.isVisible == true).ToList();
+
+                    if (products != null)
+                    {
+                        List<ProductListAll> produkty = new List<ProductListAll>();
+                        foreach (Produkt p in products)
+                        {
+
+                            decimal cenaBrutto = p.cenaNetto*1.23m;
+                            cenaBrutto = Math.Ceiling(cenaBrutto * 100) / 100;
+
+                            string kategoriaNazwa = db.Kategoria.FirstOrDefault(k =>
+                            k.KategoriaId == db.Rodzaj.FirstOrDefault(r => r.Id == p.rodzajId).KategoriaId && k.isDeleted == false && k.isVisible == true).Name;
+
+                            string imageUrl = db.Photo.FirstOrDefault(p => p.ProductId == p.ProductId && p.SectionId == 0).link;
+
+                            if (string.IsNullOrEmpty(imageUrl))
+                            {
+                                imageUrl = "/Images/NoIcon.PNG";
+                            }
+
+                            if (!string.IsNullOrEmpty(kategoriaNazwa))
+                            {
+                                var prod = new ProductListAll()
+                                {
+                                    Id = p.ProduktId,
+                                    Name = p.Nazwa,
+                                    StoreCount = p.Ilosc_w_magazynie,
+                                    BruttoPrice = cenaBrutto,
+                                    NettoPrice = p.cenaNetto,
+                                    CategoryName = kategoriaNazwa,
+                                    OpinionCounter = 10,
+                                    ImageUrl = imageUrl,
+                                    OpinionValue = 4.8m,
+                                };
+
+                                produkty.Add(prod);
+                            }
+
+                        }
+
+                        ViewBag.Products = produkty;
+                        return View("Products");
+                    }
+                    else
+                    {
+
+                        return HttpNotFound();
+                    }
+
+                }
+                catch (Exception)
+                {
+                    return HttpNotFound();
+                }
+            }
+
         }
 
         // GET: Product/Details/5
         public ActionResult Details(int id)
         {
-            using(var db = _db)
+            if (Request.Cookies["KoszykWartosc"] != null)
+            {
+                HttpCookie existingCookie = Request.Cookies["KoszykWartosc"];
+                string cookieValue = existingCookie.Value;
+                ViewBag.WartoscKoszyka = cookieValue;
+            }
+            using (var db = _db)
             {
                         try
                         {

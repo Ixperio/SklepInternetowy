@@ -29,6 +29,12 @@ namespace Sklep.Controllers
         // GET: Person
         public ActionResult Index()
         {
+            if (Request.Cookies["Koszyk"] != null)
+            {
+                HttpCookie existingCookie = Request.Cookies["Koszyk"];
+                string cookieValue = existingCookie.Value;
+                ViewBag.WartoscKoszyka = cookieValue;
+            }
             return View();
         }
 
@@ -38,6 +44,12 @@ namespace Sklep.Controllers
         [HttpGet]
         public ActionResult Register()
         {
+            if (Request.Cookies["Koszyk"] != null)
+            {
+                HttpCookie existingCookie = Request.Cookies["Koszyk"];
+                string cookieValue = existingCookie.Value;
+                ViewBag.WartoscKoszyka = cookieValue;
+            }
             return View();
         }
         /**
@@ -83,6 +95,12 @@ namespace Sklep.Controllers
         [HttpGet]
         public ActionResult Login()
         {
+            if (Request.Cookies["KoszykWartosc"] != null)
+            {
+                HttpCookie existingCookie = Request.Cookies["KoszykWartosc"];
+                string cookieValue = existingCookie.Value;
+                ViewBag.WartoscKoszyka = cookieValue;
+            }
             return View();
         }
         /**
@@ -91,6 +109,12 @@ namespace Sklep.Controllers
         [HttpPost]
         public ActionResult Login(PersonLogin personLogged)
         {
+            if (Request.Cookies["KoszykWartosc"] != null)
+            {
+                HttpCookie existingCookie = Request.Cookies["KoszykWartosc"];
+                string cookieValue = existingCookie.Value;
+                ViewBag.WartoscKoszyka = cookieValue;
+            }
             if (ModelState.IsValid)
             {
 

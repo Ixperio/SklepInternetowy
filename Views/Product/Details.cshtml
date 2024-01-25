@@ -208,14 +208,39 @@
     }
 
 </style>
+<script>
+    $(document).ready(function () {
+        $.ajaxSetup({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            }
+        });
+        $(".buyButton").click(function (event) {
+            var productData = {
+                ProduktId: 1,
+                Liczba: 1
+            };
 
+            $.ajax({
+                type: "POST",
+                url: "/Busket/Add",
+                data: JSON.stringify(productData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+                    alert(result.message);
+                }
+            });
+        });
+    });
+</script>
 <content id="contentDetails">
     <div class="cont">
         <div class="backBtn">
             <svg width="20px" height="20px" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="m5.828 6.997 2.536 2.536-1.414 1.414L2 5.997l4.95-4.95L8.364 2.46 5.828 4.997H13a8 8 0 0 1 0 16H4v-2h9a6 6 0 0 0 0-12H5.828Z"></path>
             </svg>
-            @Html.ActionLink("Wróć do wyszukiwania", "Index")
+            <a href="/Product/Products" style="text-decoration: none; color: #fff;">Wróć do wyszukiwania</a>
         </div>
         <div class="contentProduct">
             <div class="sectionMain">
