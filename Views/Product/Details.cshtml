@@ -25,9 +25,11 @@
         cursor: pointer;
         transition: 0.1s;
         width: max-content;
+        grid-template-columns: max-content max-content;
+        grid-column-gap: 5px;
     }
     .cont {
-        width: 70%;
+        width: 60%;
         display: grid;
         justify-items: left;
     }
@@ -82,10 +84,11 @@
     .buySection {
         display: grid;
         width: 100%;
+        height: 80%;
         grid-template-columns: 1fr;
-        grid-row-gap: 20px;
+        grid-template-rows: 80% 20%;
         place-items: flex-start;
-        justify-items: center;
+        justify-items: right;
     }
     .verticalLine{
         background-color: #eeeeed;
@@ -96,18 +99,133 @@
         margin-right: 30px;
         content: '';
     }
+    .buyButton {
+        display: grid;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 40px;
+        border-radius: 5px;
+        background-color: #FC6D84;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.1s;
+        width: max-content;
+    }
+    .sectionDescription{
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-bottom: 50px;
+    }
+    .descriptionSection{
+        width: 100%;
+        font-weight: 400;
+        font-family: Roboto;
+        text-align: left;
+        font-size: 18px;
+        color: #000;
+        text-indent: 10px;
+        white-space: normal;
+    }
+    .sectionTechnicalData {
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-bottom: 50px;
+    }
+    .sectionComents {
+        padding-left: 50px;
+        padding-right: 50px;
+        padding-bottom: 50px;
+    }
+    .contentSection{
+        display: grid;
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        grid-template-columns: 100%;
+        grid-row-gap: 20px;
+        justify-items: center;
+        align-items: flex-start;
+        padding-top: 30px;
+    }
+    .technicalTable{
+        width: min-content;
+
+    }
+        .technicalTable > tbody > tr {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        .technicalTable > tbody > tr > th {
+            width: max-content;
+            padding-left: 50px;
+            padding-right: 50px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .technicalTable > tbody > tr:nth-of-type(even){
+            background-color: #EDEDED;
+        }
+        .technicalTable > tbody > tr:nth-of-type(odd) {
+            background-color: #F7F7F7;
+        }
+            .technicalTable > tbody > tr > td {
+                display: grid;
+                justify-items: center;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+        .grayBtn{
+            background-color: #eeeeed;
+            width: 14px;
+            height: 14px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            content: '';
+            cursor: pointer;
+        }
+            .grayBtn[selected] > .innerBtn {
+                background-color: #FC6D84;
+            }
+        .innerBtn {
+        background-color: #eeeeed;
+        width: 8px;
+        height: 8px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        content: '';
+    }
+    .changeButtons{
+        display: inline-grid;
+        grid-template-columns: min-content min-content min-content;
+        grid-column-gap: 10px;
+        padding-bottom: 50px;
+    }
+
 </style>
 
 <content id="contentDetails">
     <div class="cont">
         <div class="backBtn">
+            <svg width="20px" height="20px" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="m5.828 6.997 2.536 2.536-1.414 1.414L2 5.997l4.95-4.95L8.364 2.46 5.828 4.997H13a8 8 0 0 1 0 16H4v-2h9a6 6 0 0 0 0-12H5.828Z"></path>
+            </svg>
             @Html.ActionLink("Wróć do wyszukiwania", "Index")
         </div>
         <div class="contentProduct">
             <div class="sectionMain">
                 <div class="picture">
-                    <img style="width: 30vh; height:30vh;" src="https://selgros24.pl/images/prodImages/Mars_Baton_czekoladowy_Mars_51g_67613455_0_1000_1000.jpg"/>
-                    <div class="changeButtons"></div>
+                    <img style="width: 30vh; height:30vh;" src="https://selgros24.pl/images/prodImages/Mars_Baton_czekoladowy_Mars_51g_67613455_0_1000_1000.jpg" />
+                    <div class="changeButtons">
+                        <div class="grayBtn" selected><div class="innerBtn"></div></div>
+                        <div class="grayBtn"><div class="innerBtn"></div></div>
+                        <div class="grayBtn"><div class="innerBtn"></div></div>
+                    </div>
                 </div>
                 <div class="verticalLine"></div>
                 <div class="information">
@@ -115,9 +233,47 @@
                     <h5 class="CategoryName">Batony</h5>
                 </div>
                 <div class="buySection">
-                    <h3>Cena brutto: 5,29</h3>
-                    <h5>Cena netto: 4,30</h5>
+                    <div>
+                        <h3>Cena brutto: <strong>5,29zł/szt.</strong></h3>
+                        <h5>Cena netto: <strong>4,30zł/szt.</strong></h5>
+                    </div>
+                    <div>
+                        <div class="buyButton">
+                            Do koszyka
+                        </div>
+                        <h6>Pozostało 120 sztuk</h6>
+                    </div>
+                    
                 </div>
+            </div>
+            <div class="sectionDescription">
+                <h3 style="padding-left: 20px;"><strong>Opis</strong></h3>
+                <hr />
+                <div class="contentSection">
+                    <div class="descriptionSection">Baton Snickers to pyszny i klasyczny przysmak, który zdobył serca wielu łasuchów na całym świecie. Stworzony przez firmę Snickers, ten niezapomniany baton to doskonałe połączenie chrupiącego karmelu, delikatnej nugatowej warstwy oraz oblanej gładką czekoladą mleczną.</div>
+                    <div class="descriptionSection">Pierwszy kęs otwiera przed tobą świat intensywnego smaku, gdzie słodycz karmelu harmonizuje z orzechowym smakiem nugatu, tworząc kompozycję, która kusząco balansuje między chrupkością a jedwabistą konsystencją. Czekoladowa otoczka, która obejmuje całą strukturę batona, dosłownie rozpływa się w ustach, uwalniając bogactwo aromatów.</div>
+                    <div class="descriptionSection">Pierwszy kęs otwiera przed tobą świat intensywnego smaku, gdzie słodycz karmelu harmonizuje z orzechowym smakiem nugatu, tworząc kompozycję, która kusząco balansuje między chrupkością a jedwabistą konsystencją. Czekoladowa otoczka, która obejmuje całą strukturę batona, dosłownie rozpływa się w ustach, uwalniając bogactwo aromatów.</div>
+                </div>
+
+            </div>
+            <div class="sectionTechnicalData">
+                <h3 style="padding-left: 20px;"><strong>Dane techniczne</strong></h3>
+                <hr />
+                <div class="contentSection">
+
+                    <table class="technicalTable">
+                        <tr><th>Paramter</th><th>Wartość</th></tr>
+                        <tr><td>Kalorie</td><td>300kcal</td></tr>
+                        <tr><td>Cukier</td><td>30g</td></tr>
+                        <tr><td>Waga</td><td>65g</td></tr>
+                    </table>
+
+                </div>
+            </div>
+            <div class="sectionComents">
+                <h3 style="padding-left: 20px;"><strong>Oceny i komentarze</strong></h3>
+                <hr />
+                <div class="contentSection"></div>
             </div>
         </div>
     </div>

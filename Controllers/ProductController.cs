@@ -35,7 +35,6 @@ namespace Sklep.Controllers
         // GET: Product
         public ActionResult Index()
         {
-
             return View();
         }
 
@@ -44,8 +43,6 @@ namespace Sklep.Controllers
         {
             using(var db = _db)
             {
-                    using (var transaction = db.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
-                    {
                         try
                         {
                         var product = db.Products.FirstOrDefault(p => p.ProduktId == id && p.isDeleted == false && p.isVisible == true);
@@ -62,7 +59,6 @@ namespace Sklep.Controllers
                                 {
                                     ViewBag.produkt = product;
                                     ViewBag.kategoria = kategoria;
-                                    transaction.Commit();
 
                                     return View("Details");
                                 }
@@ -70,7 +66,7 @@ namespace Sklep.Controllers
                         }
                         else
                         {
-                            transaction.Rollback();
+                       
                             return HttpNotFound();
                         }
 
@@ -79,8 +75,9 @@ namespace Sklep.Controllers
                         {
                             return HttpNotFound();
                         }
-                    }
-              }
+                    
+                return HttpNotFound();
+            }
 
         }
 
