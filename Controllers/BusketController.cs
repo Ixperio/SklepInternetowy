@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Sklep.Db_Context;
 using Sklep.Models;
 using Sklep.Models.ModelViews;
 using System;
@@ -12,12 +13,13 @@ namespace Sklep.Controllers
 {
     public class BusketController : Controller
     {
-        private readonly MyDbContext _db;
+        private MyDbContext _db;
 
         public BusketController()
         {
-            _db = new MyDbContext();
+            this._db = MyDbContext.GetInstance();
         }
+
 
         public ActionResult Index()
         {

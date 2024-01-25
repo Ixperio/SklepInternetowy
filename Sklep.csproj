@@ -206,13 +206,9 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Migrations\202401250109563_Init1.cs" />
-    <Compile Include="Migrations\202401250109563_Init1.designer.cs">
-      <DependentUpon>202401250109563_Init1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202401250135095_Init2.cs" />
-    <Compile Include="Migrations\202401250135095_Init2.designer.cs">
-      <DependentUpon>202401250135095_Init2.cs</DependentUpon>
+    <Compile Include="Migrations\202401252107091_Init.cs" />
+    <Compile Include="Migrations\202401252107091_Init.designer.cs">
+      <DependentUpon>202401252107091_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
@@ -371,11 +367,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202401250109563_Init1.resx">
-      <DependentUpon>202401250109563_Init1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202401250135095_Init2.resx">
-      <DependentUpon>202401250135095_Init2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202401252107091_Init.resx">
+      <DependentUpon>202401252107091_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -125,7 +125,7 @@ namespace Sklep.Controllers
 
         }
 
-        // GET: Product/Details/5
+        //GET: Product/Details/5
         public ActionResult Details(int id)
         {
             if (Request.Cookies["KoszykWartosc"] != null)
@@ -136,42 +136,41 @@ namespace Sklep.Controllers
             }
             using (var db = _db)
             {
-                        try
-                        {
-                        var product = db.Products.FirstOrDefault(p => p.ProduktId == id && p.isDeleted == false && p.isVisible == true);
+                try
+                {
+                    var product = db.Products.FirstOrDefault(p => p.ProduktId == id && p.isDeleted == false && p.isVisible == true);
 
-                        if (product != null)
-                        {
-                            var rodzaj = db.Rodzaj.FirstOrDefault(r => r.Id == product.rodzajId);
+                    if (product != null)
+                    {
+                        var rodzaj = db.Rodzaj.FirstOrDefault(r => r.Id == product.rodzajId);
 
-                            if (rodzaj != null)
+                        if (rodzaj != null)
+                        {
+                            var kategoria = db.Kategoria.FirstOrDefault(k => k.KategoriaId == rodzaj.KategoriaId && k.isDeleted == false && k.isVisible == true);
+
+                            if (kategoria != null)
                             {
-                                var kategoria = db.Kategoria.FirstOrDefault(k => k.KategoriaId == rodzaj.KategoriaId && k.isDeleted == false && k.isVisible == true);
+                                ViewBag.produkt = product;
+                                ViewBag.kategoria = kategoria;
 
-                                if (kategoria != null)
-                                {
-                                    ViewBag.produkt = product;
-                                    ViewBag.kategoria = kategoria;
-
-                                    return View("Details");
-                                }
+                                return View("Details");
                             }
-                            transaction.Commit();
-                            return View(product);
-                        }
-                        else
-                        {
-                       
-                            return HttpNotFound();
                         }
 
-                        }
-                        catch(Exception)
-                        {
-                            return HttpNotFound();
-                        }
-                    
-                return HttpNotFound();
+                       //transaction.Commit();
+                        return View(product);
+                    }
+                    else
+                    {
+
+                        return HttpNotFound();
+                    }
+
+                }
+                catch (Exception)
+                {
+                    return HttpNotFound();
+                }
             }
 
         }
@@ -201,8 +200,6 @@ namespace Sklep.Controllers
                 string name = collection["Nazwa"];
                 string amount = collection["Ilosc_w_magazynie"];
                 string price = collection["cenaNetto"];
-
-                
 
                 ProductBuilder builder = new ProductBuilder();
                 builder.Reset();

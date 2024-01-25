@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Init1 : DbMigration
+    public partial class Init : DbMigration
     {
         public override void Up()
         {
@@ -160,6 +160,7 @@
                         isVisible = c.Boolean(nullable: false),
                         adderId = c.Int(nullable: false),
                         SectionId = c.Int(nullable: false),
+                        ProductId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.PhotoId);
             
@@ -181,11 +182,8 @@
                         isVisible = c.Boolean(nullable: false),
                         addDate = c.DateTime(nullable: false),
                         removeDate = c.DateTime(),
-                        opis_OpisId = c.Int(),
                     })
-                .PrimaryKey(t => t.ProduktId)
-                .ForeignKey("dbo.Opis", t => t.opis_OpisId)
-                .Index(t => t.opis_OpisId);
+                .PrimaryKey(t => t.ProduktId);
             
             CreateTable(
                 "dbo.Produkty_w_zamowieniu",
@@ -293,10 +291,8 @@
         
         public override void Down()
         {
-            DropForeignKey("dbo.Produkts", "opis_OpisId", "dbo.Opis");
             DropForeignKey("dbo.Komentarzs", "ProduktId", "dbo.Produkts");
             DropForeignKey("dbo.People", "LogowanieId", "dbo.Logowanies");
-            DropIndex("dbo.Produkts", new[] { "opis_OpisId" });
             DropIndex("dbo.People", new[] { "LogowanieId" });
             DropIndex("dbo.Komentarzs", new[] { "ProduktId" });
             DropTable("dbo.Zamowienias");
