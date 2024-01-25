@@ -25,6 +25,7 @@ using Sklep.Models.Strategia.Interface;
 using Sklep.Models.Strategia;
 using Sklep.Models.ModelViews;
 using Sklep.Prototype;
+using iText.Commons.Actions.Producer;
 
 
 namespace Sklep.Controllers
@@ -57,10 +58,8 @@ namespace Sklep.Controllers
 
                         if (product != null)
                         {
-                            ViewBag.produkt = product;
                             transaction.Commit();
-
-                            return View();
+                            return View(product);
                         }
                         else
                         {
@@ -78,34 +77,46 @@ namespace Sklep.Controllers
 
         }
 
-        // GET: Product/Create
-        public ActionResult Create()
+        [HttpGet]
+        public ActionResult AddProduct()
         {
-            return View();
+            if (Session["UserId"] != null)
+            {
+                int userId = (int)Session["UserId"];
+                var user = _db.Person.Find(userId);
+
+                if (user != null && user.AccountTypeId == 2) 
+                {
+                    return View();
+                }
+            }
+
+            return RedirectToAction("Login", "Person");
         }
 
-        // POST: Product/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult AddProduct(FormCollection collection)
         {
             try
             {
-                string name = collection["name"];
-                string description = collection["description"];
-                //string price = collection["price"];
+                string name = collection["Nazwa"];
+                string amount = collection["Ilosc_w_magazynie"];
+                string price = collection["cenaNetto"];
+
+                
 
                 ProductBuilder builder = new ProductBuilder();
                 builder.Reset();
                 builder.BuildName(name);
-                //builder.BuildDescription(new Opis());
-                //builder.BuildPrice(price.AsDecimal());
+                builder.BuildAmount(Convert.ToInt32(amount));
+                builder.BuildPrice(Convert.ToDecimal(price));
 
                 Produkt produkt = builder.GetProduct();
                 MyDbContext _db = MyDbContext.GetInstance();
                 _db.Products.Add(produkt);
                 _db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return View();
             }
             catch (Exception)
             {

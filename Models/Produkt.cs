@@ -16,7 +16,6 @@ namespace Sklep.Models
         public int rodzaj_miaryId { get; set; }
         public decimal cenaNetto { get; set; }
 
-        public Opis opis { get; set; }
         public int vatId { get; set; }
 
         public int glownaWalutaId { get; set; }

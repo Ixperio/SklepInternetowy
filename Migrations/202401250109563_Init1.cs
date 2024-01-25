@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Init : DbMigration
+    public partial class Init1 : DbMigration
     {
         public override void Up()
         {
@@ -92,30 +92,6 @@
                 .Index(t => t.ProduktId);
             
             CreateTable(
-                "dbo.Produkts",
-                c => new
-                    {
-                        ProduktId = c.Int(nullable: false, identity: true),
-                        Nazwa = c.String(),
-                        Ilosc_w_magazynie = c.Int(nullable: false),
-                        rodzaj_miaryId = c.Int(nullable: false),
-                        cenaNetto = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        vatId = c.Int(nullable: false),
-                        glownaWalutaId = c.Int(nullable: false),
-                        rodzajId = c.Int(nullable: false),
-                        Kupiono_lacznie = c.Int(nullable: false),
-                        adderId = c.Int(nullable: false),
-                        isDeleted = c.Boolean(nullable: false),
-                        isVisible = c.Boolean(nullable: false),
-                        addDate = c.DateTime(nullable: false),
-                        removeDate = c.DateTime(),
-                        opis_OpisId = c.Int(),
-                    })
-                .PrimaryKey(t => t.ProduktId)
-                .ForeignKey("dbo.Opis", t => t.opis_OpisId)
-                .Index(t => t.opis_OpisId);
-            
-            CreateTable(
                 "dbo.Logowanies",
                 c => new
                     {
@@ -186,6 +162,30 @@
                         SectionId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.PhotoId);
+            
+            CreateTable(
+                "dbo.Produkts",
+                c => new
+                    {
+                        ProduktId = c.Int(nullable: false, identity: true),
+                        Nazwa = c.String(),
+                        Ilosc_w_magazynie = c.Int(nullable: false),
+                        rodzaj_miaryId = c.Int(nullable: false),
+                        cenaNetto = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        vatId = c.Int(nullable: false),
+                        glownaWalutaId = c.Int(nullable: false),
+                        rodzajId = c.Int(nullable: false),
+                        Kupiono_lacznie = c.Int(nullable: false),
+                        adderId = c.Int(nullable: false),
+                        isDeleted = c.Boolean(nullable: false),
+                        isVisible = c.Boolean(nullable: false),
+                        addDate = c.DateTime(nullable: false),
+                        removeDate = c.DateTime(),
+                        opis_OpisId = c.Int(),
+                    })
+                .PrimaryKey(t => t.ProduktId)
+                .ForeignKey("dbo.Opis", t => t.opis_OpisId)
+                .Index(t => t.opis_OpisId);
             
             CreateTable(
                 "dbo.Produkty_w_zamowieniu",
@@ -293,11 +293,11 @@
         
         public override void Down()
         {
-            DropForeignKey("dbo.People", "LogowanieId", "dbo.Logowanies");
-            DropForeignKey("dbo.Komentarzs", "ProduktId", "dbo.Produkts");
             DropForeignKey("dbo.Produkts", "opis_OpisId", "dbo.Opis");
-            DropIndex("dbo.People", new[] { "LogowanieId" });
+            DropForeignKey("dbo.Komentarzs", "ProduktId", "dbo.Produkts");
+            DropForeignKey("dbo.People", "LogowanieId", "dbo.Logowanies");
             DropIndex("dbo.Produkts", new[] { "opis_OpisId" });
+            DropIndex("dbo.People", new[] { "LogowanieId" });
             DropIndex("dbo.Komentarzs", new[] { "ProduktId" });
             DropTable("dbo.Zamowienias");
             DropTable("dbo.Walutas");
@@ -308,12 +308,12 @@
             DropTable("dbo.Rodzaj_dostawy");
             DropTable("dbo.Rodzajs");
             DropTable("dbo.Produkty_w_zamowieniu");
+            DropTable("dbo.Produkts");
             DropTable("dbo.Photos");
             DropTable("dbo.People");
             DropTable("dbo.Parametr_Produkt");
             DropTable("dbo.Parametrs");
             DropTable("dbo.Logowanies");
-            DropTable("dbo.Produkts");
             DropTable("dbo.Komentarzs");
             DropTable("dbo.Kategorias");
             DropTable("dbo.Globals");

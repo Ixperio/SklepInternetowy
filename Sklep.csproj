@@ -205,13 +205,13 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Migrations\202401242133341_Init.cs" />
-    <Compile Include="Migrations\202401242133341_Init.designer.cs">
-      <DependentUpon>202401242133341_Init.cs</DependentUpon>
+    <Compile Include="Migrations\202401250109563_Init1.cs" />
+    <Compile Include="Migrations\202401250109563_Init1.designer.cs">
+      <DependentUpon>202401250109563_Init1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202401242241532_Init2.cs" />
-    <Compile Include="Migrations\202401242241532_Init2.designer.cs">
-      <DependentUpon>202401242241532_Init2.cs</DependentUpon>
+    <Compile Include="Migrations\202401250135095_Init2.cs" />
+    <Compile Include="Migrations\202401250135095_Init2.designer.cs">
+      <DependentUpon>202401250135095_Init2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
@@ -270,6 +270,7 @@
     <Compile Include="Observer\IOrderObserver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Prototype\Comment.cs" />
+    <None Include="Views\Product\AddProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\DB.mdf" />
@@ -352,7 +353,6 @@
     <Content Include="Scripts\jquery-3.7.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.1.min.map" />
     <Content Include="Views\Product\Index.cshtml" />
-    <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Person\Login.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Order\SubmitOrder.cshtml" />
@@ -363,11 +363,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202401242133341_Init.resx">
-      <DependentUpon>202401242133341_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202401250109563_Init1.resx">
+      <DependentUpon>202401250109563_Init1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202401242241532_Init2.resx">
-      <DependentUpon>202401242241532_Init2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202401250135095_Init2.resx">
+      <DependentUpon>202401250135095_Init2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

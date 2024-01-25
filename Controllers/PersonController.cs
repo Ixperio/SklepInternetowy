@@ -104,9 +104,12 @@ namespace Sklep.Controllers
             {
 
                 var query = from c in _db.Logowanie where c.Login == personLogged.Login && c.Password == personLogged.Password select c;
- 
-                if (query.ToList().Count != 0 ) {
 
+                var user = query.FirstOrDefault();
+
+                if (user != null)
+                {
+                    Session["UserId"] = user.LogowanieId;
                     ViewBag.Message = "Zalogowano";
                 }
                 else
@@ -118,5 +121,6 @@ namespace Sklep.Controllers
             
             return View();
         }
+
     }
 }

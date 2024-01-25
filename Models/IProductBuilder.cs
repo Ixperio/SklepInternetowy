@@ -12,7 +12,7 @@ namespace Sklep.Models
 
         void BuildPrice(decimal price);
 
-        void BuildDescription(Opis description);
+        void BuildAmount(int amount);
     }
 
     public class ProductBuilder : IProductBuilder
@@ -29,13 +29,9 @@ namespace Sklep.Models
             produkt = new Produkt();
         }
 
-        public void BuildDescription(Opis description)
+        public void BuildAmount(int amount)
         {
-            if(produkt.opis == null)
-            {
-                produkt.opis = new Opis();
-        }
-            produkt.opis = description;
+            produkt.Ilosc_w_magazynie = amount;
         }
 
         public void BuildName(string name)
@@ -46,11 +42,6 @@ namespace Sklep.Models
         public void BuildPrice(decimal price)
         {
             produkt.cenaNetto = price;
-        }
-
-        public void BuildVat(int vatId)
-        {
-            produkt.vatId = vatId;
         }
 
         public Produkt GetProduct()

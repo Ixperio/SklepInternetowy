@@ -1,0 +1,38 @@
+@model Sklep.Models.Produkt
+@{
+    ViewBag.Title = "Produkt";
+}
+
+
+<content id="forMain">
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nazwa, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Nazwa, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nazwa, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ilosc_w_magazynie, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Ilosc_w_magazynie, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Ilosc_w_magazynie, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.cenaNetto, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.cenaNetto, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cenaNetto, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+        @ViewBag.Message
+    }
+
+</content>
