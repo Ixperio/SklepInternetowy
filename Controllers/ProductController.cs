@@ -145,6 +145,10 @@ namespace Sklep.Controllers
                                 {
                                     ViewBag.produkt = product;
                                     ViewBag.kategoria = kategoria;
+                                    var opinie = db.Comment.Where(c => c.ProductId == product.ProduktId).ToList();
+
+                                    
+                                    ViewBag.opinie = opinie;
 
                                     return View("Details");
                                 }
@@ -248,6 +252,7 @@ namespace Sklep.Controllers
         [HttpGet]
         public ActionResult GetProductPdf(int id)
         {
+            //WYBÓR STRATEGII
             IPdfGenerator generujPojedynczyProdukt = new ProduktSolo();
 
             PdfGeneartorContext context = new PdfGeneartorContext(generujPojedynczyProdukt);
@@ -267,10 +272,11 @@ namespace Sklep.Controllers
                     var pdf = new PdfDocument(writer);
                     var document = new Document(pdf);
 
-                    string fontPath = Server.MapPath("~/App_Data/Sevillana-Regular.ttf"); // Zmień YourNamespace na rzeczywistą przestrzeń nazw
+                    string fontPath = Server.MapPath("~/App_Data/Sevillana-Regular.ttf"); 
                     PdfFont font = PdfFontFactory.CreateFont(fontPath, PdfEncodings.UTF8);
                     document.SetFont(font);
 
+                    //UŻYCIE STRATEGIA
                     document = context.generate(listaProduktow, document);
 
                     string fileName = "Produkt nr "+id+".pdf";
@@ -290,6 +296,46 @@ namespace Sklep.Controllers
             return HttpNotFound();
 
         }
+
+        [HttpGet]
+        public ActionResult GetProductsPdf()
+        {
+            //WYBÓR STRATEGII
+            IPdfGenerator generujKatalog = new KatalogProduktow();
+           
+            PdfGeneartorContext context = new PdfGeneartorContext(generujKatalog);
+
+                List<Produkt> listaProduktow = new List<Produkt>();
+                
+                listaProduktow = _db.Products.Where(p => p.isVisible == true && p.isDeleted == false).ToList();
+
+                using (var memoryStream = new MemoryStream())
+                {
+                    var writer = new PdfWriter(memoryStream);
+                    var pdf = new PdfDocument(writer);
+                    var document = new Document(pdf);
+
+                    string fontPath = Server.MapPath("~/App_Data/Sevillana-Regular.ttf");
+                    PdfFont font = PdfFontFactory.CreateFont(fontPath, PdfEncodings.UTF8);
+                    document.SetFont(font);
+                    
+                    //UŻYCIE STRATEGIA
+                    document = context.generate(listaProduktow, document);
+
+                    string fileName = "Katalog produktów skelpu.pdf";
+
+                    pdf.GetDocumentInfo().SetTitle(fileName);
+
+                    document.Close();
+                    Response.Clear();
+                    Response.ContentType = "application/pdf";
+                    Response.AddHeader("Content-Disposition", "inline; filename=" + fileName);
+
+                    return File(memoryStream.ToArray(), "application/pdf", fileName);
+                }
+
+        }
+
 
         private Produkt? getProductById(int id) {
             var produkt = new Produkt()

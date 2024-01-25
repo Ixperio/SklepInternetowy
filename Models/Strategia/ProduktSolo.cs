@@ -24,6 +24,14 @@ namespace Sklep.Models.Strategia
     public class ProduktSolo : IPdfGenerator
     {
         //Tworzy plik pdf.
+
+        private static MyDbContext _DB;
+
+        public ProduktSolo()
+        {
+            _DB = new MyDbContext();
+        }
+
         public Document generatePdf(List<Produkt> products, Document dokument)
         {
 
@@ -39,29 +47,23 @@ namespace Sklep.Models.Strategia
             HolidayDiscountDecorator ofWakacyjna = new HolidayDiscountDecorator(prod);
             StandardDiscountDecorator ofStandard = new StandardDiscountDecorator(prod);
 
-            Paragraph nazwa = new Paragraph(produkt.Nazwa+" - Cena netto :"+ ofSpecjalna.getPrice() + " ,uwzglednia ("+ ofSpecjalna.decoratorName()+")");
 
-            dokumentPdf.Add(nazwa);
+            dokumentPdf.Add(new Paragraph(produkt.Nazwa + " Cena netto: " + produkt.cenaNetto + "zL | Cena brutto: " + Math.Ceiling((produkt.cenaNetto * 1.23m) * 100) / 100 + "zl"));
+            dokumentPdf.Add(new Paragraph(produkt.Nazwa + " "+ ofSpecjalna.decoratorName()+" " + ofSpecjalna.getPrice() + "zL | Cena brutto: " + Math.Ceiling((produkt.cenaNetto * 1.23m) * 100) / 100 + "zl"));
+            dokumentPdf.Add(new Paragraph(produkt.Nazwa + " " + ofWakacyjna.decoratorName() + " " + ofWakacyjna.getPrice() + "zL | Cena brutto: " + Math.Ceiling((produkt.cenaNetto * 1.23m) * 100) / 100 + "zl"));
+            dokumentPdf.Add(new Paragraph(""));
+            dokumentPdf.Add(new Paragraph("Opis"));
+            dokumentPdf.Add(new Paragraph("--------------------------------------------------"));
+            List<Section> sekcje = _DB.Sekcja.Where(s => s.OpisId == 2).ToList();
 
-            Paragraph nazwa2 = new Paragraph(produkt.Nazwa + " - Cena netto :" + ofWakacyjna.getPrice() + " ,uwzglednia (" + ofWakacyjna.decoratorName() + ")");
-
-            dokumentPdf.Add(nazwa2);
-
-            Paragraph nazwa3 = new Paragraph(produkt.Nazwa + " - Cena netto :" + ofStandard.getPrice() + " ,uwzglednia (" + ofStandard.decoratorName() + ")");
-
-            dokumentPdf.Add(nazwa3);
-
-            //DOSTAWY
-
-            IFactoryDostawa dostawyFabrykaKurier = new DostawaKurier();
-            IFactoryDostawa dostawyFabrykaKurierPobranie = new DostawaPobranieKurier();
-            IDostawa dostawa = dostawyFabrykaKurier.createFactory();
-            IDostawa dostawaPobranie = dostawyFabrykaKurierPobranie.createFactory();
-
-            dokumentPdf.Add(new Paragraph("Możliwe dostawy : "));
-
-            dokumentPdf.Add(new Paragraph(dostawa.getName() + " | " + dostawa.getPrice() + "PLN"));
-            dokumentPdf.Add(new Paragraph(dostawaPobranie.getName() + " | " + dostawaPobranie.getPrice() + "PLN"));
+            foreach(var s in sekcje)
+            {
+                dokumentPdf.Add(new Paragraph(""));
+                dokumentPdf.Add(new Paragraph(s.Description));
+            }
+            dokumentPdf.Add(new Paragraph(""));
+            dokumentPdf.Add(new Paragraph("Parametry techniczne"));
+            dokumentPdf.Add(new Paragraph("--------------------------------------------------"));
 
             return dokumentPdf;
 

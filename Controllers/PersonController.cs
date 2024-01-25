@@ -10,6 +10,7 @@ using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity;
+using Org.BouncyCastle.Ocsp;
 
 namespace Sklep.Controllers
 {
@@ -56,33 +57,33 @@ namespace Sklep.Controllers
          * Pobieranie danych z formularza
          */
         //[HttpPost]
-       /* public ActionResult Register(PersonRegistration personRegistered)
-        {
-            if (ModelState.IsValid)
-            {
-                ViewBag.Message = "Utworzono nowe konto!";
-                /*Person person = new Person();
-                person.Email = personRegistered.Email;
-                person.Phone = personRegistered.PhoneNumber;
-                person.Name = personRegistered.FirstName;
-                person.Surname = personRegistered.LastName;
-                person.Birthday = personRegistered.BirthDate;
-                person.Logowanie = new Logowanie()
-                {
-                    Login = personRegistered.Login,
-                    Password = personRegistered.Password
-                };
+        /* public ActionResult Register(PersonRegistration personRegistered)
+         {
+             if (ModelState.IsValid)
+             {
+                 ViewBag.Message = "Utworzono nowe konto!";
+                 /*Person person = new Person();
+                 person.Email = personRegistered.Email;
+                 person.Phone = personRegistered.PhoneNumber;
+                 person.Name = personRegistered.FirstName;
+                 person.Surname = personRegistered.LastName;
+                 person.Birthday = personRegistered.BirthDate;
+                 person.Logowanie = new Logowanie()
+                 {
+                     Login = personRegistered.Login,
+                     Password = personRegistered.Password
+                 };
 
-                _db.Logowanie.Add(person.Logowanie);
-                _db.Person.Add(person);
-                _db.SaveChanges();
-            }
-            else
-            {
-                ViewBag.Message = "Wprowadzono nieprawidłowe dane!";
-            }
-            return View();
-        } */
+                 _db.Logowanie.Add(person.Logowanie);
+                 _db.Person.Add(person);
+                 _db.SaveChanges();
+             }
+             else
+             {
+                 ViewBag.Message = "Wprowadzono nieprawidłowe dane!";
+             }
+             return View();
+         } */
 
         /*
         * @autor Artur Leszczak
@@ -95,13 +96,23 @@ namespace Sklep.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            if (Request.Cookies["KoszykWartosc"] != null)
-            {
-                HttpCookie existingCookie = Request.Cookies["KoszykWartosc"];
-                string cookieValue = existingCookie.Value;
-                ViewBag.WartoscKoszyka = cookieValue;
+            int? userId = Session["UserId"] as int?;
+            if (!userId.HasValue) {
+                if (Request.Cookies["KoszykWartosc"] != null)
+                {
+                    HttpCookie existingCookie = Request.Cookies["KoszykWartosc"];
+                    string cookieValue = existingCookie.Value;
+                    ViewBag.WartoscKoszyka = cookieValue;
+                }
+
+
+                return View();
             }
-            return View();
+            else
+            {
+                return View("Account");
+            }
+            
         }
         /**
          * Pobieranie danych z formularza
@@ -117,21 +128,62 @@ namespace Sklep.Controllers
             }
             if (ModelState.IsValid)
             {
-
-                var query = from c in _db.Logowanie where c.Login == personLogged.Login && c.Password == personLogged.Password select c;
+                int d = _db.Logowanie.SingleOrDefault(d => d.Login == personLogged.Login && d.Password == personLogged.Password).LogowanieId;
+                var c = _db.Person.SingleOrDefault(p => p.LogowanieId == d);
  
-                if (query.ToList().Count != 0 ) {
+                if (c != null) {
 
-                    ViewBag.Message = "Zalogowano";
+                    Session["UserId"] = c.PersonId;
+                    return View("Account");
                 }
                 else
                 {
-                    ViewBag.Message = "Niepoprawne dane!";
+                    return View("Login");
                 }
                
             }
-            
+
             return View();
         }
+
+        public ActionResult AccountEdit()
+        {
+            int? userId = Session["UserId"] as int?;
+            if (userId.HasValue)
+            {
+
+               Person person = _db.Person.SingleOrDefault(p=>p.PersonId == userId);
+
+                ViewBag.Person = person;
+                return View();
+            }
+            else
+            {
+                return View("Login");
+            }
+        }
+        public ActionResult Account()
+        {
+            int? userId = Session["UserId"] as int?;
+            if (userId.HasValue)
+            {
+
+                Person person = _db.Person.SingleOrDefault(p => p.PersonId == userId.Value);
+                if(person != null)
+                {
+                    return View(person);
+                }
+                else
+                {
+                    return View("Login");
+                }
+               
+            }
+            else
+            {
+                return View("Login");
+            }
+        }
+
     }
 }

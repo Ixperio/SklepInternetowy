@@ -203,6 +203,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BusketController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Migrations\202401202258105_Initial.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\Adress.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Country.cs" />
     <Compile Include="Models\DbContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -361,6 +363,9 @@
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Product\Products.cshtml" />
     <Content Include="Views\Busket\Index.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Person\AccountEdit.cshtml" />
+    <Content Include="Views\Person\Account.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
