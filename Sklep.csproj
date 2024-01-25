@@ -362,6 +362,9 @@
     <Content Include="Views\Person\Register.cshtml" />
     <Content Include="Views\Product\Products.cshtml" />
     <Content Include="Views\Busket\Index.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Person\AccountEdit.cshtml" />
+    <Content Include="Views\Person\Account.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

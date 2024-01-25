@@ -73,5 +73,7 @@ namespace Sklep.Db_Context
 
         public  DbSet<Globals> Globals { get; set; }
 
+        public DbSet<Comment> Comment { get; set; }
+
     }
 }
