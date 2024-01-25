@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Twój koszyk</h2>
+
+<style>
+    table > tbody > tr {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+    table > tbody > tr > td {
+        display: grid;
+        place-items: center;
+    }
+    table > tbody > tr > th {
+        display: grid;
+        place-items: center;
+        font-weight: 600;
+        font-size: 24px;
+    }
+    .mainContent{
+        display: grid;
+        width: 100%;
+        justify-items: center;
+    }
+    .btn {
+        background-color: #FC6D84;
+        border-radius: 5px;
+        box-shadow: rgba(0,0,0,0.25) 0px 1px 1px 0px;
+        display: grid;
+        padding: 15px 35px 15px 35px;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: Inter;
+        cursor: pointer;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $.ajaxSetup({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            }
+        });
+        $(".btn#delete").click(function (event) {
+            var productIdToRemove = $(this).attr("produktId"); 
+            $.post("/Busket/Remove", { ProduktId: productIdToRemove }, function (result) {
+                location.reload(true);
+            }).fail(function (error) {
+                console.error("Nie udało się usunąc produktu");
+                alert("Nie udało się usunąć produktu!");
+            });
+        });
+    });
+</script>
+<div class="mainContent">
+    @{ if (ViewBag.ProduktyKoszyka != null)
+        {
+            var liczba = 0;
+            <table>
+                <tr>
+                    <th>Nr w koszyku</th>
+                    <th>Grafika</th>
+                    <th>Nazwa produktu</th>
+                    <th>Cena netto</th>
+                    <th>Stawka podatku VAT</th>
+                    <th>Cena brutto</th>
+                    <th>Ilość w koszyku</th>
+                    <th>Wartość</th>
+                    <th>Usuń z koszyka</th>
+                </tr>
+                @foreach (var p in ViewBag.ProduktyKoszyka)
+                {
+                    liczba++;
+                    <tr>
+                        <td>@liczba</td>
+                        <td><img style="width: 100px; height: 100px;" src="@p.Icon" /></td>
+                        <td><h3>@p.Produkt.Nazwa</h3></td>
+                        <td>
+                            <h4>@{@p.Produkt.cenaNetto}zł</h4>
+                        </td>
+                        <td>
+                            <h4>@{@p.StawkaVat}%</h4>
+                        </td>
+                        <td>
+                            <h4>@{@p.CenaBrutto}zł</h4>
+                        </td>
+                        <td>
+                            <h4>@p.Ilosc</h4>
+                        </td>
+                        <td><h4>@{@p.Wartosc}zł</h4></td>
+                        <td><div class="btn" id="delete" produktId="@p.Produkt.ProduktId">Usuń</div></td>
+                    </tr>
+    }
+            </table>
+            <hr />
+            <h3> Do zapłaty: @{@ViewBag.DoZaplaty}zł</h3>
+
+        }
+    }
+
+    @{
+        if (ViewBag.ProduktyKoszyka == null)
+        {
+            <h1>Twój koszyk jest pusty!</h1>
+        }
+    }
+</div>

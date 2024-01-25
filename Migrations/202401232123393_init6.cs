@@ -22,6 +22,15 @@
                         Status = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
+
+            AddColumn("dbo.Photos", "ProductId", c => c.Int(nullable: false));
+            
+        }
+        
+        public override void Down()
+        {
+            DropTable("dbo.Globals");
+            DropColumn("dbo.Photos", "ProductId");
             
             AddColumn("dbo.Zamowienias", "statusId", c => c.Int(nullable: false));
             DropColumn("dbo.Zamowienias", "status");
