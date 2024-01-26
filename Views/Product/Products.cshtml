@@ -112,6 +112,24 @@
         font-family: Inter;
         color: #898989;
     }
+    .buyButtonCont{
+        width:max-content;
+        height: auto;
+        display: grid;
+        grid-template-columns: min-content max-content;
+
+    }
+    .liczbaZamawiana{
+        height: 100%;
+        width: 60px;
+        margin-right: -5px;
+    }
+        .liczbaZamawiana > input {
+            height: 100%;
+            width: 100%;
+            font-size: 21px;
+            text-indent: 5px;
+        }
 </style>
 
 <script>
@@ -122,9 +140,10 @@
             }
         });
         $(".buyBtn").click(function (event) {
+            var produktId = $(this).attr("productId");
             var productData = {
-                ProduktId: 1,
-                Liczba: 1
+                ProduktId: produktId,
+                Liczba: $('input[type=number][productId="' + produktId +'"]').val()
             };
 
             $.ajax({
@@ -133,10 +152,10 @@
                 data: JSON.stringify(productData),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function (result) {
-                    alert(result.message);
-                }
-            });
+                success: function (result) {}
+            }).always(function () {
+                location.reload(true);
+            });;
         });
     });
 </script>
@@ -158,11 +177,23 @@
                     <div class="details"><a href="/Product/Details/@p.Id">Wyświetl szczegóły produktu</a></div>
                 </div>
                 <div class="ceny">
-                    <div class="productCena">Brutto <strong style="color: #FC6D84; font-size: 24px;">@{@p.BruttoPrice}zł/szt.</strong></div>
-                    <div class="productCena">Netto <strong style="color: #FC6D84; font-size: 20px;">@{@p.NettoPrice}zł/szt.</strong></div>
-                    <div class="info">Ocena @{@p.OpinionValue}/5 </div>
-                    <div class="info">Na podstawie @p.OpinionCounter opinni</div>
-                    <div class="buyBtn" productId="@p.Id" liczba="1">Dodaj do koszyka</div>
+                    @{
+                        if (p.DiscountName != null)
+                        {
+                            <div>Promocja - <strong>@p.DiscountName</strong></div>
+                            <div class="productCena">Cena brutto <strong style="color: #FC6D84; font-size: 24px;">@{@p.BruttoPrice}zł/szt.</strong></div>
+                            <div class="productCena" style="transform: scale(0.6);">Stara cena brutto <s><strong style="color: #FC6D84; font-size: 24px;">@{@p.BruttoPriceOld}zł/szt.</strong></s></div>
+                            <div class="productCena">Cena netto <strong style="color: #FC6D84; font-size: 20px;">@{@p.NettoPrice}zł/szt.</strong></div>
+                            <div class="productCena" style="transform: scale(0.6);">Stara cena netto <s><strong style="color: #FC6D84; font-size: 20px;">@{@p.NettoPriceOld}zł/szt.</strong></s></div>
+                        }
+                        else
+                        {
+                            <div class="productCena">Brutto <strong style="color: #FC6D84; font-size: 24px;">@{@p.BruttoPrice}zł/szt.</strong></div>
+                            <div class="productCena">Netto <strong style="color: #FC6D84; font-size: 20px;">@{@p.NettoPrice}zł/szt.</strong></div>
+                        }
+                    }
+
+                    <div class="buyButtonCont"><div class="liczbaZamawiana"><input type="number" productId="@p.Id" value="1" min="1" max="@p.StoreCount" step="1" /></div><div class="buyBtn" productId="@p.Id">Dodaj do koszyka</div></div>
                     <div class="info">Pozostało @p.StoreCount szt.</div>
                 </div>
 

@@ -226,7 +226,7 @@
         $(".buyButton").click(function (event) {
             var productData = {
                 ProduktId: @ViewBag.produkt.Id,
-                Liczba: 1
+                Liczba: $(this).attr("liczba")
             };
 
             $.ajax({
@@ -235,9 +235,9 @@
                 data: JSON.stringify(productData),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function (result) {
-                    alert(result.message);
-                }
+                success: function (result) { }
+            }).always(function () {
+                location.reload(true);
             });
         });
     });
@@ -271,7 +271,7 @@
                         <h5>Cena netto: <strong>@{@ViewBag.produkt.NettoPrice}zł/szt.</strong></h5>
                     </div>
                     <div>
-                        <div class="buyButton">
+                        <div class="buyButton" liczba="1">
                             Do koszyka
                         </div>
                         <h6>Pozostało @ViewBag.produkt.StoreCount sztuk</h6>

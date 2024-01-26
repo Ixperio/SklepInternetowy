@@ -202,6 +202,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BusketController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
@@ -213,6 +214,10 @@
     <Compile Include="Migrations\202401261306370_Init2.cs" />
     <Compile Include="Migrations\202401261306370_Init2.designer.cs">
       <DependentUpon>202401261306370_Init2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401261522059_Init3.cs" />
+    <Compile Include="Migrations\202401261522059_Init3.designer.cs">
+      <DependentUpon>202401261522059_Init3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
@@ -261,6 +266,8 @@
     <Compile Include="Models\Produkt.cs" />
     <Compile Include="Models\Produkty_w_zamowieniu_goscie.cs" />
     <Compile Include="Models\Produkty_w_zamowieniu.cs" />
+    <Compile Include="Models\Promocja.cs" />
+    <Compile Include="Models\Promocja_produkt.cs" />
     <Compile Include="Models\Rodzaj.cs" />
     <Compile Include="Models\Rodzaj_dostawy.cs" />
     <Compile Include="Models\Rodzaj_miary.cs" />
@@ -280,6 +287,7 @@
     <Compile Include="Observer\IOrderObserver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Prototype\Comment.cs" />
+    <Content Include="Views\Category\Index.cshtml" />
     <None Include="Views\Product\AddProduct.cshtml" />
     <Content Include="App_Data\Baza.mdf" />
     <Content Include="App_Data\Baza_log.ldf">
@@ -385,7 +393,11 @@
     <EmbeddedResource Include="Migrations\202401261306370_Init2.resx">
       <DependentUpon>202401261306370_Init2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401261522059_Init3.resx">
+      <DependentUpon>202401261522059_Init3.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

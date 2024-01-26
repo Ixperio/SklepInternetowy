@@ -83,5 +83,9 @@ namespace Sklep.Db_Context
 
         public DbSet<Zamowienie_status> Zamowienie_status { get; set; }
 
+        public DbSet<Promocja> Promocja { get; set;}
+
+        public DbSet<Promocja_produkt> Promocja_produkt { get; set; }
+
     }
 }

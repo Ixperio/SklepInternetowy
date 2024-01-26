@@ -13,9 +13,12 @@ namespace Sklep.Models.ModelViews
         public string CategoryName { get; set; }
         public string ImageUrl { get; set; }
         public decimal NettoPrice { get; set; }
+        public decimal NettoPriceOld { get; set; }
         public decimal BruttoPrice { get; set; }
+        public decimal BruttoPriceOld { get; set; }
         public int OpinionCounter { get; set; }
         public decimal OpinionValue { get; set; }
         public int StoreCount { get; set; }
+        public string? DiscountName { get; set; }
     }
 }
