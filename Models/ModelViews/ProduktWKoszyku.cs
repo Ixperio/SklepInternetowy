@@ -5,6 +5,7 @@ using System.Web;
 
 namespace Sklep.Models.ModelViews
 {
+    //klasa widoku reprezentująca model Produktu w koszyku - Artur Leszczak
     public class ProduktWKoszyku
     {
         public Produkt Produkt { get; set; }

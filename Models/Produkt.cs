@@ -30,7 +30,5 @@ namespace Sklep.Models
 
         public DateTime addDate { get; set; } = DateTime.Now;
         public DateTime? removeDate { get; set; }
-
-        public virtual ICollection<Komentarz> Komentarze { get; set; }
     }
 }

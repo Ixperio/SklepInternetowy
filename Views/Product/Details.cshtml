@@ -298,7 +298,17 @@
             <div class="sectionComents">
                 <h3 style="padding-left: 20px;"><strong>Oceny i komentarze</strong></h3>
                 <hr />
-                <div class="contentSection"></div>
+                <div class="contentSection">
+                    
+                    @{ 
+                        foreach(var o in ViewBag.opinie)
+                        {
+
+                        }
+                    }
+
+
+                </div>
             </div>
             <a href="/Product/GetProductPdf/1">
                 Pobierz plik pdf

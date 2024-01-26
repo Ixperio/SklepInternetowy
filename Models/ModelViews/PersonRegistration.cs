@@ -5,6 +5,8 @@ using System.Web.Mvc;
 
 namespace Sklep.Models.ModelViews
 {
+    //Klasa widoku odpowiedzialna za model widoku formularza rejestacji nowych użytkowników wraz z ograniczeniami nałożonymi na
+    //konkretne typy - Artur Leszczak i Katarzyna Grygo
     public class PersonRegistration
     {
         [Required]

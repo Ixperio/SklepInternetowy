@@ -6,19 +6,20 @@ using System.Reflection.Emit;
 
 namespace Sklep.Prototype
 {
-    public class Comment
+    // Prototyp komentarza - Katarzyna Grygo
+    public class CommentPrototype
     {
         public string UserName;
         public string Content;
 
-        public Comment ShallowCopy()
+        public CommentPrototype ShallowCopy()
         {
-            return (Comment)MemberwiseClone();
+            return (CommentPrototype)MemberwiseClone();
         }
 
-        public Comment DeepCopy()
+        public CommentPrototype DeepCopy()
         {
-            Comment comment = (Comment)MemberwiseClone();
+            CommentPrototype comment = (CommentPrototype)MemberwiseClone();
             comment.Content = string.Copy(Content);
             comment.UserName = string.Copy(UserName);
             return comment;

@@ -82,14 +82,13 @@
                 c => new
                     {
                         CommentId = c.Int(nullable: false, identity: true),
-                        UserName = c.String(nullable: false),
+                        UserId = c.Int(nullable: false),
                         Content = c.String(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
                         ProduktId = c.Int(nullable: false),
+                        isDeleted = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.CommentId)
-                .ForeignKey("dbo.Produkts", t => t.ProduktId, cascadeDelete: true)
-                .Index(t => t.ProduktId);
+                .PrimaryKey(t => t.CommentId);
             
             CreateTable(
                 "dbo.Logowanies",
@@ -196,6 +195,16 @@
                 .PrimaryKey(t => t.Produkty_w_zamowieniuId);
             
             CreateTable(
+                "dbo.Produkty_w_zamowieniu_goscie",
+                c => new
+                    {
+                        Produkty_w_zamowieniuId = c.Int(nullable: false, identity: true),
+                        zamowienie_goscieId = c.Int(nullable: false),
+                        ProduktId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Produkty_w_zamowieniuId);
+            
+            CreateTable(
                 "dbo.Rodzajs",
                 c => new
                     {
@@ -211,6 +220,7 @@
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
+                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
                         IsDeleted = c.Boolean(nullable: false),
                         IsVisible = c.Boolean(nullable: false),
                     })
@@ -274,7 +284,7 @@
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.Zamowienias",
+                "dbo.ZamowieniaKliencis",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -283,6 +293,25 @@
                         dostawaId = c.Int(nullable: false),
                         platnosc_typId = c.Int(nullable: false),
                         walutaId = c.Int(nullable: false),
+                        addDate = c.DateTime(nullable: false),
+                        status = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.ZamowieniaGoscies",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Imie = c.String(),
+                        Nazwisko = c.String(),
+                        Adres = c.String(),
+                        Phone = c.String(),
+                        AdresEmail = c.String(),
+                        dostawaId = c.Int(nullable: false),
+                        platnosc_typId = c.Int(nullable: false),
+                        walutaId = c.Int(nullable: false),
+                        addDate = c.DateTime(nullable: false),
                         status = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
@@ -291,11 +320,10 @@
         
         public override void Down()
         {
-            DropForeignKey("dbo.Komentarzs", "ProduktId", "dbo.Produkts");
             DropForeignKey("dbo.People", "LogowanieId", "dbo.Logowanies");
             DropIndex("dbo.People", new[] { "LogowanieId" });
-            DropIndex("dbo.Komentarzs", new[] { "ProduktId" });
-            DropTable("dbo.Zamowienias");
+            DropTable("dbo.ZamowieniaGoscies");
+            DropTable("dbo.ZamowieniaKliencis");
             DropTable("dbo.Walutas");
             DropTable("dbo.Typ_jednostki");
             DropTable("dbo.Sections");
@@ -303,6 +331,7 @@
             DropTable("dbo.Rodzaj_miary");
             DropTable("dbo.Rodzaj_dostawy");
             DropTable("dbo.Rodzajs");
+            DropTable("dbo.Produkty_w_zamowieniu_goscie");
             DropTable("dbo.Produkty_w_zamowieniu");
             DropTable("dbo.Produkts");
             DropTable("dbo.Photos");

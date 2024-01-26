@@ -2,7 +2,6 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
-
 ﻿using Sklep.Models;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
@@ -12,20 +11,21 @@ namespace Sklep.Db_Context
 {
     public sealed class MyDbContext : DbContext
     {
-        private static MyDbContext _instance;
+        private static MyDbContext _instance; //prywatna instancja singletona
 
         //ŚCIEŻKA DO PLIKU BAZY DANYCH (W App_Data)
 
         private static string DB_PATH = "C:\\Users\\alok1\\Desktop\\STUDIA\\SEM5\\MVC\\PROJEKT\\Sklep\\App_Data\\Baza.mdf";
 
         [Obsolete("Konstruktor do ef")]
-        public MyDbContext() : base("Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename = "+DB_PATH+"; Initial Catalog=Sklep.Db_Context.MyDbContext;Integrated Security=True;Connect Timeout=30;Encrypt=False;")
+        public MyDbContext() : base("Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename="+DB_PATH+";Integrated Security=True;Connect Timeout=30;Encrypt=False;")
         {
         }
-        private MyDbContext(bool x) : base("Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename = "+DB_PATH+"; Initial Catalog=Sklep.Db_Context.MyDbContext;Integrated Security=True;Connect Timeout=30;Encrypt=False;")
+        private MyDbContext(bool x) : base("Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename="+DB_PATH+";Integrated Security=True;Connect Timeout=30;Encrypt=False;")
         {
         }
-
+        //SINGLETON - Katarzyna Grygo
+        //zwraca instniejącą instancje lub tworzy instancję połączenia jeżeli brak takowej
         public static MyDbContext GetInstance()
         {
             if (_instance == null)
@@ -34,7 +34,7 @@ namespace Sklep.Db_Context
             }
             return _instance;
         }
-
+        //KONFIGURACJA MAPOWANIA OBIEKTOWEGO
         public DbSet<Logowanie> Logowanie { get; set; }
 
         public DbSet<Produkt> Products { get; set; }
@@ -58,6 +58,7 @@ namespace Sklep.Db_Context
 
         public DbSet<Produkty_w_zamowieniu> Produkty_w_zamowieniu { get; set; }
 
+        public DbSet<Produkty_w_zamowieniu_goscie> Produkty_w_zamowieniu_goscie { get; set; }
         public DbSet<Rodzaj> Rodzaj { get; set; }
 
         public DbSet<Rodzaj_dostawy> Rodzaj_dostawy { get; set; }
@@ -71,8 +72,9 @@ namespace Sklep.Db_Context
 
         public DbSet<Waluta> Waluta { get; set; }
         
-        public DbSet<Zamowienia> Zamowienia { get; set; }
+        public DbSet<ZamowieniaKlienci> Zamowienia { get; set; }
 
+        public DbSet<ZamowieniaGoscie> ZamowieniaGoscie { get; set; }
         public  DbSet<Globals> Globals { get; set; }
 
     }

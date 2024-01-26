@@ -3,33 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.WebPages;
 using System.IO;
-using System.Xml.Linq;
 using iText.Kernel.Pdf;
 using iText.Layout;
-using iText.Layout.Element;
-using Microsoft.Ajax.Utilities;
-
-using System.Runtime.Remoting.Messaging;
-using iText.IO.Font.Constants;
 using iText.Kernel.Font;
 using iText.IO.Font;
-using System.Text;
-using System.Web.Configuration;
-using System.Data.Entity.Infrastructure.Interception;
-using static iText.StyledXmlParser.Jsoup.Select.Evaluator;
 using Sklep.Models.ModelViews;
-using System.Data.Entity;
-
 using Sklep.Db_Context;
 using Sklep.Models;
 using Sklep.Models.Strategia.Interface;
 using Sklep.Models.Strategia;
-using Sklep.Models.ModelViews;
 using Sklep.Prototype;
-using iText.Commons.Actions.Producer;
-
 
 namespace Sklep.Controllers
 {
@@ -53,7 +37,7 @@ namespace Sklep.Controllers
             }
             return View();
         }
-
+        //pobieranie wszystkich produktów - Artur Leszczak
         public ActionResult Products(Pages page)
         {
             if (Request.Cookies["KoszykWartosc"] != null)
@@ -126,6 +110,8 @@ namespace Sklep.Controllers
         }
 
         //GET: Product/Details/5
+        //pobieranie detali produktu po Id - Artur Leszczak
+        [HttpGet]
         public ActionResult Details(int id)
         {
             if (Request.Cookies["KoszykWartosc"] != null)
@@ -151,11 +137,8 @@ namespace Sklep.Controllers
                                 if (kategoria != null)
                                 {
                                     ViewBag.produkt = product;
-                                    ViewBag.kategoria = kategoria;
-                                    var opinie = db.Komentarze.Where(c => c.ProduktId == product.ProduktId).ToList();
-
-                                    
-                                    ViewBag.opinie = opinie;
+                                    ViewBag.kategoria = kategoria;                        
+                                    ViewBag.opinie = this.GetComments(id);
 
                                     return View("Details");
                                 }
@@ -264,7 +247,7 @@ namespace Sklep.Controllers
                 return View();
             }
         }
-
+        //pobieranie produktu po Id - Artur Leszczak
         [HttpGet]
         public ActionResult GetProductPdf(int id)
         {
@@ -312,7 +295,7 @@ namespace Sklep.Controllers
             return HttpNotFound();
 
         }
-
+        //pobieranie produktu po Id - Artur Leszczak
         [HttpGet]
         public ActionResult GetProductsPdf()
         {
@@ -352,53 +335,75 @@ namespace Sklep.Controllers
 
         }
 
+        //pobieranie produktu po Id - Artur Leszczak
+        private Produkt getProductById(int id) {
 
-        private Produkt? getProductById(int id) {
-            var produkt = new Produkt()
-            {
-                ProduktId = id,
-                Nazwa = _db.Products.SingleOrDefault(x => x.ProduktId == id).Nazwa,
-                Ilosc_w_magazynie = _db.Products.SingleOrDefault(x => x.ProduktId == id).Ilosc_w_magazynie,
-                rodzaj_miaryId = _db.Products.SingleOrDefault(x => x.ProduktId == id).rodzaj_miaryId,
-                cenaNetto = _db.Products.SingleOrDefault(x => x.ProduktId == id).cenaNetto,
-                vatId = _db.Products.SingleOrDefault(x => x.ProduktId == id).vatId,
-                glownaWalutaId = _db.Products.SingleOrDefault(x => x.ProduktId == id).glownaWalutaId,
-                rodzajId = _db.Products.SingleOrDefault(x => x.ProduktId == id).rodzajId,
-                Kupiono_lacznie = _db.Products.SingleOrDefault(x => x.ProduktId == id).Kupiono_lacznie,
-                adderId = _db.Products.SingleOrDefault(x => x.ProduktId == id).adderId,
-                isDeleted = _db.Products.SingleOrDefault(x => x.ProduktId == id).isDeleted,
-                isVisible = _db.Products.SingleOrDefault(x => x.ProduktId == id).isVisible,
-                addDate = _db.Products.SingleOrDefault(x => x.ProduktId == id).addDate,
-                removeDate = _db.Products.SingleOrDefault(x => x.ProduktId == id).removeDate
-            };
+            var produkt = new Produkt();
 
-            if (produkt.isDeleted)
+            produkt = _db.Products.SingleOrDefault(x => x.ProduktId == id);
+            if(produkt != null)
             {
-                return null;
-            }
-            if(produkt.isVisible)
-            {
-                return produkt;
-            }
-            else
-            {
-                return null;
+                if (produkt.isDeleted)
+                {
+                    return null;
+                }
+                if (produkt.isVisible)
+                {
+                    return produkt;
+                }
+                else
+                {
+                    return null;
+                }
             }
 
+            return null;
         }
-
-        public ActionResult Comments(int id)
+        //pobranie komentarzy - Katarzyna Grygo
+        private List<ProductComment> GetComments(int id)
         {
             var produkt = getProductById(id);
 
             if (produkt != null)
             {
-                return View(produkt.Komentarze.ToList());
-            }
 
-            return HttpNotFound();
+                List<Komentarz> komentarze = new List<Komentarz>();
+
+                komentarze = _db.Komentarze.Where(c=>c.ProduktId == id).ToList();
+
+                List<ProductComment> komentarz_produktu = new List<ProductComment>();
+                
+                foreach (var comment in komentarze)
+                {
+                    var p = _db.Person.SingleOrDefault(p => p.PersonId == comment.UserId);
+                    if (p != null)
+                    {
+                        ProductComment productComment = new ProductComment()
+                        {
+                            ProduktId = comment.ProduktId,
+                            UserName = p.Name+" "+p.Surname,
+                            Content = comment.Content
+                        };
+                        komentarz_produktu.Add(productComment);
+                    }
+                    else
+                    {
+                        ProductComment productComment = new ProductComment()
+                        {
+                            ProduktId = comment.ProduktId,
+                            UserName = "<i>Użytkownik Nieznany</i>",
+                            Content = comment.Content
+                        };
+                        komentarz_produktu.Add(productComment);
+                    }
+                }
+
+                return komentarz_produktu;
+            }
+            return null;
         }
 
+        //dodawanie komentarzy - Katarzyna Grygo
         [HttpGet]
         public ActionResult AddComment(int productId)
         {
@@ -411,26 +416,25 @@ namespace Sklep.Controllers
             var productComment = new ProductComment { ProduktId = productId };
             return View(productComment);
         }
-
+        //dodawanie komentarzy - Katarzyna Grygo
         [HttpPost]
         public ActionResult AddComment(ProductComment productComment)
         {
             if (ModelState.IsValid)
             {
-                Comment prototypeComment = new Comment { UserName = productComment.UserName, Content = productComment.Content };
-                Comment newComment = prototypeComment.DeepCopy();
+                CommentPrototype prototypeComment = new CommentPrototype { UserName = productComment.UserName, Content = productComment.Content };
+                CommentPrototype newComment = prototypeComment.DeepCopy();
 
                 var produkt = _db.Products.Find(productComment.ProduktId);
                 if (produkt != null)
                 {
                     var komentarz = new Komentarz
                     {
-                        UserName = newComment.UserName,
+                        UserId = 1,
                         Content = newComment.Content,
                         CreatedAt = DateTime.Now
                     };
                     _db.Komentarze.Add(komentarz);
-                    produkt.Komentarze.Add(komentarz);
                     _db.SaveChanges();
 
                     ViewBag.Message = "Comment added successfully!";
@@ -439,9 +443,6 @@ namespace Sklep.Controllers
 
             return View(productComment);
         }
-
-      
-        
 
     }
 }

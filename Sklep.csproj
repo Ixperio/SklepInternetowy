@@ -206,9 +206,9 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Migrations\202401260118325_Init.cs" />
-    <Compile Include="Migrations\202401260118325_Init.designer.cs">
-      <DependentUpon>202401260118325_Init.cs</DependentUpon>
+    <Compile Include="Migrations\202401260304009_Init.cs" />
+    <Compile Include="Migrations\202401260304009_Init.designer.cs">
+      <DependentUpon>202401260304009_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
@@ -253,6 +253,7 @@
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Podatek.cs" />
     <Compile Include="Models\Produkt.cs" />
+    <Compile Include="Models\Produkty_w_zamowieniu_goscie.cs" />
     <Compile Include="Models\Produkty_w_zamowieniu.cs" />
     <Compile Include="Models\Rodzaj.cs" />
     <Compile Include="Models\Rodzaj_dostawy.cs" />
@@ -265,6 +266,7 @@
     <Compile Include="Models\Strategia\ProduktSolo.cs" />
     <Compile Include="Models\Typ_jednostki.cs" />
     <Compile Include="Models\Waluta.cs" />
+    <Compile Include="Models\ZamowieniaGoscie.cs" />
     <Compile Include="Models\Zamowienia.cs" />
     <Compile Include="Observer\EmailNotification.cs" />
     <Compile Include="Observer\IObserver.cs" />
@@ -370,8 +372,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202401260118325_Init.resx">
-      <DependentUpon>202401260118325_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202401260304009_Init.resx">
+      <DependentUpon>202401260304009_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

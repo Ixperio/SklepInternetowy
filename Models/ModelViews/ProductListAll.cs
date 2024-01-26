@@ -5,6 +5,7 @@ using System.Web;
 
 namespace Sklep.Models.ModelViews
 {
+    //Klasa widoku pozwalająca na przekazywanie jedynie niezbędnych danych do widoku - Artur Leszczak
     public class ProductListAll
     {
         public int Id { get; set; }

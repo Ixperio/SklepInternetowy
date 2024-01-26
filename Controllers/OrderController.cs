@@ -48,7 +48,7 @@ namespace Sklep.Controllers
                 _db.SaveChanges();
 
                 EmailNotification notification = new EmailNotification();
-                Zamowienia zamowienia = new Zamowienia();
+                ZamowieniaKlienci zamowienia = new ZamowieniaKlienci();
                 zamowienia.adresId = x.AdressId;
                 zamowienia.Attach(notification);
 
@@ -76,7 +76,7 @@ namespace Sklep.Controllers
 
                 if (user != null && user.AccountTypeId == 2)
                 {
-                    List<Zamowienia> orders = _db.Zamowienia.ToList();
+                    List<ZamowieniaKlienci> orders = _db.Zamowienia.ToList();
 
                     return View("~/Views/Order/CheckOrders.cshtml", orders);
                 }

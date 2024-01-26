@@ -12,6 +12,7 @@ using System.Web.Services.Description;
 
 namespace Sklep.Observer
 {
+    //Obserwator zmiany zamówienia , wysy³aj¹cy powiadomienia na adres email - Katarzyna Grygo
     public class EmailNotification : IObserver
     {
         private MyDbContext _db;
@@ -31,7 +32,7 @@ namespace Sklep.Observer
 
         public void Update(IOrderObserver order)
         {
-            Zamowienia zamowienia = order as Zamowienia;
+            ZamowieniaKlienci zamowienia = order as ZamowieniaKlienci;
             Adress adress = _db.Adress.FirstOrDefault(x => x.AdressId == zamowienia.adresId);
             MailMessage mailMessage = new MailMessage();
             mailMessage.From = new MailAddress("expensestracker4@gmail.com");

@@ -9,16 +9,16 @@ namespace Sklep.Models
         [Key]
         public int CommentId { get; set; }
 
-        [Required]
-        public string UserName { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         public string Content { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
-
         public int ProduktId { get; set; }
+
+        public bool isDeleted { get; set; }
 
     }
 }

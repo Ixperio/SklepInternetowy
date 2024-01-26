@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sklep.Observer
 {
+    //Interfejs obserwatora - Katarzyna Grygo
     public interface IObserver
     {
         void Update(IOrderObserver order);
