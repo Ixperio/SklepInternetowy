@@ -246,6 +246,7 @@
     <Compile Include="Models\Metoda_wytworcza\Interface\IFactoryDostawa.cs" />
     <Compile Include="Models\Metoda_wytworcza\Kurier.cs" />
     <Compile Include="Models\Metoda_wytworcza\KurierPobranie.cs" />
+    <Compile Include="Models\ModelViews\KurierView.cs" />
     <Compile Include="Models\ModelViews\OpisWidok.cs" />
     <Compile Include="Models\ModelViews\Pages.cs" />
     <Compile Include="Models\ModelViews\Parametry.cs" />
@@ -379,7 +380,7 @@
     <Content Include="Views\Person\Register.cshtml" />
     <Content Include="Views\Product\Products.cshtml" />
     <Content Include="Views\Busket\Index.cshtml" />
-    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Person\AccountEdit.cshtml" />
     <Content Include="Views\Person\Account.cshtml" />
   </ItemGroup>

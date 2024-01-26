@@ -7,6 +7,9 @@ using Sklep.Observer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sklep.Models.Metoda_wytworcza.Interface;
+using Sklep.Models.Metoda_wytworcza;
+using System.EnterpriseServices;
 
 namespace Sklep.Controllers
 {
@@ -90,5 +93,35 @@ namespace Sklep.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            List<KurierView> kurierViews = new List<KurierView>();
+
+            IFactoryDostawa kurierzyZwykli = new DostawaKurier();
+            
+            List<IDostawa> kuriers = new List<IDostawa>();
+            kuriers = kurierzyZwykli.createFactory();
+
+            foreach (var kurier in kuriers)
+            {
+                kurierViews.Add(new KurierView() { Nazwa = kurier.getName(), Cena = kurier.getPrice() });
+            }
+
+            IFactoryDostawa kurierzyPobranie = new DostawaPobranieKurier();
+            List<IDostawa> kuriersPobranie = new List<IDostawa>();
+            kuriersPobranie = kurierzyPobranie.createFactory();
+
+            foreach (var kurier in kuriersPobranie)
+            {
+                kurierViews.Add(new KurierView() { Nazwa = kurier.getName(), Cena = kurier.getPrice() });
+            }
+
+            ViewBag.kurierzy = kurierViews;
+
+            return View();
+        }
+
     }
 }

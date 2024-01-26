@@ -9,10 +9,16 @@ namespace Sklep.Models.Metoda_wytworcza
     public class DostawaKurier : IFactoryDostawa
     {
 
-        public IDostawa createFactory()
+        public List<IDostawa> createFactory()
         {
+            List<IDostawa> dostawas = new List<IDostawa>();
+            
             IDostawa kurier = new Kurier("Kurier ABC", 14.99m);
-            return kurier;
+            dostawas.Add(kurier);
+            IDostawa kurierDHL = new Kurier("Kurier DHL", 14.99m);
+            dostawas.Add(kurierDHL);
+
+            return dostawas;
         }
 
     }

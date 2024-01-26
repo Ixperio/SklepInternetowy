@@ -306,7 +306,6 @@ namespace Sklep.Controllers
 
                                     produkty.Add(prod);
                                 }
-
                             }
 
                             ViewBag.Products = produkty;

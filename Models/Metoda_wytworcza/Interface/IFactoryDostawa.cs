@@ -8,8 +8,7 @@ namespace Sklep.Models.Metoda_wytworcza.Interface
 {
     public interface IFactoryDostawa
     {
-
-        public IDostawa createFactory();
+        public List<IDostawa> createFactory();
 
     }
 }

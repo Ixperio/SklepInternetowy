@@ -42,16 +42,7 @@ namespace Sklep.Models.Strategia
             var font = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
             dokumentPdf.SetFont(font);
 
-            Product prod = new Product(produkt.cenaNetto);
-
-            SpecialDiscountDecorator ofSpecjalna = new SpecialDiscountDecorator(prod);
-            HolidayDiscountDecorator ofWakacyjna = new HolidayDiscountDecorator(prod);
-            StandardDiscountDecorator ofStandard = new StandardDiscountDecorator(prod);
-
-
             dokumentPdf.Add(new Paragraph(produkt.Nazwa + " Cena netto: " + produkt.cenaNetto + "zL | Cena brutto: " + Math.Ceiling((produkt.cenaNetto * 1.23m) * 100) / 100 + "zl"));
-            dokumentPdf.Add(new Paragraph(produkt.Nazwa + " "+ ofSpecjalna.decoratorName()+" " + ofSpecjalna.getPrice() + "zL | Cena brutto: " + Math.Ceiling((produkt.cenaNetto * 1.23m) * 100) / 100 + "zl"));
-            dokumentPdf.Add(new Paragraph(produkt.Nazwa + " " + ofWakacyjna.decoratorName() + " " + ofWakacyjna.getPrice() + "zL | Cena brutto: " + Math.Ceiling((produkt.cenaNetto * 1.23m) * 100) / 100 + "zl"));
             dokumentPdf.Add(new Paragraph(""));
             dokumentPdf.Add(new Paragraph("Opis"));
             dokumentPdf.Add(new Paragraph("--------------------------------------------------"));

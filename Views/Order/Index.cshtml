@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Zamowienie";
+}
+
+<h2>Realizacja zamówienia</h2>
+<div class="wyborDostawy">
+    <h6>Dostepne formy dostawy</h6>
+    <select>
+        @{
+            var i = 1;
+            foreach (var k in ViewBag.kurierzy)
+            {
+                <option id="@i">@k.Nazwa @{@k.Cena}zł</option>
+                i++;
+            }
+        }
+    </select>
+</div>
