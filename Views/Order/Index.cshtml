@@ -3,17 +3,79 @@
     ViewBag.Title = "Zamowienie";
 }
 
-<h2>Realizacja zamówienia</h2>
-<div class="wyborDostawy">
-    <h6>Dostepne formy dostawy</h6>
-    <select>
-        @{
-            var i = 1;
-            foreach (var k in ViewBag.kurierzy)
-            {
-                <option id="@i">@k.Nazwa @{@k.Cena}zł</option>
-                i++;
-            }
+<style>
+    .form{
+        display: grid;
+        grid-template-columns: min-content;
+        place-items: center;
+    }
+        .form > form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row-gap: 20px;
+        grid-column-gap: 20px;
         }
-    </select>
+        .content{
+            grid-template-rows: min-content max-content;
+            grid-row-gap: 50px;
+        }
+    input[type=submit] {
+        border: none;
+        outline: none;
+        background-color: #FC6D84;
+        border-radius: 10px;
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-weight: 400;
+        font-size: 21px;
+    }
+</style>
+
+<h2>Uzupełnij dane do wysyłki</h2>
+
+<div class="form">
+    <form action="/Order/Podsumowanie" method="post">
+        <label for="Imie">Podaj swoje imię</label>
+        <input type="text" placeholder="Jan" name="Imie" required />
+
+        <label for="Nazwisko">Podaj swoje nazwisko</label>
+        <input type="text" placeholder="Kowalski" name="Nazwisko" required />
+
+        <label for="Email">Podaj email</label>
+        <input type="email" placeholder="kowalski.jan@wp.pl" name="Email" required />
+
+        <label for="Phone">Podaj numer telefonu</label>
+        <input type="text" placeholder="341432123" name="Phone" maxlength="9" min="9" required/>
+
+        <label for="Street">Podaj ulicę</label>
+        <input type="text" placeholder="Partyzantów" name="Street" maxlength="54" min="2" required />
+
+        <label for="NumerDomu">Wporwadź numer domu ( i ewentualnie mieszkania )</label>
+        <input type="text" placeholder="8/620" name="NumerDomu" maxlength="8" min="1" required />
+
+        <label for="Post">Kod pocztowy</label>
+        <input type="text" placeholder="01-232" name="Post" maxlength="6" min="6" required/>
+
+        <label for="Town">Miejscowość</label>
+        <input type="text" placeholder="Paczuski dolne" name="Town" maxlength="60" min="2" required/>
+
+        <div class="wyborDostawy">
+            <h6>Wybierz formę dostawy</h6>
+            <select name="dostawaid">
+                @{
+                    var i = 1;
+                    foreach (var k in ViewBag.kurierzy)
+                    {
+                        <option value="@i" cena="@k.Cena">@k.Nazwa @{@k.Cena}zł</option>
+                        i++;
+                    }
+                }
+            </select>
+        </div>
+        <input type="submit" value="Przejdź do podsumowania"/>
+    </form>
+
 </div>
+
+

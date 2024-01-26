@@ -123,5 +123,14 @@ namespace Sklep.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Podsumowanie(OrderView order)
+        {
+
+
+
+        }
+
+
     }
 }
