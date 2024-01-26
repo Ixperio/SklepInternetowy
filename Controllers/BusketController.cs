@@ -68,13 +68,47 @@ namespace Sklep.Controllers
 
                     if (p != null)
                     {
-                        decimal cenaBrutto = p.cenaNetto * 1.23m;
+                        var podat = _db.Podatek.FirstOrDefault(pod => pod.Id == p.vatId);
+                        decimal podatek = 23m;
+                        if(podat != null)
+                        {
+                            podatek = podat.stawka;
+                        }
+
+                        decimal cenaNetto = p.cenaNetto;
+
+                        var promocja = _db.Promocja_produkt.FirstOrDefault(prom => prom.ProduktId == p.ProduktId);
+
+                        if(promocja != null)
+                        {
+                            Product nwProd = new Product(cenaNetto);
+                            switch (promocja.PromocjaId)
+                            {
+                                case 1:
+                                    StandardDiscountDecorator standard = new StandardDiscountDecorator(nwProd);
+                                    cenaNetto = standard.getPrice();
+                                    break;
+                                case 2:
+                                    HolidayDiscountDecorator holiday = new HolidayDiscountDecorator(nwProd);
+                                    cenaNetto = holiday.getPrice();
+                                    break;
+                                case 3:
+                                    SpecialDiscountDecorator special = new SpecialDiscountDecorator(nwProd);
+                                    cenaNetto = special.getPrice();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+
+                        decimal cenaBrutto = cenaNetto * (1+(podatek)/100);
+
                         ProduktWKoszyku pwk = new ProduktWKoszyku()
                         {
                             Produkt = p,
                             Ilosc = product.Liczba,
                             Icon = IconPhotoLink,
-                            StawkaVat = 23m,
+                            StawkaVat = podatek,
                             Wartosc = Math.Ceiling((cenaBrutto * (decimal)product.Liczba) * 100) / 100,
                             CenaBrutto = Math.Ceiling(cenaBrutto * 100) / 100
                         };

@@ -99,25 +99,25 @@ namespace Sklep.Controllers
         {
             List<KurierView> kurierViews = new List<KurierView>();
 
+            //ZASTOSOWANIE FABRYKI KURIERÓW 
             IFactoryDostawa kurierzyZwykli = new DostawaKurier();
             
-            List<IDostawa> kuriers = new List<IDostawa>();
-            kuriers = kurierzyZwykli.createFactory();
+            List<IDostawa> kuriers = kurierzyZwykli.createFactory();
 
             foreach (var kurier in kuriers)
             {
                 kurierViews.Add(new KurierView() { Nazwa = kurier.getName(), Cena = kurier.getPrice() });
             }
-
+            //ZASTOSOWANIE FABRYKI KURIERÓW POBRANIOWYCH
             IFactoryDostawa kurierzyPobranie = new DostawaPobranieKurier();
-            List<IDostawa> kuriersPobranie = new List<IDostawa>();
-            kuriersPobranie = kurierzyPobranie.createFactory();
+            List<IDostawa> kuriersPobranie = kurierzyPobranie.createFactory();
 
             foreach (var kurier in kuriersPobranie)
             {
                 kurierViews.Add(new KurierView() { Nazwa = kurier.getName(), Cena = kurier.getPrice() });
             }
 
+            //ZWRÓCENIE WSZYSTKICH DOSTĘPNYCH FORM DOSTAWY
             ViewBag.kurierzy = kurierViews;
 
             return View();

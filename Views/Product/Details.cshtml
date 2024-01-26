@@ -215,6 +215,25 @@
         justify-items: flex-start;
         align-items: flex-start;
     }
+    .buyButtonCont {
+        width: max-content;
+        height: auto;
+        display: grid;
+        grid-template-columns: min-content max-content;
+    }
+
+    .liczbaZamawiana {
+        height: 100%;
+        width: 60px;
+        margin-right: -5px;
+    }
+
+        .liczbaZamawiana > input {
+            height: 100%;
+            width: 100%;
+            font-size: 21px;
+            text-indent: 5px;
+        }
 </style>
 <script>
     $(document).ready(function () {
@@ -226,7 +245,7 @@
         $(".buyButton").click(function (event) {
             var productData = {
                 ProduktId: @ViewBag.produkt.Id,
-                Liczba: $(this).attr("liczba")
+                Liczba: $('input[type=number][productId="' + @ViewBag.produkt.Id + '"]').val()
             };
 
             $.ajax({
@@ -271,9 +290,7 @@
                         <h5>Cena netto: <strong>@{@ViewBag.produkt.NettoPrice}zł/szt.</strong></h5>
                     </div>
                     <div>
-                        <div class="buyButton" liczba="1">
-                            Do koszyka
-                        </div>
+                        <div class="buyButtonCont"><div class="liczbaZamawiana"><input type="number" productId="@ViewBag.produkt.Id" value="1" min="1" max="@ViewBag.produkt.StoreCount" step="1" /></div><div class="buyButton" productId="@ViewBag.produkt.Id">Dodaj do koszyka</div></div>
                         <h6>Pozostało @ViewBag.produkt.StoreCount sztuk</h6>
                     </div>
                     
@@ -313,6 +330,95 @@
                 <h3 style="padding-left: 20px;"><strong>Oceny i komentarze</strong> </h3>
                 <hr />
                 <div class="contentSection">
+                    <div class="comment">
+                        <input type="text" id="textInput">
+                        <button id="undoButton">Undo</button>
+                        <button id="redoButton">Redo</button>
+
+                        <script>
+                            $(document).ready(function () {
+                                // Tworzymy instancję TextEditor (klasa z wzorcem Memento)
+                                var textEditor = new TextEditor();
+
+                                // Obsługa zdarzenia wprowadzania tekstu
+                                $("#textInput").on("input", function () {
+                                    var currentText = $(this).val();
+                                    textEditor.addCharacter(currentText);
+                                });
+
+                                // Obsługa przycisku Undo
+                                $("#undoButton").on("click", function () {
+                                    textEditor.undo();
+                                    $("#textInput").val(textEditor.getText());
+                                });
+
+                                // Obsługa przycisku Redo
+                                $("#redoButton").on("click", function () {
+                                    textEditor.redo();
+                                    $("#textInput").val(textEditor.getText());
+                                });
+                            });
+
+                            // Klasa TextEditor z wzorcem Memento
+                            function TextEditor() {
+                                this.text = "";
+                                this.undoStack = [];
+                                this.redoStack = [];
+                                this.currentPosition = 0; // Nowy wskaźnik pozycji w tekście
+
+                                this.addCharacter = function (character) {
+                                    this.saveState(character);
+                                    this.redoStack = []; // Po dodaniu nowej literki, czyszczenie redoStack
+                                };
+
+                                this.saveState = function (character) {
+                                    var textBefore = this.text.slice(0, this.currentPosition); // Kopia tekstu przed dodaniem
+                                    var textAfter = this.text.slice(this.currentPosition); // Kopia tekstu po dodaniu
+
+                                    this.undoStack.push({
+                                        textBefore: textBefore,
+                                        textAfter: textAfter,
+                                        operation: "addCharacter",
+                                        character: character
+                                    });
+
+                                    this.text = textBefore + character + textAfter; // Dodaj nowy znak do tekstu
+                                    this.currentPosition++;
+                                };
+
+                                this.undo = function () {
+                                    if (this.undoStack.length > 0) {
+                                        var lastOperation = this.undoStack.pop();
+
+                                        if (lastOperation.operation === "addCharacter") {
+                                            // Jeśli ostatnia operacja to dodanie znaku, cofnij dodanie tego znaku
+                                            this.text = lastOperation.textBefore + lastOperation.textAfter;
+                                            this.currentPosition--;
+                                        }
+                                    }
+                                };
+
+                                this.redo = function () {
+                                    if (this.redoStack.length > 0) {
+                                        var lastUndoOperation = this.redoStack.pop();
+
+                                        if (lastUndoOperation.operation === "addCharacter") {
+                                            // Jeśli ostatnia operacja undo to dodanie znaku, przywróć dodanie tego znaku
+                                            this.text = lastUndoOperation.textBefore + lastUndoOperation.character + lastUndoOperation.textAfter;
+                                            this.currentPosition++;
+                                        }
+                                    }
+                                };
+
+                                this.getText = function () {
+                                    return this.text;
+                                };
+                            }
+
+
+
+                        </script>
+                    </div>
                     <div class="buyButton">Dodaj komentarz</div>
                     @{ 
                         foreach(var o in ViewBag.opinie)
