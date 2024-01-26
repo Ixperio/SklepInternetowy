@@ -28,10 +28,14 @@ namespace Sklep.Db_Context
         //zwraca instniejącą instancje lub tworzy instancję połączenia jeżeli brak takowej
         public static MyDbContext GetInstance()
         {
+            /*
             if (_instance == null)
             {
                 _instance = new MyDbContext(true);
             }
+            */
+
+            _instance = new MyDbContext(true);
             return _instance;
         }
         //KONFIGURACJA MAPOWANIA OBIEKTOWEGO

@@ -206,7 +206,15 @@
         grid-column-gap: 10px;
         padding-bottom: 50px;
     }
-
+    .comment{
+        width: 60%;
+        background-color: #eeeeed;
+        border-radius: 5px;
+        padding: 20px;
+        display: grid;
+        justify-items: flex-start;
+        align-items: flex-start;
+    }
 </style>
 <script>
     $(document).ready(function () {
@@ -217,7 +225,7 @@
         });
         $(".buyButton").click(function (event) {
             var productData = {
-                ProduktId: 1,
+                ProduktId: @ViewBag.produkt.ProduktId,
                 Liczba: 1
             };
 
@@ -266,7 +274,7 @@
                         <div class="buyButton">
                             Do koszyka
                         </div>
-                        <h6>Pozostało 120 sztuk</h6>
+                        <h6>Pozostało @ViewBag.produkt.Kupiono_lacznie sztuk</h6>
                     </div>
                     
                 </div>
@@ -296,15 +304,13 @@
                 </div>
             </div>
             <div class="sectionComents">
-                <h3 style="padding-left: 20px;"><strong>Oceny i komentarze</strong></h3>
+                <h3 style="padding-left: 20px;"><strong>Oceny i komentarze</strong> </h3>
                 <hr />
                 <div class="contentSection">
-                    
+                    <div class="buyButton">Dodaj komentarz</div>
                     @{ 
                         foreach(var o in ViewBag.opinie)
-                        {
-
-                        }
+                        {<div class="comment"><h5 style="color: #767676">@o.UserName</h5><p>@o.Content</p></div>}
                     }
 
 

@@ -64,7 +64,7 @@ namespace Sklep.Controllers
                             string kategoriaNazwa = db.Kategoria.FirstOrDefault(k =>
                             k.KategoriaId == db.Rodzaj.FirstOrDefault(r => r.Id == p.rodzajId).KategoriaId && k.isDeleted == false && k.isVisible == true).Name;
 
-                            string imageUrl = db.Photo.FirstOrDefault(p => p.ProductId == p.ProductId && p.SectionId == 0).link;
+                            string imageUrl = db.Photo.FirstOrDefault(d => d.ProductId == p.ProduktId && d.SectionId == 0).link;
 
                             if (string.IsNullOrEmpty(imageUrl))
                             {
@@ -146,16 +146,18 @@ namespace Sklep.Controllers
                         }
                         else
                         {
-                       
-                            return HttpNotFound();
+                        System.Diagnostics.Debug.WriteLine($"Problem 1");
+                        return HttpNotFound();
                         }
 
                 }
                 catch (Exception)
                 {
+                    System.Diagnostics.Debug.WriteLine($"Problem 1");
                     return HttpNotFound();
                 }
             }
+            System.Diagnostics.Debug.WriteLine($"Problem 3");
             return HttpNotFound();
         }
 
