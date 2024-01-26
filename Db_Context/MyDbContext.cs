@@ -59,7 +59,7 @@ namespace Sklep.Db_Context
         public DbSet<Person> Person { get; set; }
 
         public DbSet<Photo> Photo { get; set; }
-
+        public DbSet<Podatek> Podatek { get; set; }
         public DbSet<Produkty_w_zamowieniu> Produkty_w_zamowieniu { get; set; }
 
         public DbSet<Produkty_w_zamowieniu_goscie> Produkty_w_zamowieniu_goscie { get; set; }

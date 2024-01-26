@@ -10,7 +10,6 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(Sklep.Db_Context.MyDbContext context)
