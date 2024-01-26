@@ -128,7 +128,8 @@ namespace Sklep.Controllers
                             cenaBruttoOld = Math.Ceiling(cenaBruttoOld * 100) / 100;
 
                             string kategoriaNazwa = db.Kategoria.FirstOrDefault(k =>
-                            k.KategoriaId == db.Rodzaj.FirstOrDefault(r => r.Id == p.rodzajId).KategoriaId && k.isDeleted == false && k.isVisible == true).Name;
+                            k.KategoriaId == db.Rodzaj.FirstOrDefault(r => r.Id == p.rodzajId).KategoriaId &&
+                            k.isDeleted == false && k.isVisible == true).Name;
 
                             string imageUrl = db.Photo.FirstOrDefault(d => d.ProductId == p.ProduktId && d.SectionId == 0).link;
 

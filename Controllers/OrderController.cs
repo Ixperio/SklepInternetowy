@@ -10,6 +10,8 @@ using System.Linq;
 using Sklep.Models.Metoda_wytworcza.Interface;
 using Sklep.Models.Metoda_wytworcza;
 using System.EnterpriseServices;
+using System.Web;
+using Newtonsoft.Json;
 
 namespace Sklep.Controllers
 {
@@ -17,7 +19,7 @@ namespace Sklep.Controllers
     {
 
         private MyDbContext _db;
-
+        private List<KurierView> kurierViews;
         public OrderController()
         {
             this._db = MyDbContext.GetInstance();
@@ -94,14 +96,13 @@ namespace Sklep.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult Index()
+        private void tworzKurierow()
         {
-            List<KurierView> kurierViews = new List<KurierView>();
+            kurierViews = new List<KurierView>();
 
             //ZASTOSOWANIE FABRYKI KURIERÓW 
             IFactoryDostawa kurierzyZwykli = new DostawaKurier();
-            
+
             List<IDostawa> kuriers = kurierzyZwykli.createFactory();
 
             foreach (var kurier in kuriers)
@@ -116,6 +117,13 @@ namespace Sklep.Controllers
             {
                 kurierViews.Add(new KurierView() { Nazwa = kurier.getName(), Cena = kurier.getPrice() });
             }
+        }
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            
+            this.tworzKurierow();
 
             //ZWRÓCENIE WSZYSTKICH DOSTĘPNYCH FORM DOSTAWY
             ViewBag.kurierzy = kurierViews;
@@ -126,11 +134,84 @@ namespace Sklep.Controllers
         [HttpPost]
         public ActionResult Podsumowanie(OrderView order)
         {
+            if(ModelState.IsValid)
+            {
+                decimal cena_zamowienia = 0m;
+                BusketController controller = new BusketController();
+                    HttpCookie existingCookie = Request.Cookies["KoszykWartosc"];
+                    cena_zamowienia = decimal.Parse(existingCookie.Value);
 
+                this.tworzKurierow();
+                decimal cena_kuriera = this.kurierViews.ElementAt(order.DostawaId-1).Cena;
 
+                List<ProductAddBusket> listaProd = new List<ProductAddBusket>();
 
+                // Sprawdź, czy plik cookie "Koszyk" już istnieje
+                if (Request.Cookies["Koszyk"] != null)
+                {
+                    // Jeśli tak, odczytaj jego wartość i zdeserializuj do listy
+                    HttpCookie existingCookieKoszyk = Request.Cookies["Koszyk"];
+                    string cookieValue = existingCookieKoszyk.Value;
+
+                    // Deserializuj wartość z pliku cookie do listy
+                    listaProd = JsonConvert.DeserializeObject<List<ProductAddBusket>>(cookieValue);
+                }
+
+                //utwórz zamówienie
+                int idZamowienia; // Przechowuje Id zamówienia
+
+                using (var db = _db)
+                {
+                    ZamowieniaGoscie zg = new ZamowieniaGoscie()
+                    {
+                        Imie = order.Imie,
+                        Nazwisko = order.Nazwisko,
+                        Adres = "ul. " + order.Street + " " + order.NumerDomu + " " + order.Post + " " + order.Town,
+                        Phone = order.Phone,
+                        dostawaId = order.DostawaId,
+                        addDate = DateTime.Now,
+                        AdresEmail = order.Email,
+                        platnosc_typId = 1,
+                        walutaId = 1,
+                        kwota = cena_zamowienia + cena_kuriera,
+                        status = "Przyjęte"
+                    };
+
+                    _db.ZamowieniaGoscie.Add(zg);
+                    _db.SaveChanges();
+
+                    idZamowienia = zg.Id;
+
+                    foreach (var p in listaProd)
+                    {
+                        Produkty_w_zamowieniu_goscie pwg = new Produkty_w_zamowieniu_goscie()
+                        {
+                            ProduktId = p.ProduktId,
+                            ilosc = p.Liczba,
+                            zamowienie_goscieId = idZamowienia
+                        };
+
+                        _db.Produkty_w_zamowieniu_goscie.Add(pwg);
+                        _db.SaveChanges();
+                    }
+                }
+
+                if (idZamowienia != null)
+                {
+                    ViewBag.nrZamowienia = idZamowienia;
+                    ViewBag.kwota = cena_zamowienia + cena_kuriera;
+                }
+                else
+                {
+                    ViewBag.nrZamowienia = "Brak";
+                    ViewBag.kwota = "Brak";
+                }
+                return View();
+            }
+            else
+            {
+                return View("Index");
+            }
         }
-
-
     }
 }

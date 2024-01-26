@@ -27,7 +27,7 @@ namespace Sklep.Models
         public int walutaId { get; set; }
 
         public DateTime addDate { get; set; }
-        public string status { get; private set; }
+        public string status { get; set; }
 
         public decimal kwota { get; set; }
 

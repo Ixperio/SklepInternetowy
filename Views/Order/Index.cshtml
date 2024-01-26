@@ -1,24 +1,27 @@
-﻿
+﻿@model Sklep.Models.ModelViews.OrderView
 @{
     ViewBag.Title = "Zamowienie";
 }
 
 <style>
-    .form{
+    .form {
         display: grid;
         grid-template-columns: min-content;
         place-items: center;
     }
+
         .form > form {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-row-gap: 20px;
-        grid-column-gap: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-row-gap: 20px;
+            grid-column-gap: 20px;
         }
-        .content{
-            grid-template-rows: min-content max-content;
-            grid-row-gap: 50px;
-        }
+
+    .content {
+        grid-template-rows: min-content max-content;
+        grid-row-gap: 50px;
+    }
+
     input[type=submit] {
         border: none;
         outline: none;
@@ -35,7 +38,7 @@
 <h2>Uzupełnij dane do wysyłki</h2>
 
 <div class="form">
-    <form action="/Order/Podsumowanie" method="post">
+    <form action="/Order/Podsumowanie" method="POST">
         <label for="Imie">Podaj swoje imię</label>
         <input type="text" placeholder="Jan" name="Imie" required />
 
@@ -46,7 +49,7 @@
         <input type="email" placeholder="kowalski.jan@wp.pl" name="Email" required />
 
         <label for="Phone">Podaj numer telefonu</label>
-        <input type="text" placeholder="341432123" name="Phone" maxlength="9" min="9" required/>
+        <input type="text" placeholder="341432123" name="Phone" maxlength="9" min="9" required />
 
         <label for="Street">Podaj ulicę</label>
         <input type="text" placeholder="Partyzantów" name="Street" maxlength="54" min="2" required />
@@ -55,10 +58,10 @@
         <input type="text" placeholder="8/620" name="NumerDomu" maxlength="8" min="1" required />
 
         <label for="Post">Kod pocztowy</label>
-        <input type="text" placeholder="01-232" name="Post" maxlength="6" min="6" required/>
+        <input type="text" placeholder="01-232" name="Post" maxlength="6" min="6" required />
 
         <label for="Town">Miejscowość</label>
-        <input type="text" placeholder="Paczuski dolne" name="Town" maxlength="60" min="2" required/>
+        <input type="text" placeholder="Paczuski dolne" name="Town" maxlength="60" min="2" required />
 
         <div class="wyborDostawy">
             <h6>Wybierz formę dostawy</h6>
@@ -73,7 +76,7 @@
                 }
             </select>
         </div>
-        <input type="submit" value="Przejdź do podsumowania"/>
+        <input type="submit" value="Przejdź do podsumowania" />
     </form>
 
 </div>

@@ -248,7 +248,7 @@ namespace Sklep.Controllers
          * @brief metoda aktualizująca stan kwoty koszyka
          * @author Artur Leszczak
          */
-        private bool AktualizujWartoscKoszyka()
+        public bool AktualizujWartoscKoszyka()
         {
             List<ProductAddBusket> produktyWkoszyku = this.GetBasketFromCookie();
             decimal wartoscKoszyka = 0m;
@@ -329,7 +329,7 @@ namespace Sklep.Controllers
             }
             Response.Cookies.Remove("KoszykWartosc");
 
-            HttpCookie wartoscZamowienia = new HttpCookie("KoszykWartosc", (Math.Ceiling(wartoscKoszyka * 100) / 100) + "");
+            HttpCookie wartoscZamowienia = new HttpCookie("KoszykWartosc", (decimal)(Math.Ceiling(wartoscKoszyka * 100) / 100) + "");
             Response.Cookies.Add(wartoscZamowienia);
 
             return true;

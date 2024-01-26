@@ -336,23 +336,24 @@
                         <button id="redoButton">Redo</button>
 
                         <script>
+                            //MEMENTO
                             $(document).ready(function () {
-                                // Tworzymy instancję TextEditor (klasa z wzorcem Memento)
+                              
                                 var textEditor = new TextEditor();
 
-                                // Obsługa zdarzenia wprowadzania tekstu
+                                
                                 $("#textInput").on("input", function () {
                                     var currentText = $(this).val();
                                     textEditor.addCharacter(currentText);
                                 });
 
-                                // Obsługa przycisku Undo
+                            
                                 $("#undoButton").on("click", function () {
                                     textEditor.undo();
                                     $("#textInput").val(textEditor.getText());
                                 });
 
-                                // Obsługa przycisku Redo
+                                
                                 $("#redoButton").on("click", function () {
                                     textEditor.redo();
                                     $("#textInput").val(textEditor.getText());
@@ -364,16 +365,16 @@
                                 this.text = "";
                                 this.undoStack = [];
                                 this.redoStack = [];
-                                this.currentPosition = 0; // Nowy wskaźnik pozycji w tekście
+                                this.currentPosition = 0;
 
                                 this.addCharacter = function (character) {
                                     this.saveState(character);
-                                    this.redoStack = []; // Po dodaniu nowej literki, czyszczenie redoStack
+                                    this.redoStack = []; 
                                 };
 
                                 this.saveState = function (character) {
-                                    var textBefore = this.text.slice(0, this.currentPosition); // Kopia tekstu przed dodaniem
-                                    var textAfter = this.text.slice(this.currentPosition); // Kopia tekstu po dodaniu
+                                    var textBefore = this.text.slice(0, this.currentPosition); 
+                                    var textAfter = this.text.slice(this.currentPosition); 
 
                                     this.undoStack.push({
                                         textBefore: textBefore,
@@ -382,7 +383,7 @@
                                         character: character
                                     });
 
-                                    this.text = textBefore + character + textAfter; // Dodaj nowy znak do tekstu
+                                    this.text = textBefore + character + textAfter; 
                                     this.currentPosition++;
                                 };
 
@@ -391,7 +392,7 @@
                                         var lastOperation = this.undoStack.pop();
 
                                         if (lastOperation.operation === "addCharacter") {
-                                            // Jeśli ostatnia operacja to dodanie znaku, cofnij dodanie tego znaku
+                                            
                                             this.text = lastOperation.textBefore + lastOperation.textAfter;
                                             this.currentPosition--;
                                         }
@@ -403,7 +404,7 @@
                                         var lastUndoOperation = this.redoStack.pop();
 
                                         if (lastUndoOperation.operation === "addCharacter") {
-                                            // Jeśli ostatnia operacja undo to dodanie znaku, przywróć dodanie tego znaku
+                                            
                                             this.text = lastUndoOperation.textBefore + lastUndoOperation.character + lastUndoOperation.textAfter;
                                             this.currentPosition++;
                                         }
@@ -413,10 +414,7 @@
                                 this.getText = function () {
                                     return this.text;
                                 };
-                            }
-
-
-
+                            
                         </script>
                     </div>
                     <div class="buyButton">Dodaj komentarz</div>

@@ -248,6 +248,7 @@
     <Compile Include="Models\Metoda_wytworcza\KurierPobranie.cs" />
     <Compile Include="Models\ModelViews\KurierView.cs" />
     <Compile Include="Models\ModelViews\OpisWidok.cs" />
+    <Compile Include="Models\ModelViews\OrderView.cs" />
     <Compile Include="Models\ModelViews\Pages.cs" />
     <Compile Include="Models\ModelViews\Parametry.cs" />
     <Compile Include="Models\ModelViews\PersonLogin.cs" />
@@ -289,6 +290,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Prototype\Comment.cs" />
     <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Order\Podsumowanie.cshtml" />
     <None Include="Views\Product\AddProduct.cshtml" />
     <Content Include="App_Data\Baza.mdf" />
     <Content Include="App_Data\Baza_log.ldf">
