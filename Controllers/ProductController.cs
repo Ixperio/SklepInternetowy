@@ -60,8 +60,12 @@ namespace Sklep.Controllers
                         List<ProductListAll> produkty = new List<ProductListAll>();
                         foreach (Produkt p in products)
                         {
-
-                            decimal cenaBrutto = p.cenaNetto*1.23m;
+                            decimal podatek = _db.Podatek.FirstOrDefault(pod => pod.Id == p.vatId).stawka;
+                            if (podatek == null)
+                            {
+                                podatek = 23m;
+                            }
+                            decimal cenaBrutto = p.cenaNetto*(1+(podatek)/100);
                             cenaBrutto = Math.Ceiling(cenaBrutto * 100) / 100;
 
                             string kategoriaNazwa = db.Kategoria.FirstOrDefault(k =>
@@ -83,7 +87,7 @@ namespace Sklep.Controllers
                                     StoreCount = p.Ilosc_w_magazynie,
                                     BruttoPrice = cenaBrutto,
                                     NettoPrice = p.cenaNetto,
-                                    CategoryName = kategoriaNazwa.Name,
+                                    CategoryName = kategoriaNazwa,
                                     OpinionCounter = 10,
                                     ImageUrl = imageUrl,
                                     OpinionValue = 4.8m,
@@ -139,13 +143,50 @@ namespace Sklep.Controllers
 
                                 if (kategoria != null)
                                 {
-                                    ViewBag.produkt = product;
-                                    ViewBag.kategoria = kategoria;
-                                    ViewBag.parametry = this.GetParametryWidok(id);
-                                    ViewBag.opinie = this.GetComments(id);
 
-                                    return View("Details");
-                                }
+                                    decimal podatek = _db.Podatek.FirstOrDefault(pod => pod.Id == product.vatId).stawka;
+                                    if (podatek == null)
+                                    {
+                                        podatek = 23m;
+                                    }
+                                    decimal cenaBrutto = product.cenaNetto * (1 + (podatek)/100);
+                                    cenaBrutto = Math.Ceiling(cenaBrutto * 100) / 100;        
+
+                                    string imageUrl = db.Photo.FirstOrDefault(d => d.ProductId == product.ProduktId && d.SectionId == 0).link;
+
+                                    if (string.IsNullOrEmpty(imageUrl))
+                                    {
+                                        imageUrl = "/Images/NoIcon.PNG";
+                                    }
+
+                                    if (!string.IsNullOrEmpty(kategoria.Name))
+                                    {
+                                        //tworzy model widoku dla podstawowych parametrów
+                                        var prod = new ProductListAll()
+                                        {
+                                            Id = product.ProduktId,
+                                            Name = product.Nazwa,
+                                            StoreCount = product.Ilosc_w_magazynie,
+                                            BruttoPrice = cenaBrutto,
+                                            NettoPrice = product.cenaNetto,
+                                            CategoryName = kategoria.Name,
+                                            OpinionCounter = 10,
+                                            ImageUrl = imageUrl,
+                                            OpinionValue = 4.8m,
+                                        };
+
+                                        ViewBag.produkt = prod;
+                                        ViewBag.kategoria = kategoria;
+                                        ViewBag.opis = this.GetOpis(id);
+                                        ViewBag.parametry = this.GetParametryWidok(id);
+                                        ViewBag.opinie = this.GetComments(id);
+
+                                        return View("Details");
+
+                                    }
+                                    return HttpNotFound();
+
+                            }
                             }
                   }
                   else
@@ -197,7 +238,38 @@ namespace Sklep.Controllers
                 }
             
         }
-                [HttpGet]
+
+        private List<OpisWidok> GetOpis(int id)
+        {
+            var opis = _db.Description.FirstOrDefault(o => o.ProduktId == id && o.isVisible == true && o.isDeleted == false);
+
+            var sections = _db.Sekcja.Where(p => p.OpisId == opis.OpisId && p.isVisible == true && p.isDeleted == false).ToList();
+
+            if (sections.Count > 0)
+            {
+                List<OpisWidok> pw = new List<OpisWidok>();
+
+                foreach (var sec in sections)
+                {
+                    OpisWidok ow = new OpisWidok()
+                    {
+                        Opis = sec.Description
+                    };
+
+                    pw.Add(ow);
+                }
+                return pw;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+
+
+        [HttpGet]
         public ActionResult AddProduct()
         {
             if (Session["UserId"] != null)

@@ -225,7 +225,7 @@
         });
         $(".buyButton").click(function (event) {
             var productData = {
-                ProduktId: @ViewBag.produkt.ProduktId,
+                ProduktId: @ViewBag.produkt.Id,
                 Liczba: 1
             };
 
@@ -253,7 +253,7 @@
         <div class="contentProduct">
             <div class="sectionMain">
                 <div class="picture">
-                    <img style="width: 30vh; height:30vh;" src="https://selgros24.pl/images/prodImages/Mars_Baton_czekoladowy_Mars_51g_67613455_0_1000_1000.jpg" />
+                    <img style="width: 30vh; height:30vh;" src="@ViewBag.produkt.ImageUrl" />
                     <div class="changeButtons">
                         <div class="grayBtn" selected><div class="innerBtn"></div></div>
                         <div class="grayBtn"><div class="innerBtn"></div></div>
@@ -262,19 +262,19 @@
                 </div>
                 <div class="verticalLine"></div>
                 <div class="information">
-                    <h3 class="ProductName">Baton Mars</h3>
-                    <h5 class="CategoryName">Batony</h5>
+                    <h3 class="ProductName">@ViewBag.produkt.Name</h3>
+                    <h5 class="CategoryName">@ViewBag.produkt.CategoryName</h5>
                 </div>
                 <div class="buySection">
                     <div>
-                        <h3>Cena brutto: <strong>5,29zł/szt.</strong></h3>
-                        <h5>Cena netto: <strong>4,30zł/szt.</strong></h5>
+                        <h3>Cena brutto: <strong>@{@ViewBag.produkt.BruttoPrice}zł/szt.</strong></h3>
+                        <h5>Cena netto: <strong>@{@ViewBag.produkt.NettoPrice}zł/szt.</strong></h5>
                     </div>
                     <div>
                         <div class="buyButton">
                             Do koszyka
                         </div>
-                        <h6>Pozostało @ViewBag.produkt.Kupiono_lacznie sztuk</h6>
+                        <h6>Pozostało @ViewBag.produkt.StoreCount sztuk</h6>
                     </div>
                     
                 </div>
@@ -283,9 +283,12 @@
                 <h3 style="padding-left: 20px;"><strong>Opis</strong></h3>
                 <hr />
                 <div class="contentSection">
-                    <div class="descriptionSection">Baton Snickers to pyszny i klasyczny przysmak, który zdobył serca wielu łasuchów na całym świecie. Stworzony przez firmę Snickers, ten niezapomniany baton to doskonałe połączenie chrupiącego karmelu, delikatnej nugatowej warstwy oraz oblanej gładką czekoladą mleczną.</div>
-                    <div class="descriptionSection">Pierwszy kęs otwiera przed tobą świat intensywnego smaku, gdzie słodycz karmelu harmonizuje z orzechowym smakiem nugatu, tworząc kompozycję, która kusząco balansuje między chrupkością a jedwabistą konsystencją. Czekoladowa otoczka, która obejmuje całą strukturę batona, dosłownie rozpływa się w ustach, uwalniając bogactwo aromatów.</div>
-                    <div class="descriptionSection">Pierwszy kęs otwiera przed tobą świat intensywnego smaku, gdzie słodycz karmelu harmonizuje z orzechowym smakiem nugatu, tworząc kompozycję, która kusząco balansuje między chrupkością a jedwabistą konsystencją. Czekoladowa otoczka, która obejmuje całą strukturę batona, dosłownie rozpływa się w ustach, uwalniając bogactwo aromatów.</div>
+                    @{
+                        foreach (var o in ViewBag.opis)
+                        {
+                            <div class="descriptionSection">@o.Opis</div>
+                        }
+                    }
                 </div>
 
             </div>
@@ -319,7 +322,7 @@
 
                 </div>
             </div>
-            <a href="/Product/GetProductPdf/1">
+            <a href="/Product/GetProductPdf/@ViewBag.produkt.Id">
                 Pobierz plik pdf
             </a>
         </div>

@@ -241,6 +241,7 @@
     <Compile Include="Models\Metoda_wytworcza\Interface\IFactoryDostawa.cs" />
     <Compile Include="Models\Metoda_wytworcza\Kurier.cs" />
     <Compile Include="Models\Metoda_wytworcza\KurierPobranie.cs" />
+    <Compile Include="Models\ModelViews\OpisWidok.cs" />
     <Compile Include="Models\ModelViews\Pages.cs" />
     <Compile Include="Models\ModelViews\Parametry.cs" />
     <Compile Include="Models\ModelViews\PersonLogin.cs" />
