@@ -83,7 +83,7 @@ namespace Sklep.Controllers
                                     StoreCount = p.Ilosc_w_magazynie,
                                     BruttoPrice = cenaBrutto,
                                     NettoPrice = p.cenaNetto,
-                                    CategoryName = kategoriaNazwa,
+                                    CategoryName = kategoriaNazwa.Name,
                                     OpinionCounter = 10,
                                     ImageUrl = imageUrl,
                                     OpinionValue = 4.8m,
