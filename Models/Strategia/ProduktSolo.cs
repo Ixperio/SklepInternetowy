@@ -13,6 +13,7 @@ using Sklep.Models.Metoda_wytworcza.Interface;
 using Sklep.Models.Metoda_wytworcza;
 using iText.Kernel.Font;
 using iText.IO.Font.Constants;
+using Sklep.Db_Context;
 
 namespace Sklep.Models.Strategia
 {
@@ -25,11 +26,11 @@ namespace Sklep.Models.Strategia
     {
         //Tworzy plik pdf.
 
-        private static MyDbContext _DB;
+        private MyDbContext _db;
 
         public ProduktSolo()
         {
-            _DB = new MyDbContext();
+            _db = MyDbContext.GetInstance();
         }
 
         public Document generatePdf(List<Produkt> products, Document dokument)
@@ -54,7 +55,7 @@ namespace Sklep.Models.Strategia
             dokumentPdf.Add(new Paragraph(""));
             dokumentPdf.Add(new Paragraph("Opis"));
             dokumentPdf.Add(new Paragraph("--------------------------------------------------"));
-            List<Section> sekcje = _DB.Sekcja.Where(s => s.OpisId == 2).ToList();
+            List<Section> sekcje = _db.Sekcja.Where(s => s.OpisId == 2).ToList();
 
             foreach(var s in sekcje)
             {

@@ -14,14 +14,16 @@ namespace Sklep.Db_Context
     {
         private static MyDbContext _instance;
 
+        //ŚCIEŻKA DO PLIKU BAZY DANYCH (W App_Data)
+
+        private static string DB_PATH = "C:\\Users\\alok1\\Desktop\\STUDIA\\SEM5\\MVC\\PROJEKT\\Sklep\\App_Data\\Baza.mdf";
 
         [Obsolete("Konstruktor do ef")]
-        public MyDbContext()
+        public MyDbContext() : base("Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename = "+DB_PATH+"; Initial Catalog=Sklep.Db_Context.MyDbContext;Integrated Security=True;Connect Timeout=30;Encrypt=False;")
         {
         }
-        private MyDbContext(bool x) : base("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Sklep.Db_Context.MyDbContext;Integrated Security=True;Connect Timeout=30;Encrypt=False;")
+        private MyDbContext(bool x) : base("Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename = "+DB_PATH+"; Initial Catalog=Sklep.Db_Context.MyDbContext;Integrated Security=True;Connect Timeout=30;Encrypt=False;")
         {
-            
         }
 
         public static MyDbContext GetInstance()
@@ -72,8 +74,6 @@ namespace Sklep.Db_Context
         public DbSet<Zamowienia> Zamowienia { get; set; }
 
         public  DbSet<Globals> Globals { get; set; }
-
-        public DbSet<Comment> Comment { get; set; }
 
     }
 }

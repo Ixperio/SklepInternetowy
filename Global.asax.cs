@@ -32,7 +32,8 @@ namespace Sklep
 
             MyDbContext context = MyDbContext.GetInstance();
 
-            HttpContext.Current.Application["liczba_wyswietlen"] = 1;//context.Globals.FirstOrDefault(c => c.Id == 1).Value;
+            //licznik wyœwietleñ strony
+            HttpContext.Current.Application["liczba_wyswietlen"] = context.Globals.FirstOrDefault(c => c.Id == 1).Value;
         }
 
     }

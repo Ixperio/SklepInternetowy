@@ -6,6 +6,7 @@ using iText.IO.Font.Constants;
 using iText.Kernel.Font;
 using iText.Layout;
 using iText.Layout.Element;
+using Sklep.Db_Context;
 using Sklep.Models.ModelViews;
 using Sklep.Models.Strategia.Interface;
 
@@ -13,10 +14,10 @@ namespace Sklep.Models.Strategia
 {
     public class KatalogProduktow : IPdfGenerator
     {
-        private static MyDbContext _db;
+        private MyDbContext _db;
         public KatalogProduktow()
         {
-            _db = new MyDbContext();
+            _db = MyDbContext.GetInstance();
         }
         public Document generatePdf(List<Produkt> list, Document dokument)
         {

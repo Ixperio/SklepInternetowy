@@ -152,7 +152,7 @@ namespace Sklep.Controllers
                                 {
                                     ViewBag.produkt = product;
                                     ViewBag.kategoria = kategoria;
-                                    var opinie = db.Comment.Where(c => c.ProductId == product.ProduktId).ToList();
+                                    var opinie = db.Komentarze.Where(c => c.ProduktId == product.ProduktId).ToList();
 
                                     
                                     ViewBag.opinie = opinie;
@@ -173,7 +173,7 @@ namespace Sklep.Controllers
                     return HttpNotFound();
                 }
             }
-
+            return HttpNotFound();
         }
 
         [HttpGet]
