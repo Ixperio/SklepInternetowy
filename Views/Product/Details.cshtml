@@ -296,9 +296,12 @@
 
                     <table class="technicalTable">
                         <tr><th>Paramter</th><th>Wartość</th></tr>
-                        <tr><td>Kalorie</td><td>300kcal</td></tr>
-                        <tr><td>Cukier</td><td>30g</td></tr>
-                        <tr><td>Waga</td><td>65g</td></tr>
+                        @{
+                            foreach (var p in ViewBag.parametry)
+                            {
+                                <tr><td>@p.Nazwa</td><td>@p.Wartosc</td></tr>
+                            }
+                        }
                     </table>
 
                 </div>

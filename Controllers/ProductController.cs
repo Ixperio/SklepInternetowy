@@ -14,6 +14,9 @@ using Sklep.Models;
 using Sklep.Models.Strategia.Interface;
 using Sklep.Models.Strategia;
 using Sklep.Prototype;
+using Microsoft.Extensions.Logging.Abstractions;
+using System.Runtime.Remoting;
+using Microsoft.Ajax.Utilities;
 
 namespace Sklep.Controllers
 {
@@ -137,31 +140,64 @@ namespace Sklep.Controllers
                                 if (kategoria != null)
                                 {
                                     ViewBag.produkt = product;
-                                    ViewBag.kategoria = kategoria;                        
+                                    ViewBag.kategoria = kategoria;
+                                    ViewBag.parametry = this.GetParametryWidok(id);
                                     ViewBag.opinie = this.GetComments(id);
 
                                     return View("Details");
                                 }
                             }
-                        }
-                        else
-                        {
+                  }
+                  else
+                  {
                         System.Diagnostics.Debug.WriteLine($"Problem 1");
                         return HttpNotFound();
-                        }
+                  }
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Problem 1");
+                    System.Diagnostics.Debug.WriteLine($"Problem 2 - "+ex.Message);
                     return HttpNotFound();
                 }
             }
             System.Diagnostics.Debug.WriteLine($"Problem 3");
             return HttpNotFound();
         }
+        /**@brief Metoda zwraca paramtery wchodzące w skład informacji produktowej
+         * 
+         * @author Artur Leszczak
+         */
+        private List<ParametryWidok> GetParametryWidok(int id)
+        {
+                var parametry_W_produkcie = _db.Parametr_w_produkcie.Where(p => p.ProduktId == id && p.isVisible == true && p.isDeleted == false).ToList();
 
-        [HttpGet]
+                if (parametry_W_produkcie.Count > 0)
+                {
+                    List<ParametryWidok> pw = new List<ParametryWidok>();
+
+                    foreach (var pwp in parametry_W_produkcie)
+                    {
+                        var parametr = _db.Parametr.FirstOrDefault(p => p.Parametrid == pwp.ParametrId);
+                        if (parametr != null)
+                        {
+                            ParametryWidok parametryWidok = new ParametryWidok()
+                            {
+                                Nazwa = parametr.name,
+                                Wartosc = pwp.Value + "" + parametr.jednostka
+                            };
+                            pw.Add(parametryWidok);
+                        }
+                    }
+                    return pw;
+                }
+                else
+                {
+                    return null;
+                }
+            
+        }
+                [HttpGet]
         public ActionResult AddProduct()
         {
             if (Session["UserId"] != null)

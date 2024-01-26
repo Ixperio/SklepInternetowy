@@ -14,12 +14,10 @@ namespace Sklep.Models
        public int positionY { get; set; }
        public int sizeX { get; set; }
        public int sizeY { get; set; }
-
        public bool isDeleted { get; set; }
        public bool isVisible { get; set; }
        public int adderId { get; set; }
        public int SectionId { get; set; }
-
        public int ProductId { get; set; }
 
     } 

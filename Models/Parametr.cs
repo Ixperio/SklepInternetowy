@@ -19,8 +19,12 @@ namespace Sklep.Models
 
         public DateTime addDate { get; set; }
 
-        public int PersonRemoverId { get; set; }
+        public int? PersonRemoverId { get; set; }
         public DateTime? removeDate { get; set; }
+
+        public bool isDeleted { get; set; }
+
+        public bool isVisible { get; set; }
 
     }
 }

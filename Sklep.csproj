@@ -206,13 +206,9 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Migrations\202401260304009_Init.cs" />
-    <Compile Include="Migrations\202401260304009_Init.designer.cs">
-      <DependentUpon>202401260304009_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202401260445394_Init2.cs" />
-    <Compile Include="Migrations\202401260445394_Init2.designer.cs">
-      <DependentUpon>202401260445394_Init2.cs</DependentUpon>
+    <Compile Include="Migrations\202401261254517_Initial.cs" />
+    <Compile Include="Migrations\202401261254517_Initial.designer.cs">
+      <DependentUpon>202401261254517_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
@@ -242,6 +238,7 @@
     <Compile Include="Models\Metoda_wytworcza\Kurier.cs" />
     <Compile Include="Models\Metoda_wytworcza\KurierPobranie.cs" />
     <Compile Include="Models\ModelViews\Pages.cs" />
+    <Compile Include="Models\ModelViews\Parametry.cs" />
     <Compile Include="Models\ModelViews\PersonLogin.cs" />
     <Compile Include="Models\ModelViews\Product.cs" />
     <Compile Include="Models\ModelViews\ProductAddBusket.cs" />
@@ -377,11 +374,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202401260304009_Init.resx">
-      <DependentUpon>202401260304009_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202401260445394_Init2.resx">
-      <DependentUpon>202401260445394_Init2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202401261254517_Initial.resx">
+      <DependentUpon>202401261254517_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
