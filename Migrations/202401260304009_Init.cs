@@ -110,7 +110,7 @@
                         typ_JednostkiId = c.Int(nullable: false),
                         PersonAdderId = c.Int(nullable: false),
                         addDate = c.DateTime(nullable: false),
-                        PersonRemoverId = c.Int(nullable: false),
+                        PersonRemoverId = c.Int(),
                         removeDate = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Parametrid);
@@ -191,6 +191,7 @@
                         Produkty_w_zamowieniuId = c.Int(nullable: false, identity: true),
                         zamowienieId = c.Int(nullable: false),
                         ProduktId = c.Int(nullable: false),
+                        ilosc = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Produkty_w_zamowieniuId);
             
@@ -201,7 +202,8 @@
                         Produkty_w_zamowieniuId = c.Int(nullable: false, identity: true),
                         zamowienie_goscieId = c.Int(nullable: false),
                         ProduktId = c.Int(nullable: false),
-                    })
+                        ilosc = c.Int(nullable: false),
+                })
                 .PrimaryKey(t => t.Produkty_w_zamowieniuId);
             
             CreateTable(
@@ -280,6 +282,7 @@
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
+                        Code = c.String(maxLength:3)
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -295,7 +298,8 @@
                         walutaId = c.Int(nullable: false),
                         addDate = c.DateTime(nullable: false),
                         status = c.String(),
-                    })
+                        kwota = c.Decimal(nullable: false, precision: 9, scale: 2),
+                })
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
@@ -313,7 +317,8 @@
                         walutaId = c.Int(nullable: false),
                         addDate = c.DateTime(nullable: false),
                         status = c.String(),
-                    })
+                        kwota = c.Decimal(nullable: false, precision: 9, scale: 2),
+                })
                 .PrimaryKey(t => t.Id);
             
         }

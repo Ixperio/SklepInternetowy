@@ -210,6 +210,10 @@
     <Compile Include="Migrations\202401260304009_Init.designer.cs">
       <DependentUpon>202401260304009_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202401260445394_Init2.cs" />
+    <Compile Include="Migrations\202401260445394_Init2.designer.cs">
+      <DependentUpon>202401260445394_Init2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\Adress.cs" />
@@ -268,6 +272,7 @@
     <Compile Include="Models\Waluta.cs" />
     <Compile Include="Models\ZamowieniaGoscie.cs" />
     <Compile Include="Models\Zamowienia.cs" />
+    <Compile Include="Models\Zamowienie_status.cs" />
     <Compile Include="Observer\EmailNotification.cs" />
     <Compile Include="Observer\IObserver.cs" />
     <Compile Include="Observer\IOrderObserver.cs" />
@@ -374,6 +379,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202401260304009_Init.resx">
       <DependentUpon>202401260304009_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401260445394_Init2.resx">
+      <DependentUpon>202401260445394_Init2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

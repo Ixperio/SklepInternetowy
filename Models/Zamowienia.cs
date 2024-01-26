@@ -3,6 +3,7 @@ using Sklep.Observer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Net;
 
 namespace Sklep.Models
 {
@@ -19,6 +20,7 @@ namespace Sklep.Models
         public DateTime addDate { get; set; }
 
         public string status { get; private set; }
+        public decimal kwota { get; set; }
 
         public List<IObserver> _observers = new List<IObserver>();
         public void Attach(IObserver observer)

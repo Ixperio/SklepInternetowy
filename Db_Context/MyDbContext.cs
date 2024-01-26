@@ -77,5 +77,7 @@ namespace Sklep.Db_Context
         public DbSet<ZamowieniaGoscie> ZamowieniaGoscie { get; set; }
         public  DbSet<Globals> Globals { get; set; }
 
+        public DbSet<Zamowienie_status> Zamowienie_status { get; set; }
+
     }
 }

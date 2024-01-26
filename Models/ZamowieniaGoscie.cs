@@ -27,9 +27,9 @@ namespace Sklep.Models
         public int walutaId { get; set; }
 
         public DateTime addDate { get; set; }
-
-
         public string status { get; private set; }
+
+        public decimal kwota { get; set; }
 
         public List<IObserver> _observers = new List<IObserver>();
         public void Attach(IObserver observer)

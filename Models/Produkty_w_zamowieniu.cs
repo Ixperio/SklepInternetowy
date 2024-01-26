@@ -9,7 +9,7 @@ namespace Sklep.Models
         public int Produkty_w_zamowieniuId { get; set; }
         public int zamowienieId { get; set; }
         public int ProduktId { get; set; }
-        public uint Liczba { get; set; }
+        public int ilosc { get; set; }
 
     }
 }
