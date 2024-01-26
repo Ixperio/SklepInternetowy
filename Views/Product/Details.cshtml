@@ -286,8 +286,21 @@
                 </div>
                 <div class="buySection">
                     <div>
-                        <h3>Cena brutto: <strong>@{@ViewBag.produkt.BruttoPrice}zł/szt.</strong></h3>
-                        <h5>Cena netto: <strong>@{@ViewBag.produkt.NettoPrice}zł/szt.</strong></h5>
+                        @{
+                            if (ViewBag.produkt.DiscountName != null)
+                            {
+                                <div>Promocja - <strong>@ViewBag.produkt.DiscountName</strong></div>
+                                <div class="productCena">Cena brutto <strong style="color: #FC6D84; font-size: 24px;">@{@ViewBag.produkt.BruttoPrice}zł/szt.</strong></div>
+                                <div class="productCena" style="transform: scale(0.6);">Stara cena brutto <s><strong style="color: #FC6D84; font-size: 24px;">@{@ViewBag.produkt.BruttoPriceOld}zł/szt.</strong></s></div>
+                                <div class="productCena">Cena netto <strong style="color: #FC6D84; font-size: 20px;">@{@ViewBag.produkt.NettoPrice}zł/szt.</strong></div>
+                                <div class="productCena" style="transform: scale(0.6);">Stara cena netto <s><strong style="color: #FC6D84; font-size: 20px;">@{@ViewBag.produkt.NettoPriceOld}zł/szt.</strong></s></div>
+                            }
+                            else
+                            {
+                                <div class="productCena">Brutto <strong style="color: #FC6D84; font-size: 24px;">@{@ViewBag.produkt.BruttoPrice}zł/szt.</strong></div>
+                                <div class="productCena">Netto <strong style="color: #FC6D84; font-size: 20px;">@{@ViewBag.produkt.NettoPrice}zł/szt.</strong></div>
+                            }
+                        }
                     </div>
                     <div>
                         <div class="buyButtonCont"><div class="liczbaZamawiana"><input type="number" productId="@ViewBag.produkt.Id" value="1" min="1" max="@ViewBag.produkt.StoreCount" step="1" /></div><div class="buyButton" productId="@ViewBag.produkt.Id">Dodaj do koszyka</div></div>

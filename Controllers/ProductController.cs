@@ -356,15 +356,73 @@ namespace Sklep.Controllers
                                 if (kategoria != null)
                                 {
 
-                                    decimal podatek = _db.Podatek.FirstOrDefault(pod => pod.Id == product.vatId).stawka;
-                                    if (podatek == null)
-                                    {
-                                        podatek = 23m;
-                                    }
-                                    decimal cenaBrutto = product.cenaNetto * (1 + (podatek)/100);
-                                    cenaBrutto = Math.Ceiling(cenaBrutto * 100) / 100;        
+                                decimal podatek = _db.Podatek.FirstOrDefault(pod => pod.Id == product.vatId).stawka;
+                                if (podatek == null)
+                                {
+                                    podatek = 23m;
+                                }
 
-                                    string imageUrl = db.Photo.FirstOrDefault(d => d.ProductId == product.ProduktId && d.SectionId == 0).link;
+                                //SPRAWDŹ CZY PRODUKT JEST OBJĘTY PROMOCJĄ
+
+                                var promocja = _db.Promocja_produkt.FirstOrDefault(c => c.ProduktId == product.ProduktId && c.isDeleted == false);
+                                decimal cenaBrutto = 0m;
+                                decimal cenaNetto = product.cenaNetto;
+                                string nazwaPromocji = "";
+                                if (promocja != null)
+                                {
+                                    //utwórz odpowiedni dekorator ceny
+
+                                    Product nwProd = new Product(cenaNetto);
+                                    System.Diagnostics.Debug.WriteLine($"Promocja");
+                                    switch (promocja.PromocjaId)
+                                    {
+                                        case 1:
+                                            System.Diagnostics.Debug.WriteLine($"Oferta standardowa");
+                                            StandardDiscountDecorator standard = new StandardDiscountDecorator(nwProd);
+                                            cenaBrutto = standard.getPrice() * (1 + (podatek) / 100);
+                                            cenaNetto = standard.getPrice();
+                                            nazwaPromocji = standard.decoratorName();
+                                            break;
+                                        case 2:
+                                            System.Diagnostics.Debug.WriteLine($"Oferta wakacyjna");
+                                            HolidayDiscountDecorator holiday = new HolidayDiscountDecorator(nwProd);
+                                            cenaBrutto = holiday.getPrice() * (1 + (podatek) / 100);
+                                            cenaNetto = holiday.getPrice();
+                                            nazwaPromocji = holiday.decoratorName();
+                                            break;
+                                        case 3:
+                                            System.Diagnostics.Debug.WriteLine($"Oferta specjalna");
+                                            SpecialDiscountDecorator special = new SpecialDiscountDecorator(nwProd);
+                                            cenaBrutto = special.getPrice() * (1 + (podatek) / 100);
+                                            cenaNetto = special.getPrice();
+                                            nazwaPromocji = special.decoratorName();
+                                            break;
+                                        default:
+                                            System.Diagnostics.Debug.WriteLine($"Brak");
+                                            cenaBrutto = cenaNetto * (1 + (podatek) / 100);
+                                            break;
+                                    }
+                                    if (cenaBrutto <= 0m)
+                                    {
+                                        cenaBrutto = cenaNetto * (1 + (podatek) / 100);
+                                        cenaBrutto = Math.Ceiling(cenaBrutto * 100) / 100;
+                                    }
+                                    else
+                                    {
+                                        cenaBrutto = Math.Ceiling(cenaBrutto * 100) / 100;
+                                    }
+
+                                }
+                                else
+                                {
+                                    cenaBrutto = cenaNetto * (1 + (podatek) / 100);
+                                    cenaBrutto = Math.Ceiling(cenaBrutto * 100) / 100;
+                                }
+
+                                decimal cenaBruttoOld = product.cenaNetto * (1 + (podatek) / 100);
+                                cenaBruttoOld = Math.Ceiling(cenaBruttoOld * 100) / 100;
+
+                                string imageUrl = db.Photo.FirstOrDefault(d => d.ProductId == product.ProduktId && d.SectionId == 0).link;
 
                                     if (string.IsNullOrEmpty(imageUrl))
                                     {
@@ -380,14 +438,14 @@ namespace Sklep.Controllers
                                             Name = product.Nazwa,
                                             StoreCount = product.Ilosc_w_magazynie,
                                             BruttoPrice = cenaBrutto,
-                                            BruttoPriceOld = cenaBrutto,
-                                            NettoPrice = product.cenaNetto,
+                                            BruttoPriceOld = cenaBruttoOld,
+                                            NettoPrice = cenaNetto,
                                             NettoPriceOld = product.cenaNetto,
                                             CategoryName = kategoria.Name,
                                             OpinionCounter = 10,
                                             ImageUrl = imageUrl,
                                             OpinionValue = 4.8m,
-                                            DiscountName = ""
+                                            DiscountName = nazwaPromocji
                                         };
 
                                         ViewBag.produkt = prod;
