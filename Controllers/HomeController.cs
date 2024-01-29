@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Sklep.Models.Utils; //zawiera kontekst globalny
 
 namespace Sklep.Controllers
 {
+
+
     public class HomeController : Controller 
     {
 
         public ActionResult Index()
         {
-           
-            int aktualnaLiczbaWyswietlen = (int)HttpContext.Application["liczba_wyswietlen"];
-            HttpContext.Application["liczba_wyswietlen"] = aktualnaLiczbaWyswietlen + 1;
 
-            ViewBag.LiczbaWyswietlenStrony = HttpContext.Application["liczba_wyswietlen"];
+            int aktualnaLiczbaWyswietlen = AppGlobalDataContext.LiczbaWyswietlen;
+            AppGlobalDataContext.LiczbaWyswietlen = aktualnaLiczbaWyswietlen + 1;
+
+            ViewBag.LiczbaWyswietlenStrony = AppGlobalDataContext.LiczbaWyswietlen;
             ViewBag.navId = 0;
 
             if (Request.Cookies["KoszykWartosc"] != null)

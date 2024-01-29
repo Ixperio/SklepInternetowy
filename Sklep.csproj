@@ -280,6 +280,7 @@
     <Compile Include="Models\Strategia\PdfGeneartorContext.cs" />
     <Compile Include="Models\Strategia\ProduktSolo.cs" />
     <Compile Include="Models\Typ_jednostki.cs" />
+    <Compile Include="Models\Utils\Helpers.cs" />
     <Compile Include="Models\Waluta.cs" />
     <Compile Include="Models\ZamowieniaGoscie.cs" />
     <Compile Include="Models\Zamowienia.cs" />
