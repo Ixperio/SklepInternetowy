@@ -15,13 +15,13 @@ namespace Sklep.Db_Context
 
         //ŚCIEŻKA DO PLIKU BAZY DANYCH (W App_Data)
 
-        private static string DB_PATH = "C:\\Users\\alok1\\Desktop\\STUDIA\\SEM5\\MVC\\PROJEKT\\Sklep\\App_Data\\Baza.mdf";
+        private static string DB_PATH = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\OEM\\source\\repos\\SklepInternetowy\\App_Data\\Baza.mdf;Integrated Security=True";
 
         [Obsolete("Konstruktor do ef")]
-        public MyDbContext() : base("Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename="+DB_PATH+";Integrated Security=True;Connect Timeout=30;Encrypt=False;")
+        public MyDbContext() : base("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\OEM\\source\\repos\\SklepInternetowy\\App_Data\\Baza.mdf;Integrated Security=True")
         {
         }
-        private MyDbContext(bool x) : base("Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename="+DB_PATH+";Integrated Security=True;Connect Timeout=30;Encrypt=False;")
+        private MyDbContext(bool x) : base("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\OEM\\source\\repos\\SklepInternetowy\\App_Data\\Baza.mdf;Integrated Security=True")
         {
         }
         //SINGLETON - Katarzyna Grygo
