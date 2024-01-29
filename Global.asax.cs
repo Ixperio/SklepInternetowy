@@ -19,7 +19,7 @@ namespace Sklep
 
         public GlobalDataSaver()
         {
-            int intervalMilliseconds = 10000;
+            int intervalMilliseconds = 10000; //zapisuje zmiany automatycznie co 10s
             timer = new Timer(intervalMilliseconds);
             timer.Elapsed += TimerElapsed;
         }
@@ -34,6 +34,14 @@ namespace Sklep
         }
 
         private void TimerElapsed(object sender, ElapsedEventArgs e)
+        {
+            Save();
+        }
+        private int? GetInformationFromContext()
+        {
+            return AppGlobalDataContext.LiczbaWyswietlen;
+        }
+        public void Save()
         {
             var dataToSave = GetInformationFromContext();
             if (dataToSave.HasValue)
@@ -64,14 +72,13 @@ namespace Sklep
             }
         }
 
-        private int? GetInformationFromContext()
-        {
-            return AppGlobalDataContext.LiczbaWyswietlen;
-        }
+
     }
 
     public class MvcApplication : System.Web.HttpApplication
     {
+        private GlobalDataSaver _globalDataSaver;
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -84,8 +91,14 @@ namespace Sklep
             MyDbContext context = MyDbContext.GetInstance();
 
             // Licznik wyœwietleñ strony
-            GlobalDataSaver contextGlobalData = new GlobalDataSaver();
-            contextGlobalData.Start();
+            _globalDataSaver = new GlobalDataSaver();
+            _globalDataSaver.Start();
+        }
+
+        //w przypadku zamkniêcia aplikacji zapisuje zmiany
+        protected void Application_End()
+        {
+            _globalDataSaver.Save();
         }
     }
 
