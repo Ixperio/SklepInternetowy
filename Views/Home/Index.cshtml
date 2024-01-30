@@ -1,11 +1,225 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<style>
+    .productElement {
+        display: grid;
+        width: max-content;
+        grid-template-columns: min-content min-content 500px max-content;
+        background-color: #fff;
+        border-radius: 10px;
+        justify-items: left;
+        align-items: flex-start;
+        color: #000;
+        margin-top: 60px;
+        padding: 30px;
+        box-shadow: rgba(0,0,0,0.25) 0px 0px 4px 1px;
+    }
 
-<main>
+    .ceny {
+        display: grid;
+        grid-template-columns: 1fr;
+        place-items: center;
+    }
+
+    .mainContent {
+        display: grid;
+        grid-template-columns: 100%;
+        width: 100%;
+        justify-items: center;
+        align-items: flex-start;
+        grid-column-gap: 50px;
+        padding: 30px 30px 30px 30px;
+    }
+
+    .items {
+        display: grid;
+        width: 100%;
+        justify-items: center;
+        margin-left: -10vw;
+    }
+
+    .filtry {
+        display: grid;
+        width: min-content;
+        grid-template-columns: 1fr;
+        background-color: #fff;
+        border-radius: 10px;
+        place-items: center;
+        color: #000;
+        margin-top: 60px;
+        padding: 30px;
+        box-shadow: rgba(0,0,0,0.25) 0px 0px 4px 1px;
+    }
+
+    .button {
+        display: grid;
+        place-items: center;
+        color: #fff;
+        background-color: #FC6D84;
+        border-radius: 5px;
+        padding: 10px 30px 10px 30px;
+        font-size: 16px;
+        font-weight: 400;
+        font-family: Roboto;
+        cursor: pointer;
+        box-shadow: rgba(0,0,0,0.3) 0px 1px 2px 0px;
+        transition: 0.1s;
+        width: max-content;
+    }
+
+        .button:hover {
+            margin-top: -2px;
+            box-shadow: rgba(0,0,0,0.3) 0px 3px 2px 0px;
+            transition: 0.2s;
+            margin-bottom: 2px;
+        }
+
+    .icon > img {
+        width: 20vh;
+        height: 20vh;
+    }
+
+    .icon {
+        display: grid;
+        justify-items: center;
+        width: 100%;
+        padding-left: 20px;
+    }
+
+    .ceny {
+        display: grid;
+        justify-items: right;
+        width: 100%;
+        height: 100%;
+    }
+
+    .buyBtn {
+        background-color: #FC6D84;
+        border-radius: 5px;
+        box-shadow: rgba(0,0,0,0.25) 0px 1px 1px 0px;
+        display: grid;
+        padding: 15px 35px 15px 35px;
+        color: #fff;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: Inter;
+        cursor: pointer;
+    }
+
+    .productName {
+        font-size: 32px;
+        font-weight: 500;
+        font-family: Inter;
+        color: #000;
+    }
+
+    .productCategory {
+        font-size: 24px;
+        font-weight: 300;
+        font-family: Inter;
+        color: #898989;
+    }
+
+    .buyButtonCont {
+        width: max-content;
+        height: auto;
+        display: grid;
+        grid-template-columns: min-content max-content;
+    }
+
+    .liczbaZamawiana {
+        height: 100%;
+        width: 60px;
+        margin-right: -5px;
+    }
+
+        .liczbaZamawiana > input {
+            height: 100%;
+            width: 100%;
+            font-size: 21px;
+            text-indent: 5px;
+        }
+</style>
+<script>
+    $(document).ready(function () {
+        $.ajaxSetup({
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+            }
+        });
+        $(".buyBtn").click(function (event) {
+            var produktId = $(this).attr("productId");
+            var productData = {
+                ProduktId: produktId,
+                Liczba: $('input[type=number][productId="' + produktId + '"]').val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Busket/Add",
+                data: JSON.stringify(productData),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) { }
+            }).always(function () {
+                location.reload(true);
+            });;
+        });
+    });
+</script>
     <h1>Witamy w naszym sklepie</h1>
-    <h3>
-        Liczba wyświetleń strony : @ViewBag.LiczbaWyswietlenStrony
-    </h3>
+    <div class="width: 100vw;">
+        <h3>Oto lista 10 najchętniej kupowanych produktów w sklepie</h3>
+        <hr />
+        <div class="mainContent">
+            <div class="items">
+                @{
+                    if (ViewBag.bestselery != null)
+                    {
+                        var pozycja = 1;
+                        foreach (var p in ViewBag.bestselery)
+                        {
+                            <div class="productElement">
+                                <div style="display: grid; place-items: center; height: 100%;"><h3 style="display: grid; place-items: center;">#@pozycja</h3></div>
+                                <div class="icon">
+                                    <img src="@p.ImageUrl" />
+                                </div>
+                                <div class="data" style="display: grid; padding-left: 20px;">
+                                    <div class="productName">@p.Name</div>
+                                    <div class="productCategory">@p.CategoryName</div>
+                                    <div class="details"><a href="/Product/Details/@p.Id">Wyświetl szczegóły produktu</a></div>
+                                </div>
+                                <div class="ceny">
+                                    @{
+                                        if (p.DiscountName != null)
+                                        {
+                                            <div>Promocja - <strong>@p.DiscountName</strong></div>
+                                            <div class="productCena">Cena brutto <strong style="color: #FC6D84; font-size: 24px;">@{@p.BruttoPrice}zł/szt.</strong></div>
+                                            <div class="productCena" style="transform: scale(0.6);">Stara cena brutto <s><strong style="color: #FC6D84; font-size: 24px;">@{@p.BruttoPriceOld}zł/szt.</strong></s></div>
+                                            <div class="productCena">Cena netto <strong style="color: #FC6D84; font-size: 20px;">@{@p.NettoPrice}zł/szt.</strong></div>
+                                            <div class="productCena" style="transform: scale(0.6);">Stara cena netto <s><strong style="color: #FC6D84; font-size: 20px;">@{@p.NettoPriceOld}zł/szt.</strong></s></div>
+                                        }
+                                        else
+                                        {
+                                            <div class="productCena">Brutto <strong style="color: #FC6D84; font-size: 24px;">@{@p.BruttoPrice}zł/szt.</strong></div>
+                                            <div class="productCena">Netto <strong style="color: #FC6D84; font-size: 20px;">@{@p.NettoPrice}zł/szt.</strong></div>
+                                        }
+                                    }
+                                    <div class="info">Pozostało @p.StoreCount szt.</div>
+                                </div>
 
-</main>
+                            </div>
+                            pozycja += 1;
+                        }
+                    }
+                    else
+                    {
+                        <h3>Jeszcze nikt nic nie zamówił :(</h3>
+                    }
+                }
+            </div>
+
+        </div>
+    </div>
+    
