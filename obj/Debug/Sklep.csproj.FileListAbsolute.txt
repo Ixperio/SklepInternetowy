@@ -130,3 +130,4 @@ C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.Migrations.
 C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.Migrations.Init4.resources
 C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.csproj.GenerateResource.cache
 C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.Migrations.Init5.resources
+C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.Migrations.Init6.resources
