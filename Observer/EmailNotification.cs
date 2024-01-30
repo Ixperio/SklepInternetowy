@@ -62,7 +62,7 @@ namespace Sklep.Observer
         public void InfoDoExperta(ContactFormExpertView cfv)
         {
 
-            var produkt = _db.Products.FirstOrDefault(p => p.ProduktId == cfv.produktId && p.isVisible == true && p.isDeleted == false);
+            var produkt = _db.Products.FirstOrDefault(p => p.ProduktId == cfv.ProductId && p.isVisible == true && p.isDeleted == false);
             if(produkt != null)
             {
                 string expertEmail = _db.Person.SingleOrDefault(per => per.PersonId == produkt.adderId).Email;

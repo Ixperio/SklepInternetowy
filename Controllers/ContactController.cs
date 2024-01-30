@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Sklep.Observer;
+using System.Xml.Linq;
 
 
 namespace Sklep.Controllers
@@ -17,7 +18,8 @@ namespace Sklep.Controllers
         {
             return View();
         }
-        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult SendQuestion(ContactFormView cfv)
         {
 
@@ -37,5 +39,34 @@ namespace Sklep.Controllers
 
             return RedirectToAction("Contact", "Home");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SendQuestionExpert(ContactFormView cfv, int produktId)
+        {
+            if(ModelState.IsValid)
+            {
+                EmailNotification newMail = new EmailNotification();
+                ContactFormExpertView contactFormExpertView = new ContactFormExpertView()
+                {
+                    email = cfv.email,
+                    message = cfv.message,
+                    name = cfv.name,
+                    ProductId = produktId
+                };
+                
+                newMail.InfoDoExperta(contactFormExpertView);
+
+                TempData["messageSendingForm"] = "Dziękujemy za kontakt, wkrótce ekspert skontaktuje się z Państwem na przekazany adres email.";
+               return RedirectToAction("Details", "Product", new { id = produktId });
+            }
+            else
+            {
+                TempData["messageSendingForm"] = "Nie udało się wysłać! - Nieprawidłowy format danych";
+               return RedirectToAction("Details", "Product", new { id = produktId });
+            }
+           
+
+        }
+
     }
 }

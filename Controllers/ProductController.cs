@@ -23,12 +23,8 @@ namespace Sklep.Controllers
 {
     public class ProductController : Controller
     {
-        private MyDbContext _db;
 
-        public ProductController()
-        {
-            this._db = MyDbContext.GetInstance();
-        }
+        public ProductController(){ }
 
         // GET: Product
         public ActionResult Index()
@@ -50,11 +46,11 @@ namespace Sklep.Controllers
                 string cookieValue = existingCookie.Value;
                 ViewBag.WartoscKoszyka = cookieValue;
             }
-            using (var db = _db)
+            using (var _db = new MyDbContext())
             {
                 try
                 {
-                    List<Produkt> products = db.Products.Where(p => p.isDeleted == false && p.isVisible == true).ToList();
+                    List<Produkt> products = _db.Products.Where(p => p.isDeleted == false && p.isVisible == true).ToList();
 
                     if (products != null)
                     {
@@ -127,11 +123,11 @@ namespace Sklep.Controllers
                             decimal cenaBruttoOld = p.cenaNetto * (1 + (podatek) / 100);
                             cenaBruttoOld = Math.Ceiling(cenaBruttoOld * 100) / 100;
 
-                            string kategoriaNazwa = db.Kategoria.FirstOrDefault(k =>
-                            k.KategoriaId == db.Rodzaj.FirstOrDefault(r => r.Id == p.rodzajId).KategoriaId &&
+                            string kategoriaNazwa = _db.Kategoria.FirstOrDefault(k =>
+                            k.KategoriaId == _db.Rodzaj.FirstOrDefault(r => r.Id == p.rodzajId).KategoriaId &&
                             k.isDeleted == false && k.isVisible == true).Name;
 
-                            string imageUrl = db.Photo.FirstOrDefault(d => d.ProductId == p.ProduktId && d.SectionId == 0).link;
+                            string imageUrl = _db.Photo.FirstOrDefault(d => d.ProductId == p.ProduktId && d.SectionId == 0).link;
 
                             if (string.IsNullOrEmpty(imageUrl))
                             {
@@ -189,16 +185,16 @@ namespace Sklep.Controllers
 
         public ActionResult Category(int id)
         {
-            using (var db = _db)
+            using (var _db = new MyDbContext())
             {
-                var rodzaj = db.Rodzaj.Where(r => r.KategoriaId == id).Select(r => r.Id).ToList();
+                var rodzaj = _db.Rodzaj.Where(r => r.KategoriaId == id).Select(r => r.Id).ToList();
 
                 if (rodzaj.Count() > 0)
                 {
                   
                     try
                     {
-                        List<Produkt> products = db.Products.Where(p => p.isDeleted == false && p.isVisible == true && rodzaj.Contains(p.rodzajId)).ToList();
+                        List<Produkt> products = _db.Products.Where(p => p.isDeleted == false && p.isVisible == true && rodzaj.Contains(p.rodzajId)).ToList();
                       
                         if (products != null)
                         {
@@ -271,10 +267,10 @@ namespace Sklep.Controllers
                                 decimal cenaBruttoOld = p.cenaNetto * (1 + (podatek) / 100);
                                 cenaBruttoOld = Math.Ceiling(cenaBruttoOld * 100) / 100;
 
-                                string kategoriaNazwa = db.Kategoria.FirstOrDefault(k =>
-                                k.KategoriaId == db.Rodzaj.FirstOrDefault(r => r.Id == p.rodzajId).KategoriaId && k.isDeleted == false && k.isVisible == true).Name;
+                                string kategoriaNazwa = _db.Kategoria.FirstOrDefault(k =>
+                                k.KategoriaId == _db.Rodzaj.FirstOrDefault(r => r.Id == p.rodzajId).KategoriaId && k.isDeleted == false && k.isVisible == true).Name;
 
-                                string imageUrl = db.Photo.FirstOrDefault(d => d.ProductId == p.ProduktId && d.SectionId == 0).link;
+                                string imageUrl = _db.Photo.FirstOrDefault(d => d.ProductId == p.ProduktId && d.SectionId == 0).link;
 
                                 if (string.IsNullOrEmpty(imageUrl))
                                 {
@@ -339,19 +335,19 @@ namespace Sklep.Controllers
                 string cookieValue = existingCookie.Value;
                 ViewBag.WartoscKoszyka = cookieValue;
             }
-            using (var db = _db)
+            using (var _db = new MyDbContext())
             {
                 try
                 {
-                    var product = db.Products.FirstOrDefault(p => p.ProduktId == id && p.isDeleted == false && p.isVisible == true);
+                    var product = _db.Products.FirstOrDefault(p => p.ProduktId == id && p.isDeleted == false && p.isVisible == true);
 
                     if (product != null)
                     {
-                        var rodzaj = db.Rodzaj.FirstOrDefault(r => r.Id == product.rodzajId);
+                        var rodzaj = _db.Rodzaj.FirstOrDefault(r => r.Id == product.rodzajId);
 
                         if (rodzaj != null)
                         {
-                            var kategoria = db.Kategoria.FirstOrDefault(k => k.KategoriaId == rodzaj.KategoriaId && k.isDeleted == false && k.isVisible == true);
+                            var kategoria = _db.Kategoria.FirstOrDefault(k => k.KategoriaId == rodzaj.KategoriaId && k.isDeleted == false && k.isVisible == true);
 
                                 if (kategoria != null)
                                 {
@@ -411,28 +407,30 @@ namespace Sklep.Controllers
                                     {
                                         cenaBrutto = Math.Ceiling(cenaBrutto * 100) / 100;
                                     }
-
+                                    System.Diagnostics.Debug.WriteLine($"Sprawdzenie 1");
                                 }
                                 else
                                 {
                                     cenaBrutto = cenaNetto * (1 + (podatek) / 100);
                                     cenaBrutto = Math.Ceiling(cenaBrutto * 100) / 100;
                                 }
-
+                                System.Diagnostics.Debug.WriteLine($"Sprawdzenie 2");
                                 decimal cenaBruttoOld = product.cenaNetto * (1 + (podatek) / 100);
                                 cenaBruttoOld = Math.Ceiling(cenaBruttoOld * 100) / 100;
+                                System.Diagnostics.Debug.WriteLine($"Sprawdzenie 3");
+                                string imageUrl = _db.Photo.FirstOrDefault(d => d.ProductId == product.ProduktId && d.SectionId == 0).link;
+                                System.Diagnostics.Debug.WriteLine($"Sprawdzenie 4");
 
-                                string imageUrl = db.Photo.FirstOrDefault(d => d.ProductId == product.ProduktId && d.SectionId == 0).link;
-
-                                    if (string.IsNullOrEmpty(imageUrl))
+                                if (string.IsNullOrEmpty(imageUrl))
                                     {
                                         imageUrl = "/Images/NoIcon.PNG";
                                     }
 
                                     if (!string.IsNullOrEmpty(kategoria.Name))
                                     {
-                                        //tworzy model widoku dla podstawowych parametrów
-                                        var prod = new ProductListAll()
+                                    System.Diagnostics.Debug.WriteLine($"Sprawdzenie 5");
+                                    //tworzy model widoku dla podstawowych parametrów
+                                    var prod = new ProductListAll()
                                         {
                                             Id = product.ProduktId,
                                             Name = product.Nazwa,
@@ -456,11 +454,17 @@ namespace Sklep.Controllers
 
                                         return View("Details");
 
-                                    }
+                                }
+                                else
+                                {
+                                    System.Diagnostics.Debug.WriteLine($"Sprawdzenie 6");
                                     return HttpNotFound();
 
+                                }
+                                   
+
                             }
-                            }
+                        }
                   }
                   else
                   {
@@ -484,6 +488,8 @@ namespace Sklep.Controllers
          */
         private List<ParametryWidok> GetParametryWidok(int id)
         {
+            using(var _db = new MyDbContext())
+            {
                 var parametry_W_produkcie = _db.Parametr_w_produkcie.Where(p => p.ProduktId == id && p.isVisible == true && p.isDeleted == false).ToList();
 
                 if (parametry_W_produkcie.Count > 0)
@@ -509,35 +515,39 @@ namespace Sklep.Controllers
                 {
                     return null;
                 }
+            }
+                
             
         }
 
         private List<OpisWidok> GetOpis(int id)
         {
-            var opis = _db.Description.FirstOrDefault(o => o.ProduktId == id && o.isVisible == true && o.isDeleted == false);
-
-            var sections = _db.Sekcja.Where(p => p.OpisId == opis.OpisId && p.isVisible == true && p.isDeleted == false).ToList();
-
-            if (sections.Count > 0)
+            using (var _db = new MyDbContext())
             {
-                List<OpisWidok> pw = new List<OpisWidok>();
+                var opis = _db.Description.FirstOrDefault(o => o.ProduktId == id && o.isVisible == true && o.isDeleted == false);
 
-                foreach (var sec in sections)
+                var sections = _db.Sekcja.Where(p => p.OpisId == opis.OpisId && p.isVisible == true && p.isDeleted == false).ToList();
+
+                if (sections.Count > 0)
                 {
-                    OpisWidok ow = new OpisWidok()
+                    List<OpisWidok> pw = new List<OpisWidok>();
+
+                    foreach (var sec in sections)
                     {
-                        Opis = sec.Description
-                    };
+                        OpisWidok ow = new OpisWidok()
+                        {
+                            Opis = sec.Description
+                        };
 
-                    pw.Add(ow);
+                        pw.Add(ow);
+                    }
+                    return pw;
                 }
-                return pw;
+                else
+                {
+                    return null;
+                }
             }
-            else
-            {
-                return null;
-            }
-
         }
 
         [HttpGet]
@@ -545,12 +555,15 @@ namespace Sklep.Controllers
         {
             if (Session["UserId"] != null)
             {
-                int userId = (int)Session["UserId"];
-                var user = _db.Person.Find(userId);
-
-                if (user != null && user.AccountTypeId == 2) 
+                using (var _db = new MyDbContext())
                 {
-                    return View();
+                    int userId = (int)Session["UserId"];
+                    var user = _db.Person.Find(userId);
+
+                    if (user != null && user.AccountTypeId == 2)
+                    {
+                        return View();
+                    }
                 }
             }
 
@@ -686,7 +699,8 @@ namespace Sklep.Controllers
             PdfGeneartorContext context = new PdfGeneartorContext(generujKatalog);
 
                 List<Produkt> listaProduktow = new List<Produkt>();
-                
+            using (var _db = new MyDbContext())
+            {
                 listaProduktow = _db.Products.Where(p => p.isVisible == true && p.isDeleted == false).ToList();
 
                 using (var memoryStream = new MemoryStream())
@@ -698,7 +712,7 @@ namespace Sklep.Controllers
                     string fontPath = Server.MapPath("~/App_Data/Sevillana-Regular.ttf");
                     PdfFont font = PdfFontFactory.CreateFont(fontPath, PdfEncodings.UTF8);
                     document.SetFont(font);
-                    
+
                     //UŻYCIE STRATEGIA
                     document = context.generate(listaProduktow, document);
 
@@ -713,6 +727,7 @@ namespace Sklep.Controllers
 
                     return File(memoryStream.ToArray(), "application/pdf", fileName);
                 }
+            }
 
         }
 
@@ -720,21 +735,23 @@ namespace Sklep.Controllers
         private Produkt getProductById(int id) {
 
             var produkt = new Produkt();
-
-            produkt = _db.Products.SingleOrDefault(x => x.ProduktId == id);
-            if(produkt != null)
+            using (var _db = new MyDbContext())
             {
-                if (produkt.isDeleted)
+                produkt = _db.Products.SingleOrDefault(x => x.ProduktId == id);
+                if (produkt != null)
                 {
-                    return null;
-                }
-                if (produkt.isVisible)
-                {
-                    return produkt;
-                }
-                else
-                {
-                    return null;
+                    if (produkt.isDeleted)
+                    {
+                        return null;
+                    }
+                    if (produkt.isVisible)
+                    {
+                        return produkt;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
             }
 
@@ -749,42 +766,43 @@ namespace Sklep.Controllers
             {
 
                 List<Komentarz> komentarze = new List<Komentarz>();
-
-                komentarze = _db.Komentarze.Where(c=>c.ProduktId == id).ToList();
-
-                //ZASTOSOWANIE PROTOTYPU
-
-                List<CommentPrototype> komentarz_produktu = new List<CommentPrototype>();
-
-                CommentPrototype orginalComment = new CommentPrototype
+                using (var _db = new MyDbContext())
                 {
-                    UserName = "",
-                    Content = ""
-                };
+                    komentarze = _db.Komentarze.Where(c => c.ProduktId == id).ToList();
 
-                foreach (var comment in komentarze)
-                {
-                    var p = _db.Person.SingleOrDefault(p => p.PersonId == comment.UserId);
-                    if (p != null)
+                    //ZASTOSOWANIE PROTOTYPU
+
+                    List<CommentPrototype> komentarz_produktu = new List<CommentPrototype>();
+
+                    CommentPrototype orginalComment = new CommentPrototype
                     {
-                       
-                        CommentPrototype copy = orginalComment.ShallowCopy();
-                        copy.UserName = p.Name;
-                        copy.Content = comment.Content;
+                        UserName = "",
+                        Content = ""
+                    };
 
-                        komentarz_produktu.Add(copy);
-                    }
-                    else
+                    foreach (var comment in komentarze)
                     {
-                        CommentPrototype copy = orginalComment.DeepCopy();
-                        copy.UserName = "<i>Użytkownik nieznany</i>";
-                        copy.Content = comment.Content;
+                        var p = _db.Person.SingleOrDefault(p => p.PersonId == comment.UserId);
+                        if (p != null)
+                        {
 
-                        komentarz_produktu.Add(copy);
+                            CommentPrototype copy = orginalComment.ShallowCopy();
+                            copy.UserName = p.Name;
+                            copy.Content = comment.Content;
+
+                            komentarz_produktu.Add(copy);
+                        }
+                        else
+                        {
+                            CommentPrototype copy = orginalComment.DeepCopy();
+                            copy.UserName = "<i>Użytkownik nieznany</i>";
+                            copy.Content = comment.Content;
+
+                            komentarz_produktu.Add(copy);
+                        }
                     }
+                    return komentarz_produktu;
                 }
-
-                return komentarz_produktu;
             }
             return null;
         }
@@ -793,14 +811,17 @@ namespace Sklep.Controllers
         [HttpGet]
         public ActionResult AddComment(int productId)
         {
-            var produkt = _db.Products.Find(productId);
-            if (produkt == null)
+            using (var _db = new MyDbContext())
             {
-                return HttpNotFound();
-            }
+                var produkt = _db.Products.Find(productId);
+                if (produkt == null)
+                {
+                    return HttpNotFound();
+                }
 
-            var productComment = new ProductComment { ProduktId = productId };
-            return View(productComment);
+                var productComment = new ProductComment { ProduktId = productId };
+                return View(productComment);
+            }
         }
         //dodawanie komentarzy - Katarzyna Grygo
         [HttpPost]
@@ -810,20 +831,22 @@ namespace Sklep.Controllers
             {
                 CommentPrototype prototypeComment = new CommentPrototype { UserName = productComment.UserName, Content = productComment.Content };
                 CommentPrototype newComment = prototypeComment.DeepCopy();
-
-                var produkt = _db.Products.Find(productComment.ProduktId);
-                if (produkt != null)
+                using (var _db = new MyDbContext())
                 {
-                    var komentarz = new Komentarz
+                    var produkt = _db.Products.Find(productComment.ProduktId);
+                    if (produkt != null)
                     {
-                        UserId = 1,
-                        Content = newComment.Content,
-                        CreatedAt = DateTime.Now
-                    };
-                    _db.Komentarze.Add(komentarz);
-                    _db.SaveChanges();
+                        var komentarz = new Komentarz
+                        {
+                            UserId = 1,
+                            Content = newComment.Content,
+                            CreatedAt = DateTime.Now
+                        };
+                        _db.Komentarze.Add(komentarz);
+                        _db.SaveChanges();
 
-                    ViewBag.Message = "Comment added successfully!";
+                        ViewBag.Message = "Comment added successfully!";
+                    }
                 }
             }
 

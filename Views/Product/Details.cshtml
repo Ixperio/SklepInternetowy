@@ -1,4 +1,6 @@
 ﻿
+@model Sklep.Models.ModelViews.ContactFormView
+
 @{
     ViewBag.Title = "Details";
 }
@@ -28,11 +30,13 @@
         grid-template-columns: max-content max-content;
         grid-column-gap: 5px;
     }
+
     .cont {
         width: 60%;
         display: grid;
         justify-items: left;
     }
+
     .contentProduct {
         background-color: #fff;
         box-shadow: rgba(0,0,0,0.25) 0px 0px 3px 1px;
@@ -53,10 +57,12 @@
         padding: 7px 20px 13px 20px;
         transition: 0.1s;
     }
-    .CategoryName{
+
+    .CategoryName {
         color: #787878;
     }
-    .sectionMain{
+
+    .sectionMain {
         display: grid;
         width: 100%;
         grid-template-columns: 10fr min-content 20fr 15fr;
@@ -65,6 +71,7 @@
         padding-left: 30px;
         padding-right: 30px;
     }
+
     .picture {
         display: grid;
         width: 100%;
@@ -73,6 +80,7 @@
         place-items: flex-start;
         justify-items: center;
     }
+
     .informaction {
         display: grid;
         width: 100%;
@@ -81,6 +89,7 @@
         place-items: flex-start;
         justify-items: center;
     }
+
     .buySection {
         display: grid;
         width: 100%;
@@ -90,7 +99,8 @@
         place-items: flex-start;
         justify-items: right;
     }
-    .verticalLine{
+
+    .verticalLine {
         background-color: #eeeeed;
         height: 80%;
         margin-top: 10%;
@@ -99,6 +109,7 @@
         margin-right: 30px;
         content: '';
     }
+
     .buyButton {
         display: grid;
         color: #fff;
@@ -112,12 +123,14 @@
         transition: 0.1s;
         width: max-content;
     }
-    .sectionDescription{
+
+    .sectionDescription {
         padding-left: 50px;
         padding-right: 50px;
         padding-bottom: 50px;
     }
-    .descriptionSection{
+
+    .descriptionSection {
         width: 100%;
         font-weight: 400;
         font-family: Roboto;
@@ -127,17 +140,20 @@
         text-indent: 10px;
         white-space: normal;
     }
+
     .sectionTechnicalData {
         padding-left: 50px;
         padding-right: 50px;
         padding-bottom: 50px;
     }
+
     .sectionComents {
         padding-left: 50px;
         padding-right: 50px;
         padding-bottom: 50px;
     }
-    .contentSection{
+
+    .contentSection {
         display: grid;
         width: 90%;
         margin-left: 5%;
@@ -148,10 +164,11 @@
         align-items: flex-start;
         padding-top: 30px;
     }
-    .technicalTable{
-        width: min-content;
 
+    .technicalTable {
+        width: min-content;
     }
+
         .technicalTable > tbody > tr {
             width: 100%;
             display: grid;
@@ -159,39 +176,46 @@
             padding-left: 20px;
             padding-right: 20px;
         }
-        .technicalTable > tbody > tr > th {
-            width: max-content;
-            padding-left: 50px;
-            padding-right: 50px;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-        .technicalTable > tbody > tr:nth-of-type(even){
-            background-color: #EDEDED;
-        }
-        .technicalTable > tbody > tr:nth-of-type(odd) {
-            background-color: #F7F7F7;
-        }
+
+            .technicalTable > tbody > tr > th {
+                width: max-content;
+                padding-left: 50px;
+                padding-right: 50px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .technicalTable > tbody > tr:nth-of-type(even) {
+                background-color: #EDEDED;
+            }
+
+            .technicalTable > tbody > tr:nth-of-type(odd) {
+                background-color: #F7F7F7;
+            }
+
             .technicalTable > tbody > tr > td {
                 display: grid;
                 justify-items: center;
                 padding-top: 10px;
                 padding-bottom: 10px;
             }
-        .grayBtn{
-            background-color: #eeeeed;
-            width: 14px;
-            height: 14px;
-            display: grid;
-            place-items: center;
-            border-radius: 50%;
-            content: '';
-            cursor: pointer;
+
+    .grayBtn {
+        background-color: #eeeeed;
+        width: 14px;
+        height: 14px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        content: '';
+        cursor: pointer;
+    }
+
+        .grayBtn[selected] > .innerBtn {
+            background-color: #FC6D84;
         }
-            .grayBtn[selected] > .innerBtn {
-                background-color: #FC6D84;
-            }
-        .innerBtn {
+
+    .innerBtn {
         background-color: #eeeeed;
         width: 8px;
         height: 8px;
@@ -200,13 +224,15 @@
         border-radius: 50%;
         content: '';
     }
-    .changeButtons{
+
+    .changeButtons {
         display: inline-grid;
         grid-template-columns: min-content min-content min-content;
         grid-column-gap: 10px;
         padding-bottom: 50px;
     }
-    .comment{
+
+    .comment {
         width: 60%;
         background-color: #eeeeed;
         border-radius: 5px;
@@ -215,6 +241,7 @@
         justify-items: flex-start;
         align-items: flex-start;
     }
+
     .buyButtonCont {
         width: max-content;
         height: auto;
@@ -306,7 +333,7 @@
                         <div class="buyButtonCont"><div class="liczbaZamawiana"><input type="number" productId="@ViewBag.produkt.Id" value="1" min="1" max="@ViewBag.produkt.StoreCount" step="1" /></div><div class="buyButton" productId="@ViewBag.produkt.Id">Dodaj do koszyka</div></div>
                         <h6>Pozostało @ViewBag.produkt.StoreCount sztuk</h6>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="sectionDescription">
@@ -339,112 +366,62 @@
 
                 </div>
             </div>
-            <div class="sectionComents">
+            <div class="sectionQuestion">
                 <h3 style="padding-left: 20px;"><strong>Oceny i komentarze</strong> </h3>
                 <hr />
                 <div class="contentSection">
-                    <div class="comment">
-                        <input type="text" id="textInput">
-                        <button id="undoButton">Undo</button>
-                        <button id="redoButton">Redo</button>
+                </div>
+            </div>
+            <div class="sectionComents">
+                <h3 style="padding-left: 20px;"><strong>Kontakt w sprawie produktu</strong> </h3>
+                <hr />
+                <div class="contentSection">
+                        @using (Html.BeginForm("SendQuestionExpert", "Contact", new { produktId = ViewBag.produkt.Id }, FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                                <h4>Zadaj pytanie do eksperta</h4>
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="miniFormSection">
+                                    @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "" })
+                                    <div >
+                                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "" } })
+                                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-                        <script>
-                            //MEMENTO
-                            $(document).ready(function () {
-                              
-                                var textEditor = new TextEditor();
+                                <div class="miniFormSection">
+                                    @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "" })
+                                    <div >
+                                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "" } })
+                                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-                                
-                                $("#textInput").on("input", function () {
-                                    var currentText = $(this).val();
-                                    textEditor.addCharacter(currentText);
-                                });
+                                <div class="miniFormSection">
+                                    @Html.LabelFor(model => model.message, htmlAttributes: new { @class = "" })
+                                    <div>
+                                        @Html.TextAreaFor(model => model.message, new { htmlAttributes = new { @class = "" } })
+                                        @Html.ValidationMessageFor(model => model.message, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
 
-                            
-                                $("#undoButton").on("click", function () {
-                                    textEditor.undo();
-                                    $("#textInput").val(textEditor.getText());
-                                });
+                                <div class="miniFormSection">
+                                        <input type="submit" value="Wyślij zapytanie" />
+                                </div>
+                        }
 
-                                
-                                $("#redoButton").on("click", function () {
-                                    textEditor.redo();
-                                    $("#textInput").val(textEditor.getText());
-                                });
-                            });
-
-                            // Klasa TextEditor z wzorcem Memento
-                            function TextEditor() {
-                                this.text = "";
-                                this.undoStack = [];
-                                this.redoStack = [];
-                                this.currentPosition = 0;
-
-                                this.addCharacter = function (character) {
-                                    this.saveState(character);
-                                    this.redoStack = []; 
-                                };
-
-                                this.saveState = function (character) {
-                                    var textBefore = this.text.slice(0, this.currentPosition); 
-                                    var textAfter = this.text.slice(this.currentPosition); 
-
-                                    this.undoStack.push({
-                                        textBefore: textBefore,
-                                        textAfter: textAfter,
-                                        operation: "addCharacter",
-                                        character: character
-                                    });
-
-                                    this.text = textBefore + character + textAfter; 
-                                    this.currentPosition++;
-                                };
-
-                                this.undo = function () {
-                                    if (this.undoStack.length > 0) {
-                                        var lastOperation = this.undoStack.pop();
-
-                                        if (lastOperation.operation === "addCharacter") {
-                                            
-                                            this.text = lastOperation.textBefore + lastOperation.textAfter;
-                                            this.currentPosition--;
-                                        }
-                                    }
-                                };
-
-                                this.redo = function () {
-                                    if (this.redoStack.length > 0) {
-                                        var lastUndoOperation = this.redoStack.pop();
-
-                                        if (lastUndoOperation.operation === "addCharacter") {
-                                            
-                                            this.text = lastUndoOperation.textBefore + lastUndoOperation.character + lastUndoOperation.textAfter;
-                                            this.currentPosition++;
-                                        }
-                                    }
-                                };
-
-                                this.getText = function () {
-                                    return this.text;
-                                };
-                            
-                        </script>
-                    </div>
-                    <div class="buyButton">Dodaj komentarz</div>
-                    @{ 
-                        foreach(var o in ViewBag.opinie)
-                        {<div class="comment"><h5 style="color: #767676">@o.UserName</h5><p>@o.Content</p></div>}
-                    }
-
-
+                        @{ if (ViewBag.response != null)
+                            { <p>@ViewBag.response</p>}
+                        }
                 </div>
             </div>
             <a href="/Product/GetProductPdf/@ViewBag.produkt.Id">
-                Pobierz plik pdf
+                Pobierz plik pdf produktu
             </a>
         </div>
     </div>
-    
+
 </content>
 
 
