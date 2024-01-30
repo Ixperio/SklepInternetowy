@@ -120,11 +120,13 @@ C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\bin\pl\System.Web.WebPages.
 C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\bin\pl\System.Web.WebPages.Razor.resources.dll
 C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\bin\pl\System.Web.Optimization.resources.dll
 C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.csproj.AssemblyReference.cache
-C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.Migrations.Initial.resources
-C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.Migrations.Init2.resources
-C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.Migrations.Init3.resources
-C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.csproj.GenerateResource.cache
 C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.csproj.CoreCompileInputs.cache
 C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.csproj.CopyComplete
 C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.dll
 C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.pdb
+C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.Migrations.Initial.resources
+C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.Migrations.Init2.resources
+C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.Migrations.Init3.resources
+C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.Migrations.Init4.resources
+C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.csproj.GenerateResource.cache
+C:\Users\alok1\Desktop\STUDIA\SEM5\MVC\PROJEKT\Sklep\obj\Debug\Sklep.Migrations.Init5.resources

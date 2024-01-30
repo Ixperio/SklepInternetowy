@@ -208,9 +208,25 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Migrations\202401301145516_Init.cs" />
-    <Compile Include="Migrations\202401301145516_Init.designer.cs">
-      <DependentUpon>202401301145516_Init.cs</DependentUpon>
+    <Compile Include="Migrations\202401261254517_Initial.cs" />
+    <Compile Include="Migrations\202401261254517_Initial.Designer.cs">
+      <DependentUpon>202401261254517_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401261306370_Init2.cs" />
+    <Compile Include="Migrations\202401261306370_Init2.Designer.cs">
+      <DependentUpon>202401261306370_Init2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401261522059_Init3.cs" />
+    <Compile Include="Migrations\202401261522059_Init3.Designer.cs">
+      <DependentUpon>202401261522059_Init3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401292349261_Init4.cs" />
+    <Compile Include="Migrations\202401292349261_Init4.Designer.cs">
+      <DependentUpon>202401292349261_Init4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401301219011_Init5.cs" />
+    <Compile Include="Migrations\202401301219011_Init5.designer.cs">
+      <DependentUpon>202401301219011_Init5.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
@@ -391,8 +407,20 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202401301145516_Init.resx">
-      <DependentUpon>202401301145516_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202401261254517_Initial.resx">
+      <DependentUpon>202401261254517_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401261306370_Init2.resx">
+      <DependentUpon>202401261306370_Init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401261522059_Init3.resx">
+      <DependentUpon>202401261522059_Init3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401292349261_Init4.resx">
+      <DependentUpon>202401292349261_Init4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401301219011_Init5.resx">
+      <DependentUpon>202401301219011_Init5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

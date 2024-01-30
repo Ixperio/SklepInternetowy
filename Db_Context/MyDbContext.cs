@@ -24,8 +24,8 @@ namespace Sklep.Db_Context
         private MyDbContext(bool x) : base("Data Source=(localdb)\\MSSQLLocalDB;AttachDbFilename="+DB_PATH+";Integrated Security=True;Connect Timeout=30;Encrypt=False;")
         {
         }
-        //SINGLETON - Katarzyna Grygo
-        //zwraca instniejącą instancje lub tworzy instancję połączenia jeżeli brak takowej
+        //Katarzyna Grygo
+        //zwraca instniejącą instancje lub tworzy instancję połączenia
         public static MyDbContext GetInstance()
         {
             
