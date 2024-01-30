@@ -76,12 +76,13 @@ namespace Sklep.Controllers
         {
             if (Session["UserId"] != null)
             {
+
                 int userId = (int)Session["UserId"];
                 var user = _db.Person.Find(userId);
 
                 if (user != null && user.AccountTypeId == 2)
                 {
-                    List<ZamowieniaKlienci> orders = _db.Zamowienia.ToList();
+                    List<ZamowieniaGoscie> orders = _db.ZamowieniaGoscie.ToList();
 
                     return View("~/Views/Order/CheckOrders.cshtml", orders);
                 }

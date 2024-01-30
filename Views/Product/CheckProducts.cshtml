@@ -1,0 +1,44 @@
+@model List<Sklep.Models.Produkt>
+
+@{
+    ViewBag.Title = "Check Products";
+}
+
+<h2>Produkty</h2>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var produkt in Model)
+    {
+        <div class="order-container">
+            <div class="form-group">
+                <label for="ZamawiajacyId">Nazwa: @produkt.Nazwa<label>
+            </div>
+            <div class="form-group">
+                <label for="AdresId">Ilosc w magazynie: @produkt.Ilosc_w_magazynie</label>
+            </div>
+            <div class="form-group">
+                <label for="DostawaId">Kupiono ³¹cznie: @produkt.Kupiono_lacznie</label>
+            </div>
+            <div class="form-group">
+                <label for="PlatnoscTypId">Data dodania: @produkt.addDate</label>
+            </div>
+            <div class="form-group">
+                <label for="WalutaId">Cena: @produkt.cenaNetto</label>
+            </div>
+            <div class="form-group">
+                <label for="Status">Widocznoœæ: @produkt.isVisible</label>
+            </div>
+
+            <hr />
+        </div>
+    }
+}
+else
+{
+    <p>No products found.</p>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

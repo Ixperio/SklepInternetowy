@@ -302,6 +302,7 @@
     <Compile Include="Observer\IOrderObserver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Prototype\Comment.cs" />
+    <None Include="Views\Product\CheckProducts.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Order\Podsumowanie.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />

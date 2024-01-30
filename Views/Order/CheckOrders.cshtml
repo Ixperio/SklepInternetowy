@@ -1,4 +1,4 @@
-@model List<Sklep.Models.ZamowieniaKlienci>
+@model List<Sklep.Models.ZamowieniaGoscie>
 
 @{
     ViewBag.Title = "CheckOrders";
@@ -12,22 +12,28 @@
     {
         <div class="order-container">
             <div class="form-group">
-                <label for="ZamawiajacyId">Ordered by: @order.zamawiajacyId</label>
+                <label for="Id">Id zamówienia: @order.Id</label>
             </div>
             <div class="form-group">
-                <label for="AdresId">Address ID: @order.adresId</label>
+                <label for="Imie">Imie: @order.Imie</label>
             </div>
             <div class="form-group">
-                <label for="DostawaId">Delivery ID: @order.dostawaId</label>
+                <label for="Nazwisko">Nazwisko: @order.Nazwisko</label> 
             </div>
             <div class="form-group">
-                <label for="PlatnoscTypId">Payment Type ID: @order.platnosc_typId</label>
+                <label for="Adres">Adres: @order.Adres</label> 
             </div>
             <div class="form-group">
-                <label for="WalutaId">Currency ID: @order.walutaId</label>
+                <label for="Phone">Phone: @order.Phone</label> 
+            </div>
+            <div class="form-group">
+                <label for="AdresEmail">Adres Email: @order.AdresEmail</label> 
             </div>
             <div class="form-group">
                 <label for="Status">Status: @order.status</label>
+            </div>
+            <div class="form-group">
+                <label for="Kwota">Kwota: @order.kwota</label>
             </div>
 
             <hr />

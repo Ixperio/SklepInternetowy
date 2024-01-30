@@ -18,13 +18,14 @@ using Microsoft.Extensions.Logging.Abstractions;
 using System.Runtime.Remoting;
 using Microsoft.Ajax.Utilities;
 using Sklep.Models.Dekorator;
+using Sklep.Models.Interfaces;
+using iText.Layout.Borders;
 
 namespace Sklep.Controllers
 {
     public class ProductController : Controller
     {
-
-        public ProductController(){ }
+        private MyDbContext _db;
 
         // GET: Product
         public ActionResult Index()
@@ -587,6 +588,14 @@ namespace Sklep.Controllers
 
                 Produkt produkt = builder.GetProduct();
                 MyDbContext _db = MyDbContext.GetInstance();
+
+                produkt.isVisible = true;
+                produkt.vatId = 1;
+                produkt.rodzajId = 1;
+                produkt.rodzaj_miaryId = 1;
+                produkt.adderId = 1;
+                produkt.glownaWalutaId = 1;
+
                 _db.Products.Add(produkt);
                 _db.SaveChanges();
 
@@ -596,6 +605,27 @@ namespace Sklep.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public ActionResult CheckProducts()
+        {
+            if (Session["UserId"] != null)
+            {
+                using (var _db = new MyDbContext())
+                {
+                    int userId = (int)Session["UserId"];
+                    var user = _db.Person.Find(userId);
+
+                    if (user != null && user.AccountTypeId == 2)
+                    {
+                        List<Produkt> products = _db.Products.ToList();
+
+                        return View("~/Views/Product/CheckProducts.cshtml", products);
+                    }
+                }
+            }
+            return RedirectToAction("Login", "Person");
         }
 
         // GET: Product/Edit/5

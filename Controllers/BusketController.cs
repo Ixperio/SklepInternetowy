@@ -141,55 +141,77 @@ namespace Sklep.Controllers
                 // Obsłuż błąd, np. zwróć błąd HTTP 400 Bad Request
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            decimal wartosc = 0m;
-            List<ProductAddBusket> listaProd = new List<ProductAddBusket>();
 
-            // Sprawdź, czy plik cookie "Koszyk" już istnieje
-            if (Request.Cookies["Koszyk"] != null)
+            var dbProduct = _db.Products.FirstOrDefault(p => p.ProduktId == pab.ProduktId && p.isVisible == true && p.isDeleted == false);
+
+            if (dbProduct != null)
             {
-                // Jeśli tak, odczytaj jego wartość i zdeserializuj do listy
-                HttpCookie existingCookie = Request.Cookies["Koszyk"];
-                string cookieValue = existingCookie.Value;
 
-                // Deserializuj wartość z pliku cookie do listy
-                listaProd = JsonConvert.DeserializeObject<List<ProductAddBusket>>(cookieValue);
+                int iloscDostepna = dbProduct.Ilosc_w_magazynie;
+                int iloscWkupionych = GetQuantityInBasket(pab.ProduktId);
 
-                // Sprawdź, czy produkt już istnieje w koszyku
-                var existingProduct = listaProd.FirstOrDefault(p => p.ProduktId == pab.ProduktId);
-                decimal cena = _db.Products.FirstOrDefault(p => p.ProduktId == pab.ProduktId).cenaNetto;
-                decimal cenaBrutto = cena * 1.23m;
-
-                if (existingProduct != null)
+                if (pab.Liczba + iloscWkupionych > iloscDostepna)
                 {
-                    // Jeśli produkt już istnieje, zwiększ licznik
-                    wartosc += cenaBrutto * pab.Liczba;
-                    existingProduct.Liczba += pab.Liczba;
+                    ViewBag.ErrorMessage = $"Przepraszamy, ale nie mamy wystarczającej ilości produktu {dbProduct.Nazwa} na stanie.";
+                    return View("~/Views/Shared/Error.cshtml");
+                }
+
+                decimal wartosc = 0m;
+                List<ProductAddBusket> listaProd = new List<ProductAddBusket>();
+
+                // Sprawdź, czy plik cookie "Koszyk" już istnieje
+                if (Request.Cookies["Koszyk"] != null)
+                {
+                    // Jeśli tak, odczytaj jego wartość i zdeserializuj do listy
+                    HttpCookie existingCookie = Request.Cookies["Koszyk"];
+                    string cookieValue = existingCookie.Value;
+
+                    // Deserializuj wartość z pliku cookie do listy
+                    listaProd = JsonConvert.DeserializeObject<List<ProductAddBusket>>(cookieValue);
+
+                    // Sprawdź, czy produkt już istnieje w koszyku
+                    var existingProduct = listaProd.FirstOrDefault(p => p.ProduktId == pab.ProduktId);
+                    decimal cena = _db.Products.FirstOrDefault(p => p.ProduktId == pab.ProduktId).cenaNetto;
+                    decimal cenaBrutto = cena * 1.23m;
+
+                    if (existingProduct != null)
+                    {
+                        // Jeśli produkt już istnieje, zwiększ licznik
+                        wartosc += cenaBrutto * pab.Liczba;
+                        existingProduct.Liczba += pab.Liczba;
+                    }
+                    else
+                    {
+                        // Jeśli produkt nie istnieje, dodaj nowy produkt do listy
+                        wartosc += cenaBrutto * pab.Liczba;
+                        listaProd.Add(pab);
+                    }
                 }
                 else
                 {
-                    // Jeśli produkt nie istnieje, dodaj nowy produkt do listy
-                    wartosc += cenaBrutto * pab.Liczba;
+                    // Jeśli plik cookie "Koszyk" nie istnieje, dodaj nowy produkt do listy
                     listaProd.Add(pab);
                 }
+
+
+                // Serializuj listę do postaci tekstowej
+                string serializedList = JsonConvert.SerializeObject(listaProd);
+
+                // Utwórz nowy plik cookie lub zaktualizuj istniejący
+                HttpCookie cookie = new HttpCookie("Koszyk", serializedList);
+
+                Response.Cookies.Add(cookie);
+                this.AktualizujWartoscKoszyka();
             }
-            else
-            {
-                // Jeśli plik cookie "Koszyk" nie istnieje, dodaj nowy produkt do listy
-                listaProd.Add(pab);
-            }
-
-            // Serializuj listę do postaci tekstowej
-            string serializedList = JsonConvert.SerializeObject(listaProd);
-
-            // Utwórz nowy plik cookie lub zaktualizuj istniejący
-            HttpCookie cookie = new HttpCookie("Koszyk", serializedList);
-
-            Response.Cookies.Add(cookie);
-            this.AktualizujWartoscKoszyka();
-
             return View("Index");
         }
 
+        private int GetQuantityInBasket(int produktId)
+        {
+            List<ProductAddBusket> listaProd = GetBasketFromCookie();
+            var productInBasket = listaProd.FirstOrDefault(p => p.ProduktId == produktId);
+            return productInBasket?.Liczba ?? 0;
+        }
 
         [HttpPost]
         public ActionResult Remove(int ProduktId)
