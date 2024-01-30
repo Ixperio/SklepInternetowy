@@ -6,6 +6,7 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Data.Entity.Migrations;
 
 namespace Sklep.Db_Context
 {
@@ -84,6 +85,8 @@ namespace Sklep.Db_Context
         public DbSet<Promocja> Promocja { get; set;}
 
         public DbSet<Promocja_produkt> Promocja_produkt { get; set; }
+
+        public DbSet<ConfigData> ConfigDatas { get; set; }
 
     }
 }

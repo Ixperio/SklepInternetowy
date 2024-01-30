@@ -51,7 +51,22 @@ namespace Sklep.Observer
     
             MailMessage mailMessage = new MailMessage();
             mailMessage.From = new MailAddress("test@arturleszczak.pl");
-            mailMessage.To.Add("kontakt@arturleszczak.pl");
+
+            using(var db = new MyDbContext())
+            {
+                string email = db.ConfigDatas.FirstOrDefault(c => c.Name == "main_email" && c.isDeleted == false).Value;
+
+                if(!string.IsNullOrEmpty(email))
+                {
+                    mailMessage.To.Add(email);
+                }
+                else
+                {
+                    mailMessage.To.Add("al.ok1@wp.pl");
+                }
+
+            }
+
             mailMessage.Subject = "Otrzymano zapytanie poprzez formularz na stronie!";
             mailMessage.Body = $"U¿ytkownik - {cfv.name} - {cfv.email} | Napsia³ poprzez formularz na stronie kontaktowej : ' {cfv.message} '";
 
