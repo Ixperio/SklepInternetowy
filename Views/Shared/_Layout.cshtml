@@ -186,15 +186,55 @@
             place-items: center;
         }
     </style>
+    <script>
+        function searchProducts() {
+            // Pobierz wartość wpisaną w polu wyszukiwania
+            var searchText = $("#searchInput").val();
+
+            // Wyślij zapytanie AJAX do kontrolera
+            $.ajax({
+                url: '/Product/SearchProduct', 
+                type: 'POST',
+                data: { searchText: searchText },
+                dataType: 'json',
+                success: function (data) {
+                    displaySearchResults(data);
+                    $("#returnSearchContainer").css("max-height", "min-content");
+                    $("#returnSearchContainer").css("background-color", "#fff");
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function displaySearchResults(data) {
+            var resultsContainer = $("#returnSearchContainer");
+            resultsContainer.empty();
+
+            if (data && data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    resultsContainer.append("<p style='display: grid; place-items: center; grid-template-columns: max-content max-content; padding-top: 10px; padding-bottom: 10px; justify-content: space-around;'><img src='" + data[i].ImageUrl +"' style='width: 64px; height: 64px; background-size: 64px 64px;' /> " + data[i].Name + "</p>");
+                    
+                }
+            } else {
+                resultsContainer.append("<p>Nie znaleziono produktu</p>");
+            }
+        }
+    </script>
+
     <div class="nav">
         <div class="logo"><img src="@Url.Content("~/Images/Logotyp.PNG")" alt="Słodycze" /></div>
         <div class="search">
             <input class="search_input" type="text" placeholder="Wyszukaj produkt" />
-            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12.25 22.1667C14.8801 22.1667 17.4024 21.1219 19.2621 19.2622C21.1219 17.4024 22.1667 14.8801 22.1667 12.25C22.1667 9.61995 21.1219 7.0976 19.2621 5.23787C17.4024 3.37813 14.8801 2.33334 12.25 2.33334C9.61993 2.33334 7.09759 3.37813 5.23785 5.23787C3.37812 7.0976 2.33333 9.61995 2.33333 12.25C2.33333 14.8801 3.37812 17.4024 5.23785 19.2622C7.09759 21.1219 9.61993 22.1667 12.25 22.1667Z" stroke="white" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M15.5493 8.36734C15.1166 7.93334 14.6023 7.58914 14.0361 7.35449C13.4699 7.11984 12.8629 6.99937 12.25 7C11.6371 6.99937 11.0301 7.11984 10.4639 7.35449C9.89771 7.58914 9.38345 7.93334 8.95067 8.36734" stroke="white" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
-                <path d="M19.3783 19.3795L24.3297 24.3297" stroke="white" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+            <button onclick="searchProducts()" style="background-color: transparent; border: none;">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.25 22.1667C14.8801 22.1667 17.4024 21.1219 19.2621 19.2622C21.1219 17.4024 22.1667 14.8801 22.1667 12.25C22.1667 9.61995 21.1219 7.0976 19.2621 5.23787C17.4024 3.37813 14.8801 2.33334 12.25 2.33334C9.61993 2.33334 7.09759 3.37813 5.23785 5.23787C3.37812 7.0976 2.33333 9.61995 2.33333 12.25C2.33333 14.8801 3.37812 17.4024 5.23785 19.2622C7.09759 21.1219 9.61993 22.1667 12.25 22.1667Z" stroke="white" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M15.5493 8.36734C15.1166 7.93334 14.6023 7.58914 14.0361 7.35449C13.4699 7.11984 12.8629 6.99937 12.25 7C11.6371 6.99937 11.0301 7.11984 10.4639 7.35449C9.89771 7.58914 9.38345 7.93334 8.95067 8.36734" stroke="white" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M19.3783 19.3795L24.3297 24.3297" stroke="white" stroke-width="2.875" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+            <div class="returnSearch" style="position: absolute; margin-top: 110px; z-index:0; display: grid; grid-template-columns: 1fr; max-height: 0px; height: min-content; padding: 30px; background-color: transparent;" id="returnSearchContainer"></div>
         </div>
         <div class="navOptions">
             @{
