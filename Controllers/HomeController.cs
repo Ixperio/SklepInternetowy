@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Sklep.Models.Utils; //zawiera kontekst globalny
+using Sklep.Models.ModelViews;
+using Sklep.Models.Utils;
+using Sklep.Observer; //zawiera kontekst globalny
 
 namespace Sklep.Controllers
 {
@@ -56,5 +58,22 @@ namespace Sklep.Controllers
             }
             return View();
         }
+
+        public ActionResult SendQuestion(ContactFormView cfv)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                EmailNotification newMail = new EmailNotification();
+                newMail.InfoZeStrony(cfv);
+
+                ViewBag.response = "Dziękujemy za kontakt, wkrótce ktoś się z Państwem skontaktuje na przekazany adres email.";
+
+            }
+
+            return View("/Contact/Index");
+        }
+
     }
 }

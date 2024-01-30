@@ -203,6 +203,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BusketController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
@@ -246,6 +247,7 @@
     <Compile Include="Models\Metoda_wytworcza\Interface\IFactoryDostawa.cs" />
     <Compile Include="Models\Metoda_wytworcza\Kurier.cs" />
     <Compile Include="Models\Metoda_wytworcza\KurierPobranie.cs" />
+    <Compile Include="Models\ModelViews\ContactFormView.cs" />
     <Compile Include="Models\ModelViews\KurierView.cs" />
     <Compile Include="Models\ModelViews\OpisWidok.cs" />
     <Compile Include="Models\ModelViews\OrderView.cs" />
@@ -292,6 +294,8 @@
     <Compile Include="Prototype\Comment.cs" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Order\Podsumowanie.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Product\AddProduct.cshtml" />
     <Content Include="App_Data\Baza.mdf" />
     <Content Include="App_Data\Baza_log.ldf">

@@ -1,5 +1,6 @@
 using Sklep.Db_Context;
 using Sklep.Models;
+using Sklep.Models.ModelViews;
 using System;
 using System.Collections.Generic;
 using System.EnterpriseServices;
@@ -42,6 +43,19 @@ namespace Sklep.Observer
 
             smtpClient.Send(mailMessage);
             var x = 10;
+        }
+
+        public void InfoZeStrony(ContactFormView cfv)
+        {
+    
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.From = new MailAddress("expensestracker4@gmail.com");
+            mailMessage.To.Add("kontakt@arturlszeczak.pl");
+            mailMessage.Subject = "Otrzymano zapytanie poprzez formularz na stronie!";
+            mailMessage.Body = $"U¿ytkownik - {cfv.name} - {cfv.email} | Napsia³ poprzez formularz na stronie kontaktowej : '{cfv.message}' - <a href='mailto:{cfv.email}' >Kliknij tutaj aby odpisaæ</a> ";
+
+            smtpClient.Send(mailMessage);
+       
         }
     }
 }
