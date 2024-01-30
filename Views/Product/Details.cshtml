@@ -153,6 +153,7 @@
         padding-bottom: 50px;
     }
 
+
     .contentSection {
         display: grid;
         width: 90%;
@@ -261,6 +262,42 @@
             font-size: 21px;
             text-indent: 5px;
         }
+    .sectionComents > .contentSection > form{
+        display: grid;
+        grid-template-areas: "a b"
+                             "c c"
+                             "d d";
+        grid-row-gap: 20px;
+        grid-column-gap: 20px;
+
+    }
+        .sectionComents > .contentSection > form > .miniFormSection:nth-of-type(1) {
+            grid-area: a;
+            width: 100%;
+        }
+        .sectionComents > .contentSection > form > .miniFormSection:nth-of-type(2) {
+            grid-area: b;
+            width: 100%;
+        }
+        .sectionComents > .contentSection > form > .miniFormSection:nth-of-type(3) {
+            grid-area: c;
+            width: 100%;
+        }
+        .sectionComents > .contentSection > form > .miniFormSection:nth-of-type(3) > div> textarea{
+            width: 100%;
+            max-width: 100%;
+        }
+        .sectionComents > .contentSection > form > .miniFormSection:nth-of-type(4) {
+                width: 100%;
+                max-width: 100%;
+                grid-area: d;
+                place-items: center;
+                display: grid;
+                height: max-content;
+                padding: 10px;
+        }
+
+
 </style>
 <script>
     $(document).ready(function () {
@@ -366,56 +403,57 @@
 
                 </div>
             </div>
-            <div class="sectionQuestion">
+            <div class="sectionComents">
+                <h3 style="padding-left: 20px;"><strong>Kontakt w sprawie produktu</strong> </h3>
+                <hr />
+                <div class="contentSection">
+                    <h4>Zadaj pytanie do eksperta</h4>
+                    <hr />
+                    @using (Html.BeginForm("SendQuestionExpert", "Contact", new { produktId = ViewBag.produkt.Id }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="miniFormSection">
+                                @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "" })
+                                <div>
+                                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "" } })
+                                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        <div class="miniFormSection">
+                            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "" })
+                            <div>
+                                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "" } })
+                                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="miniFormSection">
+                           <label>Wiadomość dla experta</label>
+                            <div>
+                                @Html.TextAreaFor(model => model.message, new { htmlAttributes = new { @class = "" } })
+                                @Html.ValidationMessageFor(model => model.message, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="miniFormSection">
+                            <input type="submit" value="Wyślij zapytanie" class="backBtn" style="outline: none; border: none;" />
+                        </div>
+                    }
+
+                    @{ if (ViewBag.response != null)
+                        { <p>@ViewBag.response</p>}
+                    }
+                </div>
+            </div>
+            <div class="sectionComents">
                 <h3 style="padding-left: 20px;"><strong>Oceny i komentarze</strong> </h3>
                 <hr />
                 <div class="contentSection">
                 </div>
             </div>
-            <div class="sectionComents">
-                <h3 style="padding-left: 20px;"><strong>Kontakt w sprawie produktu</strong> </h3>
-                <hr />
-                <div class="contentSection">
-                        @using (Html.BeginForm("SendQuestionExpert", "Contact", new { produktId = ViewBag.produkt.Id }, FormMethod.Post))
-                        {
-                            @Html.AntiForgeryToken()
-                                <h4>Zadaj pytanie do eksperta</h4>
-                                <hr />
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="miniFormSection">
-                                    @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "" })
-                                    <div >
-                                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "" } })
-                                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
 
-                                <div class="miniFormSection">
-                                    @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "" })
-                                    <div >
-                                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "" } })
-                                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="miniFormSection">
-                                    @Html.LabelFor(model => model.message, htmlAttributes: new { @class = "" })
-                                    <div>
-                                        @Html.TextAreaFor(model => model.message, new { htmlAttributes = new { @class = "" } })
-                                        @Html.ValidationMessageFor(model => model.message, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="miniFormSection">
-                                        <input type="submit" value="Wyślij zapytanie" />
-                                </div>
-                        }
-
-                        @{ if (ViewBag.response != null)
-                            { <p>@ViewBag.response</p>}
-                        }
-                </div>
-            </div>
             <a href="/Product/GetProductPdf/@ViewBag.produkt.Id">
                 Pobierz plik pdf produktu
             </a>

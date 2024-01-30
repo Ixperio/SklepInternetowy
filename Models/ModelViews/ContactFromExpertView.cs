@@ -7,6 +7,7 @@ namespace Sklep.Models.ModelViews
 {
     public class ContactFormExpertView
     {
+        
         public string email { get; set; }
         public string name { get; set; }
         public string message { get; set; }
