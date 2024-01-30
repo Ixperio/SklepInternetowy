@@ -56,24 +56,19 @@ namespace Sklep.Controllers
                 string cookieValue = existingCookie.Value;
                 ViewBag.WartoscKoszyka = cookieValue;
             }
+            if (!string.IsNullOrEmpty(TempData["messageSendingForm"] as string))
+            {
+                ViewBag.response = TempData["messageSendingForm"] as string;
+            }
+            else
+            {
+                ViewBag.response = null;
+            }
+
             return View();
         }
 
-        public ActionResult SendQuestion(ContactFormView cfv)
-        {
 
-            if (ModelState.IsValid)
-            {
-
-                EmailNotification newMail = new EmailNotification();
-                newMail.InfoZeStrony(cfv);
-
-                ViewBag.response = "Dziękujemy za kontakt, wkrótce ktoś się z Państwem skontaktuje na przekazany adres email.";
-
-            }
-
-            return View("/Contact/Index");
-        }
 
     }
 }

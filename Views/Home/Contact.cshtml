@@ -1,7 +1,7 @@
 ﻿@model Sklep.Models.ModelViews.ContactFormView
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("SendQuestion", "Contact", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -40,6 +40,10 @@
         </div>
     </div>
 }
+
+@{ if (ViewBag.response != null) { <p>@ViewBag.response</p>}
+}
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")
