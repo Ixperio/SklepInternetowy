@@ -20,6 +20,8 @@ namespace Sklep.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Phone { get; set; }
+        public string Password { get; set; }
+        public string ResetToken { get; set; }
         public string Email { get; set; }
         public DateTime Birthday { get; set; }
         public int LogowanieId { get; set; }

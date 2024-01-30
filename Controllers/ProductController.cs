@@ -548,7 +548,7 @@ namespace Sklep.Controllers
                 int userId = (int)Session["UserId"];
                 var user = _db.Person.Find(userId);
 
-                if (user != null && user.AccountTypeId == 2) 
+                if (user != null && user.AccountTypeId == 2)
                 {
                     return View();
                 }

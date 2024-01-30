@@ -219,6 +219,14 @@
     <Compile Include="Migrations\202401261522059_Init3.designer.cs">
       <DependentUpon>202401261522059_Init3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202401301004439_Init4.cs" />
+    <Compile Include="Migrations\202401301004439_Init4.designer.cs">
+      <DependentUpon>202401301004439_Init4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202401301032273_Init5.cs" />
+    <Compile Include="Migrations\202401301032273_Init5.designer.cs">
+      <DependentUpon>202401301032273_Init5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\Adress.cs" />
@@ -251,6 +259,7 @@
     <Compile Include="Models\ModelViews\OrderView.cs" />
     <Compile Include="Models\ModelViews\Pages.cs" />
     <Compile Include="Models\ModelViews\Parametry.cs" />
+    <Compile Include="Models\ModelViews\PasswordReset.cs" />
     <Compile Include="Models\ModelViews\PersonLogin.cs" />
     <Compile Include="Models\ModelViews\Product.cs" />
     <Compile Include="Models\ModelViews\ProductAddBusket.cs" />
@@ -289,8 +298,10 @@
     <Compile Include="Observer\IOrderObserver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Prototype\Comment.cs" />
+    <None Include="Views\Person\ResetPassword.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Order\Podsumowanie.cshtml" />
+    <Content Include="Views\Person\ForgotPassword.cshtml" />
     <None Include="Views\Product\AddProduct.cshtml" />
     <Content Include="App_Data\Baza.mdf" />
     <Content Include="App_Data\Baza_log.ldf">
@@ -398,6 +409,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202401261522059_Init3.resx">
       <DependentUpon>202401261522059_Init3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401301004439_Init4.resx">
+      <DependentUpon>202401301004439_Init4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202401301032273_Init5.resx">
+      <DependentUpon>202401301032273_Init5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
