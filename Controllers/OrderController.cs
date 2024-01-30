@@ -128,6 +128,15 @@ namespace Sklep.Controllers
             //ZWRÓCENIE WSZYSTKICH DOSTĘPNYCH FORM DOSTAWY
             ViewBag.kurierzy = kurierViews;
 
+            using (var db = new MyDbContext())
+            {
+                var platnosci = db.Rodzaj_platnosci.Where(c => c.IsVisible == true && c.IsDeleted == false).ToList();
+                if (platnosci != null)
+                {
+                    ViewBag.platnosci = platnosci;
+                }
+            }
+
             return View();
         }
 
@@ -171,7 +180,7 @@ namespace Sklep.Controllers
                         dostawaId = order.DostawaId,
                         addDate = DateTime.Now,
                         AdresEmail = order.Email,
-                        platnosc_typId = 1,
+                        platnosc_typId = order.PlatnoscId,
                         walutaId = 1,
                         kwota = cena_zamowienia + cena_kuriera,
                         status = "Przyjęte"

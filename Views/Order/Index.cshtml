@@ -34,6 +34,29 @@
         font-size: 21px;
     }
 </style>
+<script>
+    $(document).ready(function () {
+        $(".shipCheckbox").change(function () {
+            if ($(this).is(":checked")) {
+
+                if ($(this).val() == "3") {
+                 
+                    $("#dostawaidselect option[zwykli]").hide();
+                    $("#dostawaidselect option[value='3']").prop('selected', true);
+                    $("#dostawaidselect option[pobraniowi]").show();
+                } else {
+                    alert("Inna wartość");
+                    $("#dostawaidselect option[zwykli]").show();
+                    $("#dostawaidselect option[pobraniowi]").hide();
+                }
+            } else {
+                alert("Checkbox odznaczony");
+                $("#dostawaidselect option[zwykli]").show();
+
+            }
+        });
+    });
+</script>
 
 <h2>Uzupełnij dane do wysyłki</h2>
 
@@ -64,13 +87,36 @@
         <input type="text" placeholder="Paczuski dolne" name="Town" maxlength="60" min="2" required />
 
         <div class="wyborDostawy">
+            <h6>Wybierz formę płatności</h6>
+            @{
+                var i = 1;
+                foreach (var p in ViewBag.platnosci)
+                {
+                    <div style="display: grid; grid-template-columns: max-content max-content;">
+                        <input type="radio" name="platnoscId" class="shipCheckbox" value="@p.Id" />
+                        <p>@p.Name</p>
+                    </div>
+                    i++;
+                }
+            }
+        </div>
+
+        <div class="wyborDostawy">
             <h6>Wybierz formę dostawy</h6>
-            <select name="dostawaid">
+            <select name="dostawaid" id="dostawaidselect">
                 @{
-                    var i = 1;
+                    i = 1;
                     foreach (var k in ViewBag.kurierzy)
                     {
-                        <option value="@i" cena="@k.Cena">@k.Nazwa @{@k.Cena}zł</option>
+                        if (i > 2)
+                        {
+                            <option value="@i" cena="@k.Cena" pobraniowi>@k.Nazwa @{@k.Cena }zł</option>
+                        }
+                        else
+                        {
+                            <option value="@i" cena="@k.Cena" zwykli >@k.Nazwa @{@k.Cena }zł</option>
+                        }
+
                         i++;
                     }
                 }
@@ -78,7 +124,6 @@
         </div>
         <input type="submit" value="Przejdź do podsumowania" />
     </form>
-
 </div>
 
 

@@ -26,6 +26,7 @@ namespace Sklep.Models.ModelViews
 
         public int DostawaId { get; set; }
 
+        public int PlatnoscId { get; set; }
 
     }
 }
