@@ -208,17 +208,9 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Migrations\202401261254517_Initial.cs" />
-    <Compile Include="Migrations\202401261254517_Initial.designer.cs">
-      <DependentUpon>202401261254517_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202401261306370_Init2.cs" />
-    <Compile Include="Migrations\202401261306370_Init2.designer.cs">
-      <DependentUpon>202401261306370_Init2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202401261522059_Init3.cs" />
-    <Compile Include="Migrations\202401261522059_Init3.designer.cs">
-      <DependentUpon>202401261522059_Init3.cs</DependentUpon>
+    <Compile Include="Migrations\202401301145516_Init.cs" />
+    <Compile Include="Migrations\202401301145516_Init.designer.cs">
+      <DependentUpon>202401301145516_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
@@ -254,6 +246,7 @@
     <Compile Include="Models\ModelViews\OrderView.cs" />
     <Compile Include="Models\ModelViews\Pages.cs" />
     <Compile Include="Models\ModelViews\Parametry.cs" />
+    <Compile Include="Models\ModelViews\PasswordReset.cs" />
     <Compile Include="Models\ModelViews\PersonLogin.cs" />
     <Compile Include="Models\ModelViews\Product.cs" />
     <Compile Include="Models\ModelViews\ProductAddBusket.cs" />
@@ -297,6 +290,8 @@
     <Content Include="Views\Order\Podsumowanie.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Person\ForgotPassword.cshtml" />
+    <Content Include="Views\Person\ResetPassword.cshtml" />
     <None Include="Views\Product\AddProduct.cshtml" />
     <Content Include="App_Data\Baza.mdf" />
     <Content Include="App_Data\Baza_log.ldf">
@@ -396,17 +391,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202401261254517_Initial.resx">
-      <DependentUpon>202401261254517_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202401261306370_Init2.resx">
-      <DependentUpon>202401261306370_Init2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202401261522059_Init3.resx">
-      <DependentUpon>202401261522059_Init3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202401301145516_Init.resx">
+      <DependentUpon>202401301145516_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

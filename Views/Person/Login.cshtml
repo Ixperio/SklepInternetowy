@@ -68,12 +68,15 @@
             <label for="Password">Hasło</label><br />
             <input type="password" name="Password" />
         </div>
-        
+
         <br />
         <input type="submit" value="Zaloguj się" />
         <br />
         <a href="@Url.Action("Register", "Person")">Przejdź do rejestracji</a>
 
+        <br />
+        <br />
+        <a href="@Url.Action("ForgotPassword", "Person")">Resetuj hasło</a>
         <br />
         @ViewBag.Message
     }
