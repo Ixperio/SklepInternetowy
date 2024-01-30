@@ -156,6 +156,12 @@ namespace Sklep.Controllers
                     return View("~/Views/Shared/Error.cshtml");
                 }
 
+                decimal cena = _db.Products.FirstOrDefault(p => p.ProduktId == pab.ProduktId).cenaNetto;
+                decimal cenaBrutto = cena * 1.23m;
+
+                dbProduct.Ilosc_w_magazynie -= pab.Liczba;
+                _db.SaveChanges();
+
                 decimal wartosc = 0m;
                 List<ProductAddBusket> listaProd = new List<ProductAddBusket>();
 
@@ -171,8 +177,8 @@ namespace Sklep.Controllers
 
                     // Sprawdź, czy produkt już istnieje w koszyku
                     var existingProduct = listaProd.FirstOrDefault(p => p.ProduktId == pab.ProduktId);
-                    decimal cena = _db.Products.FirstOrDefault(p => p.ProduktId == pab.ProduktId).cenaNetto;
-                    decimal cenaBrutto = cena * 1.23m;
+
+
 
                     if (existingProduct != null)
                     {
@@ -234,15 +240,25 @@ namespace Sklep.Controllers
                 // Deserializuj wartość z pliku cookie do listy
                 listaProd = JsonConvert.DeserializeObject<List<ProductAddBusket>>(cookieValue);
 
-                // Usuń produkt z listy na podstawie ProduktId
-                listaProd.RemoveAll(p => p.ProduktId == ProduktId);
+                var productToRemove = listaProd.FirstOrDefault(p => p.ProduktId == ProduktId);
 
-                // Serializuj zaktualizowaną listę do postaci tekstowej
-                string serializedList = JsonConvert.SerializeObject(listaProd);
+                if (productToRemove != null)
+                {
+                    // Zwiększ ilość magazynową produktu
+                    var dbProduct = _db.Products.FirstOrDefault(p => p.ProduktId == ProduktId && p.isVisible == true && p.isDeleted == false);
+                    dbProduct.Ilosc_w_magazynie += productToRemove.Liczba;
+                    _db.SaveChanges();
 
-                // Utwórz nowy plik cookie lub zaktualizuj istniejący
-                HttpCookie cookie = new HttpCookie("Koszyk", serializedList);
-                Response.Cookies.Add(cookie);
+                    // Usuń produkt z listy na podstawie ProduktId
+                    listaProd.RemoveAll(p => p.ProduktId == ProduktId);
+
+                    // Serializuj zaktualizowaną listę do postaci tekstowej
+                    string serializedList = JsonConvert.SerializeObject(listaProd);
+
+                    // Utwórz nowy plik cookie lub zaktualizuj istniejący
+                    HttpCookie cookie = new HttpCookie("Koszyk", serializedList);
+                    Response.Cookies.Add(cookie);
+                }
             }
             this.AktualizujWartoscKoszyka();
             return RedirectToAction("Index"); // Przekieruj do widoku lub innej akcji
